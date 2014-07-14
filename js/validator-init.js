@@ -29,6 +29,13 @@
 
 			$el.bind( "blur", function() {
 				validator.validate();
+				if( this.checkValidity ){
+					this.checkValidity();
+				}
+			});
+
+			$el.bind( "invalid", function(){
+				validator.invalidate();
 			});
 
 			$el.closest( "form" ).bind( "submit", function( e ){

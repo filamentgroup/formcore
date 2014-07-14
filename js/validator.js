@@ -40,6 +40,14 @@
 		return result;
 	};
 
+	Validator.prototype.invalidate = function(){
+		var $error;
+
+		this.opts.$applyElement.addClass( "invalid" );
+		$error = this.getErrorMessageElement();
+		$error.html( this.getErrorMessage( "invalid" ) );
+	};
+
 	Validator.prototype._isSelect = function() {
 		return this.element.tagName.toLowerCase() === "select";
 	};
