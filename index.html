@@ -19,130 +19,6 @@
 			color:#777;
 		}
 
-		/* Container used for styling the custom select, the buttom class adds the bg gradient, corners, etc. */
-		.dropdown {
-			position: relative;
-			display:block;
-			margin-top:0.5em;
-			padding:0;
-		}
-
-		/* This is the native select, we're making everything the text invisible so we can see the button styles in the wrapper */
-		.dropdown select {
-			width:100%;
-			margin:0;
-			background:none;
-			border: 1px solid transparent;
-			outline: none;
-			/* Prefixed box-sizing rules necessary for older browsers */
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
-			/* Remove select styling */
-			appearance: none;
-			-webkit-appearance: none;
-			/* Magic font size number to prevent iOS text zoom */
-			font-size:16px;
-			/* General select styles: change as needed */
-			font-family: helvetica, sans-serif;
-			font-weight: bold;
-			color: #444;
-			padding: .6em 1.9em .5em .8em;
-			line-height:1.3;
-		}
-
-		/* This hides native dropdown button arrow in IE 10/11+ so it will have the custom appearance, IE 9 and earlier get a native select */
-		@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-			.dropdown select::-ms-expand {
-				display: none;
-			}
-		}
-
-		/* Custom arrow sits on top of the select - could be an image, SVG, icon font, etc. or the arrow could just baked into the bg image on the select */
-
-		.dropdown::after {
-			background: none;
-			color: #bbb;
-			content: "\25BC";
-			font-size: .7em;
-			padding:0;
-			position: absolute;
-			right: 1.2em;
-			top: 1.2em;
-			bottom: .3em;
-			z-index: 2;
-			/* These hacks make the select behind the arrow clickable in some browsers */
-			pointer-events:none;
-			background: url(#);
-		}
-
-		/* Firefox >= 2 */
-		/* Show only the native arrow */
-		body:last-child .dropdown::after, x:-moz-any-link {
-			display: none;
-		}
-		/* reduce padding */
-		body:last-child .dropdown select, x:-moz-any-link {
-			padding-right: .8em;
-		}
-
-		/* Firefox 7+ */
-		/* The specific FF selector used below successfully overrides the previous rule that turns off the custom icon; other FF hacky selectors we tried, like `*>.dropdown::after`, did not undo the previous rule */
-		/* Show only the custom icon */
-		_::-moz-progress-bar, body:last-child .dropdown:after {
-			display: block;
-		}
-		_::-moz-progress-bar, body:last-child .dropdown select {
-			/* increase padding to make room for menu icon */
-			padding-right: 1.9em;
-			/* `window` is a Firefox way of hiding the arrow, sometimes works */
-			-moz-appearance: window;
-			text-indent: 0.01px;
-			text-overflow: "";
-		}
-
-		/* Firefox 7+ focus style - This works around the issue that -moz-appearance: window  kills the normal select focus. Using semi-opaque because outline doesn't handle rounded corners */
-		_::-moz-progress-bar, body:last-child .dropdown select:focus {
-			outline: 2px solid rgba(180,222,250, .7);
-		}
-
-
-		/* Opera - Pre-Blink nix the custom arrow, go with a native select button */
-		x:-o-prefocus, .dropdown::after {
-			display:none;
-		}
-
-
-		/* Hover style */
-		.dropdown:hover {
-			border:1px solid #888;
-		}
-
-		/* Focus style - TODO: Fix in FF */
-		select:focus {
-			outline:none;
-			box-shadow: 0 0 1px 3px rgba(180,222,250, 1);
-			background-color:transparent;
-			color: #222;
-			border:1px solid #aaa;
-		}
-
-		/* Removes the odd blue bg color behind the text in IE 10/11 and sets the text to match the focus style text */
-		select:focus::-ms-value {
-			background: transparent;
-			color: #222;
-		}
-
-		/* Firefox focus has odd artifacts around the text, this kills that */
-		select:-moz-focusring {
-			color: transparent;
-			text-shadow: 0 0 0 #000;
-		}
-
-		option {
-			font-weight:normal;
-		}
-
 
 		/* These are just demo button-y styles, style as you like */
 		.button {
@@ -158,8 +34,17 @@
 			background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 		}
-
-		.form-group {
+		button {
+			width: 100%;
+			border: 1px solid #bbb;
+			border-radius: .3em;
+			font-size: 16px;
+			font-weight: bold;
+			color: #444;
+			font-family: helvetica, sans-serif;
+			line-height: 1.2;
+			padding: .6em 1em;
+			margin-top: 1.5em;
 		}
 
 		.form-group textarea,
@@ -189,20 +74,7 @@
 			color: #444;
 			font-family: helvetica, sans-serif;
 			line-height:1.2;
-		}
-
-		button {
-			width: 100%;
-			border: 1px solid #bbb;
-			border-radius: .3em;
-			font-size:16px;
-			font-weight: bold;
-			color: #444;
-			font-family: helvetica, sans-serif;
-			line-height:1.2;
-			padding: .6em 1em;
-			margin-top: 1.5em;
-		}
+		}		
 
 	</style>
 </head>
