@@ -119,9 +119,14 @@
 			<input type="search">
 		</label>
 
-		<label class="form-group">Password
+		<label class="form-group">
 			<b class="label-text">Password</b>
 			<input type="password" data-validate="password">
+		</label>
+
+		<label class="form-group">
+			<b class="label-text">Password Confirmation</b>
+			<input type="password" data-validate="passwordconfirm" data-password-confirm>
 		</label>
 
 		<label class="form-group">
@@ -131,7 +136,7 @@
 
 		<label class="form-group">
 			<b class="label-text">Telephone</b>
-			<input type="tel" data-validate="telephone">
+			<input type="tel">
 		</label>
 
 		<label class="form-group">
@@ -146,17 +151,17 @@
 
 		<label class="form-group">
 			<b class="label-text">Time</b>
-			<input type="time">
+			<input type="time" data-validate="time">
 		</label>
 
 		<label class="form-group">
 			<b class="label-text">Month</b>
-			<input type="month">
+			<input type="month" data-validate="month">
 		</label>
 
 		<label class="form-group">
 			<b class="label-text">URL</b>
-			<input type="url">
+			<input type="url" data-validate="url">
 		</label>
 
 		<label class="form-group">
@@ -165,28 +170,23 @@
 		</label>
 
 		<label class="form-group">
-			<b class="label-text">Birthday</b>
-			<input type="date">
-		</label>
-
-		<label class="form-group">
 			<b class="label-text">Credit Card</b>
-			<input type="number">
+			<input type="text" data-validate="credit">
 		</label>
 
 		<label class="form-group">
 			<b class="label-text">CVV</b>
-			<input type="number">
+			<input type="number" data-validate="cvv">
 		</label>
 
 		<label class="form-group">
 			<b class="label-text">Expiration</b>
-			<input type="month" placeholder="MM YYYY">
+			<input type="month" placeholder="MM YYYY" data-validate="month">
 		</label>
 
 		<label class="form-group">
 			<b class="label-text">Amount ($)</b>
-			<input type="number">
+			<input type="number" step=".01" data-validate="numeric">
 		</label>
 
 
