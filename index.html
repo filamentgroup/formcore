@@ -1,26 +1,28 @@
 
 <html>
 <head>
-	<title>Select styles with CSS only</title>
+	<title>formcore</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-		/* Some basic page styles */
 		body {
 			background-color: #fff;
 			font-family: helvetica, sans-serif;
-			margin: 4% 10%
+			margin: 5% 8%;
+			padding: 0;
+
 		}
 
-		/* Label styles: style as needed */
-		label {
-			display:block;
-			margin-top:2em;
-			font-size: 0.9em;
-			color:#777;
+		/* Use a separate class/element for label text so child elements don't inherit styles */
+		.label-text {
+			display: block;
+			margin-top: 2em;
+			font-size: .7em;
+			color: #777;
+			font-weight: normal;
+			text-transform: uppercase;
 		}
 
 
-		/* These are just demo button-y styles, style as you like */
 		.button {
 			border: 1px solid #bbb;
 			padding: .6em 1em;
@@ -85,72 +87,89 @@
 
 	<form>
 
-		<label class="form-group">Text
+		<label class="form-group">
+			<b class="label-text">Text</b>
 			<input type="text">
 		</label>
 
-		<label class="form-group">Search
+		<label class="form-group">
+			<b class="label-text">Search</b>
 			<input type="search">
 		</label>
 
-		<label class="form-group">Password
+		<label class="form-group">
+			<b class="label-text">Password</b>
 			<input type="password">
 		</label>
 
-		<label class="form-group">Number
+		<label class="form-group">
+			<b class="label-text">Number</b>
 			<input type="number" data-validate="numeric">
 		</label>
 
-		<label class="form-group">Telephone
+		<label class="form-group">
+			<b class="label-text">Telephone</b>
 			<input type="tel">
 		</label>
 
-		<label class="form-group">Email
+		<label class="form-group">
+			<b class="label-text">Email</b>
 			<input type="email">
 		</label>
 
-		<label class="form-group">Date
+		<label class="form-group">
+			<b class="label-text">Date</b>
 			<input type="date">
 		</label>
 
-		<label class="form-group">Time
+		<label class="form-group">
+			<b class="label-text">Time</b>
 			<input type="time">
 		</label>
 
-		<label class="form-group">Month
+		<label class="form-group">
+			<b class="label-text">Month</b>
 			<input type="month">
 		</label>
 
-		<label class="form-group">URL
+		<label class="form-group">
+			<b class="label-text">URL</b>
 			<input type="url">
 		</label>
 
-		<label class="form-group">File
+		<label class="form-group">
+			<b class="label-text">File</b>
 			<input type="file">
 		</label>
 
-		<label class="form-group">Birthday
+		<label class="form-group">
+			<b class="label-text">Birthday</b>
 			<input type="date">
 		</label>
 
-		<label class="form-group">Credit Card
+		<label class="form-group">
+			<b class="label-text">Credit Card</b>
 			<input type="number">
 		</label>
 
-		<label class="form-group">CVV
+		<label class="form-group">
+			<b class="label-text">CVV</b>
 			<input type="number">
 		</label>
 
-		<label class="form-group">Expiration
+		<label class="form-group">
+			<b class="label-text">Expiration</b>
 			<input type="month" placeholder="MM YYYY">
 		</label>
 
-		<label class="form-group">Amount ($)
+		<label class="form-group">
+			<b class="label-text">Amount ($)</b>
 			<input type="number">
 		</label>
 
 
-		<label class="form-group">Textarea
+		<label class="form-group">
+			<b class="label-text">Textarea</b>
 			<textarea></textarea>
 		</label>
 
