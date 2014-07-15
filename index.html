@@ -4,13 +4,15 @@
 	<title>formcore</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
+		/* for this demo page only */
 		body {
 			background-color: #fff;
 			font-family: helvetica, sans-serif;
 			margin: 5% 8%;
 			padding: 0;
-
 		}
+
+		/* end demo styles */
 
 		/* Use a separate class/element for label text so child elements don't inherit styles */
 		.label-text {
@@ -21,7 +23,13 @@
 			font-weight: normal;
 			text-transform: uppercase;
 		}
+		.required .label-text:after {
+			content: "*";
+			color: red;
+			margin-left: .3em;
+		}
 
+		.button,
 		textarea,
 		input[type="text"],
 		input[type="search"],
@@ -36,8 +44,7 @@
 		input[type="month"],
 		input[type="time"],
 		input[type="week"],
-		input[type="file"],
-		.button {
+		input[type="file"] {
 			display: block;
 			width: 100%;
 			border: 1px solid #bbb;
@@ -108,9 +115,13 @@
 	<h4><a href="https://twitter.com/toddmparker">Todd Parker</a> - <a href="http://www.filamentgroup.com">Filament Group Inc.</a></h4>
 
 	<form>
-
 		<label class="form-group">
 			<b class="label-text">Text</b>
+			<input type="text">
+		</label>
+
+		<label class="form-group required">
+			<b class="label-text">Required field</b>
 			<input type="text">
 		</label>
 
