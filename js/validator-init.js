@@ -40,10 +40,8 @@
 
 			$el.closest( "form" ).bind( "submit", function( e ){
 				if( !validator.validate() ){
-					if( !e.isDefaultPrevented() ) {
-						$( this ).trigger( formSubmitErrorEventName );
-					}
 					e.preventDefault();
+					$( this ).trigger( formSubmitErrorEventName );
 				}
 			});
 		});
