@@ -28,6 +28,16 @@ body {
 /* --- end demo styles */
 
 
+/* Use this for labels/elements that are in the markup purely for audible/accessibility purposes, and are always hidden */
+.a11y-only {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
 /* Use a separate class/element for label text so child elements don't inherit styles */
 .label-text {
 	display: block;
