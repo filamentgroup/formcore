@@ -8,8 +8,9 @@ body {
 h2 {
 	margin: 2em 0 1em;
 }
-button {
+.main-submit {
 	margin-top: 3em;
+	max-width: 280px;
 }
 .clearfix:before,
 .clearfix:after {
