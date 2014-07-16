@@ -1,0 +1,148 @@
+
+<html>
+<head>
+<title>formcore</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="css/formcore.css">
+
+</head>
+
+
+<body>
+
+<!--#include virtual="ssi/masthead.html" -->	
+
+	<h2>Text Inputs</h2>
+
+	<form class="layout-a" novalidate>
+
+	<div class="clearfix">
+
+		<div class="sect-a">
+			<label class="form-group">
+				<b class="label-text">Text</b>
+				<input type="text">
+			</label>
+
+			<label class="form-group required">
+				<b class="label-text">Required field</b>
+				<input type="text">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Search</b>
+				<input type="search">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Password</b>
+				<input type="password" data-validate="password">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Password Confirmation</b>
+				<input type="password" data-validate="passwordconfirm" data-password-confirm>
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Number</b>
+				<input type="number" data-validate="numeric">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Telephone</b>
+				<input type="tel" data-validate="phone">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Email</b>
+				<input type="email" data-validate="email">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Date</b>
+				<input type="date" data-validate="date">
+			</label>
+		</div>
+
+		<div class="sect-b">
+			<label class="form-group">
+				<b class="label-text">Time</b>
+				<input type="time" data-validate="time">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Month</b>
+				<input type="month" data-validate="month">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">URL</b>
+				<input type="url" data-validate="url">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Credit Card</b>
+				<input type="text" data-validate="credit">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">CVV</b>
+				<input type="number" data-validate="cvv">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Expiration</b>
+				<input type="month" placeholder="MM YYYY" data-validate="month">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Amount ($)</b>
+				<input type="number" step=".01" data-validate="numeric">
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">Textarea</b>
+				<textarea></textarea>
+			</label>
+
+			<label class="form-group">
+				<b class="label-text">File</b>
+				<input type="file">
+			</label>
+			
+		</div>
+	</div>
+
+	<button class="button main-submit">Submit</button>
+
+	<div class="clearfix">
+		<h2>Disabled state</h2>
+
+		<div class="sect-a">
+
+			<label class="form-group disabled">
+				<b class="label-text">Text</b>
+				<input type="text" disabled>
+			</label>
+
+			<label class="form-group disabled">
+				<b class="label-text">Textarea</b>
+				<textarea disabled></textarea>
+			</label>
+
+			<label class="form-group disabled">
+				<b class="label-text">File</b>
+				<input type="file" disabled>
+			</label>
+
+		</div>
+	</div>
+
+
+	</form>
+
+	<!--#include virtual="ssi/js.html" -->
+</body>
+</html>

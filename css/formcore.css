@@ -131,11 +131,12 @@ input[type="week"] {
 	clear: both;
 	float: left;
 	width: 100%;
+	margin: 0 0 .5em;
 }
 .checkbox input,
 .radiobutton input {
 	float: left;
-	margin-top: .3em;
+	margin-right: .8em;
 }
 .checkbox .item,
 .radiobutton .item {
