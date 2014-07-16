@@ -1,0 +1,18 @@
+# compress transfer
+# <IfModule mod_deflate.c>
+# AddOutputFilterByType DEFLATE text/html text/css text/javascript
+# </IfModule>
+
+# enabled SSI for .html files
+AddType text/html .html
+AddHandler server-parsed .html
+Options Indexes FollowSymLinks Includes
+# RedirectMatch 301 ^/$ /docs
+
+# set charset early for parsing
+AddCharset UTF-8 .html
+
+# Video
+# AddType video/ogg .ogv
+# AddType video/mp4 .mp4
+# AddType video/webm .webm
