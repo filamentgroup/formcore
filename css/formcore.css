@@ -2,7 +2,7 @@
 body {
 	background-color: #fff;
 	font-family: helvetica, sans-serif;
-	padding: 5% 8%;
+	padding: 3% 4%;
 	margin: 0;
 }
 h2 {
@@ -37,20 +37,30 @@ h2 {
 	clip: rect(1px, 1px, 1px, 1px);
 }
 
+label {
+	display: block;
+	position: relative;
+}
+
 /* Use a separate class/element for label text so child elements don't inherit styles */
+.label-text, 
+.opt {
+	font-size: .7em;	
+}
 .label-text {
 	display: block;
 	margin: 2em 0 .3em;
-	font-size: .7em;
 	color: #777;
 	font-weight: normal;
 	text-transform: uppercase;
 }
 .required .label-text:after {
 	content: "*";
-	color: red;
+	color: #DC0014;
 	margin-left: .3em;
 }
+
+
 
 .button, 
 textarea,
@@ -274,6 +284,12 @@ select:focus  {
 	outline: none;
 	box-shadow: 0 0 0 3px rgba(180,222,250, .75);
 }
+input[type="checkbox"] {
+	border-radius: 10%;
+}
+input[type="radio"] {
+	border-radius: 100%;
+}
 
 .disabled .label-text,
 input[disabled],
@@ -288,6 +304,19 @@ input[type="file"][disabled] {
 	background-color: transparent;
 }
 
+.error-msg {
+	margin: .3em 0 0;
+	font-size: .8em;
+}
+.invalid .error-msg {
+	color: #DC0014;
+}
+.invalid input,
+.invalid select,
+.invalid textarea {
+	border-color: #DC0014;
+}
+
 
 @media ( min-width: 600px ) {
 	.layout-a .sect-a,
@@ -299,4 +328,16 @@ input[type="file"][disabled] {
 		float: right;
 	}
 
+}
+
+@media ( min-width: 900px ) {
+	label {
+		padding-right: 35%;
+	}
+	.opt { /* instruction text that appears next to input */
+		position: absolute;
+		left: 68%;
+		top: 1.3em;
+		min-width: 32%;	
+	}
 }
