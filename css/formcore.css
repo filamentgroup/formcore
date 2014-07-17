@@ -77,6 +77,24 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 	clear: none;
 }
 
+/* Placeholder text in form elements - each rule must remain separate to work */
+::-webkit-input-placeholder {
+	font: normal 16px/1.3 helvetica, sans-serif;
+	color: #bbb;
+}
+:-moz-placeholder { /* Firefox 18- */
+	font: normal 16px/1.3 helvetica, sans-serif;
+	color: #bbb;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+	font: normal 16px/1.3 helvetica, sans-serif;
+	color: #bbb;
+}
+:-ms-input-placeholder {
+	font: normal 16px/1.3 helvetica, sans-serif;
+	color: #bbb;
+}
+
 /* Use a separate class/element for label text so child elements don't inherit styles */
 .label-text, 
 .helper {
