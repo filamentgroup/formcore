@@ -4,6 +4,22 @@ body {
 	padding: 3% 4%;
 	margin: 0;
 }
+.demo-nav {
+	margin: 1em 0;
+	padding: 0;
+	list-style-type: none;
+}
+.demo-nav li {
+	display: inline-block;
+	padding-right: 1em;
+	border-right: 1px solid #ddd;
+	margin: .5em 1em .5em 0;
+}
+.demo-nav li:last-child {
+	padding-right: 0;
+	border-right: none;
+	margin-right: 0;
+}
 h2 {
 	margin: 2em 0 1em;
 }
