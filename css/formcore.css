@@ -359,6 +359,8 @@ input[type="file"][disabled] {
 	}
 	.layout-a .sect-b {
 		float: right;
+		padding-left: 2%;
+		border-left: 1px solid #ddd;
 	}
 
 }
