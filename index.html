@@ -20,16 +20,41 @@
 	<div class="clearfix">
 
 		<div class="sect-a">
+
+<div class="inner-layout clearfix">
+	<h3>Create an Account</h3>
+
+	<label class="form-group required sect-inner-a">
+		<b class="label-text">First Name</b>
+		<input type="text" id="fname" required>
+	</label>
+
+	<label class="form-group required sect-inner-b">
+		<b class="label-text">Last Name</b>
+		<input type="text" id="lname" required>
+	</label>
+
+	<label class="form-group">
+		<b class="label-text">Birthday</b>
+		<input type="date" data-validate="date">
+	</label>
+
+	<label class="form-group">
+		<b class="label-text">Profile Photo</b>
+		<input type="file">
+	</label>
+</div>
+
 			
 <h3>Password</h3>
 
-<label class="form-group required">
+<label class="form-group has-helper required">
 	<b class="label-text">Password</b>
-	<span class="opt">Minimum 6 characters with an uppercase letter, a lowercase letter, and a number.</span>
+	<span class="helper">Minimum 6 characters with an uppercase letter, a lowercase letter, and a number.</span>
 	<input type="password" data-validate="password" required>
 </label>
 
-<label class="form-group required">
+<label class="form-group has-helper required">
 	<b class="label-text">Confirm Password</b>
 	<input type="password" data-validate="password" required>
 </label>
