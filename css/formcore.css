@@ -68,9 +68,13 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 }
 
 .form-group {
+	clear: both;
 	margin: 0 0 1.5em;
 	display: block;
 	position: relative;
+}
+.form-group.sect-inner-b {
+	clear: none;
 }
 
 /* Use a separate class/element for label text so child elements don't inherit styles */
@@ -355,11 +359,11 @@ input[type="file"][disabled] {
 	.layout-a .sect-a,
 	.layout-a .sect-b {
 		float: left;
-		width: 48%;
+		width: 47%;
 	}
 	.layout-a .sect-b {
 		float: right;
-		padding-left: 2%;
+		padding-left: 3%;
 		border-left: 1px solid #ddd;
 	}
 
