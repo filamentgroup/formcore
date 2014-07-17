@@ -168,6 +168,13 @@ input[type="week"] {
 	-webkit-appearance: none;
 }
 
+/* opt out of spinner in numeric inputs */
+input[type=number].text-number::-webkit-inner-spin-button, 
+input[type=number].text-number::-webkit-outer-spin-button { 
+	-webkit-appearance: none; 
+	margin: 0; 
+}
+
 .button {
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 	background: #f3f3f3; /* Old browsers */
@@ -371,12 +378,12 @@ input[type="file"][disabled] {
 
 @media ( min-width: 900px ) {
 	.has-helper {
-		padding-right: 35%;
+		padding-right: 32%;
 	}
 	.helper { /* instruction text that appears next to input */
 		position: absolute;
-		left: 68%;
+		left: 103%;
 		top: 1.3em;
-		min-width: 32%;	
+		min-width: 42%;
 	}
 }

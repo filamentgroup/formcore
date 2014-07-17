@@ -48,16 +48,23 @@
 			
 <h3>Password</h3>
 
-<label class="form-group has-helper required">
-	<b class="label-text">Password</b>
-	<span class="helper">Minimum 6 characters with an uppercase letter, a lowercase letter, and a number.</span>
-	<input type="password" data-validate="password" required>
-</label>
+<div class="has-helper"><!-- Use this wrapper when one or more fields have helper text to set the proper right padding -->
+	<label class="form-group required">
+		<span class="label-text">Email</span>
+		<input type="email" data-validate="email" required>
+	</label>
 
-<label class="form-group has-helper required">
-	<b class="label-text">Confirm Password</b>
-	<input type="password" data-validate="password" required>
-</label>
+	<label class="form-group required">
+		<b class="label-text">Password</b>
+		<span class="helper">Minimum 6 characters with an uppercase letter, a lowercase letter, and a number.</span>
+		<input type="password" minlength="6" data-validate="password" required>
+	</label>
+
+	<label class="form-group required">
+		<b class="label-text">Confirm Password</b>
+		<input type="password" minlength="6" data-validate="passwordconfirm" required>
+	</label>
+</div>
 
 
 		</div><!-- /sect-a -->
@@ -131,8 +138,9 @@
 	</label> 
 
 	<label class="form-group required sect-inner-b">
-		<b class="label-text">Zip Code</b>
-		<input type="text" data-validate="numeric" required>
+		<span class="label-text">ZIP Code</span>
+		<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
+		<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="00000-0000" required>
 	</label>
 
 	<label class="form-group required">
@@ -144,8 +152,41 @@
 				<option value="US">United States</option>
 			</select>
 		</div>
-	</label> 
+	</label>	
+</div>
+
+<!-- Credit Card (numeric + pattern, required if cc radio is selected, politespace, auto-recognize cc type to show thumbnail)
+CC expiration MM YYYY (two selects, two inputs, or type=month)
+Security code (numberic + pattern, required, 3-5 digits)
+Name on Card (single text input, required) -->
+
+<div class="inner-layout clearfix">
+	<h3>Payment</h3>
+
+	<label class="form-group required">
+		<span class="label-text">Amount</span>
+		<input type="number" required>
+	</label>
+	<label class="form-group required">
+		<span class="label-text">Card Number</span>
+		<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
+		<input type="text" data-validate="credit" inputmode="numeric" pattern="[0-9]*" required data-revalidate="cvv">
+	</label>
 	
+	<label class="form-group required sect-inner-a">
+		<span class="label-text">Expiration</span>
+		<!-- DEV NOTE: Some browsers, like Safari in iOS, will display this as a dropdown.  Those that don't support the 'month' input type will fall back to 'text' and use the pattern, data-pattern, maxlength, and placeholder attributes.  -->
+		<input type="month" data-validate="ccexpiration" pattern="[0-9]*" data-pattern="" maxlength="7" placeholder="YYYY MM" required>
+	</label>
+	<label class="form-group required sect-inner-b">
+		<span class="label-text">Security Code</span>
+		<input type="text" data-validate="cvv" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="3–4 Digits" required data-revalidate="credit">
+	</label>
+	
+	<label class="form-group required">
+		<span class="label-text">ZIP/Postal Code</span>
+		<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="00000-0000" required>
+	</label>
 </div>
 
 
