@@ -48,7 +48,7 @@
 			
 <h3>Create Password</h3>
 <form novalidate>
-	<div class="has-helper"><!-- Use 'has-helper' on the form field wrapper to set the right padding when one or more fields have helper text -->
+	<div class="has-helper"><!-- Use 'has-helper' on the field wrapper to set the right-side padding when one or more fields have helper text -->
 		<label class="form-group required">
 			<span class="label-text">Email</span>
 			<input type="email" data-validate="email" required>
@@ -76,6 +76,26 @@
 Password (password, required, add toggle to view text or obfuscate - see OBJL)
 Checkbox to remember me (checkbox, optional)
 Error message on submit -->
+<form novalidate>
+	<label class="form-group required">
+		<span class="label-text">Email</span>
+		<input type="email" data-validate="email" required>
+	</label>
+
+	<label class="form-group required" data-mask-pw>
+		<b class="label-text">Password</b>
+		<input type="password" minlength="6" data-validate="password" required>
+	</label>
+	
+	<label class="form-group checkbox">
+		<input type="checkbox" name="opt1" id="opt1">
+		<span class="item">Remember me</span>
+	</label>
+
+	<div class="form-btns clearfix">
+		<button class="button btn-submit">Submit</button>
+	</div>
+</form>
 
 
 </div><!-- /sect-a -->
