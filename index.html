@@ -84,7 +84,7 @@ Error message on submit -->
 
 	<label class="form-group required" data-mask-pw>
 		<b class="label-text">Password</b>
-		<input type="password" minlength="6" data-validate="password" required>
+		<input type="password" minlength="6" id="login-pw" data-validate="password" required>
 	</label>
 	
 	<label class="form-group checkbox">
@@ -200,7 +200,7 @@ Name on Card (single text input, required) -->
 	<div class="inner-layout clearfix">
 		<label class="form-group required">
 			<span class="label-text">Amount</span>
-			<input type="number" required>
+			<input type="number" step="0.01" required>
 		</label>
 		<label class="form-group required">
 			<span class="label-text">Card Number</span>
