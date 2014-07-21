@@ -74,15 +74,18 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 .form-group.sect-inner-b {
 	clear: none;
 }
-.form-group[data-mask-pw] {
-
-}
 .button.btn-mask-pw {
 	position: absolute;
 	top: -1.2em;
 	right: 0;
 	width: auto;
 }
+
+.form-btns.sect-inner-a,
+.form-btns.sect-inner-b {
+	margin-top: 1em;
+}
+
 
 /* Placeholder text in form elements - each rule must remain separate to work */
 ::-webkit-input-placeholder {

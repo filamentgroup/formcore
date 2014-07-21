@@ -72,10 +72,6 @@
 </form>
 
 <h3>Log In</h3>
-<!-- Email (email, required)
-Password (password, required, add toggle to view text or obfuscate - see OBJL)
-Checkbox to remember me (checkbox, optional)
-Error message on submit -->
 <form novalidate>
 	<label class="form-group required">
 		<span class="label-text">Email</span>
@@ -190,11 +186,7 @@ Error message on submit -->
 	</div>
 </form>
 
-<!-- Credit Card (numeric + pattern, required if cc radio is selected, politespace, auto-recognize cc type to show thumbnail)
-CC expiration MM YYYY (two selects, two inputs, or type=month)
-Security code (numberic + pattern, required, 3-5 digits)
-Name on Card (single text input, required) -->
-
+<!-- Credit Card TODO: politespace, auto-recognize cc type to show thumbnail -->
 <h3>Payment</h3>
 <form novalidate>
 	<div class="inner-layout clearfix">
@@ -228,11 +220,25 @@ Name on Card (single text input, required) -->
 	</div>
 </form>
 
-<!-- Redeem Gift Card
-Gift Card Number (numeric + pattern, required, politespace to format as 0000 0000 0000 0000)
-PIN (numeric + pattern, required, 4 digits)
+<h3>Redeem Gift Card</h3>
+<form novalidate>
+	<div class="inner-layout clearfix">
+		<label class="form-group required">
+			<span class="label-text">Gift Card Number</span>
+			<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
+			<input type="text" data-validate="credit" inputmode="numeric" pattern="[0-9]*" required>
+		</label>
+		<label class="form-group required sect-inner-a">
+			<span class="label-text">PIN</span>
+			<input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="4 Digits" required>
+		</label>
+		<div class="form-btns sect-inner-b">
+			<button class="button btn-submit">Submit</button>
+		</div>
+	</div>	
+</form>
 
-Send Credit
+<!-- Send Credit
 Currency radio toggle (USD, Euro) 
 Amount $ (numeric, required, deal with different currencies placement of symbols, use politespace to add in $ on blur?)
 Email (email, required)
