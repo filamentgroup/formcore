@@ -23,10 +23,6 @@ body {
 h2 {
 	margin: 2em 0 1em;
 }
-.main-submit {
-	margin-top: 3em;
-	max-width: 280px;
-}
 .clearfix:before,
 .clearfix:after {
 	content: " ";
@@ -194,6 +190,7 @@ input[type=number].text-number::-webkit-outer-spin-button {
 }
 
 .button {
+	display: inline-block;
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 	background: #f3f3f3; /* Old browsers */
 	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
@@ -203,6 +200,11 @@ input[type=number].text-number::-webkit-outer-spin-button {
 	background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+.btn-submit {
+	margin: 0 0 2em;
+	max-width: 200px;
+	float: right;
 }
 
 .checkbox,
