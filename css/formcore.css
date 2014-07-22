@@ -105,10 +105,12 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 	color: #bbb;
 }
 
-/* specific placeholder text for input type="date" */
+/* Specific placeholder text for input type="date" */
+/* hide the slashes because we can't style them and they look janky when they don't match */
 ::-webkit-datetime-edit-text {
 	visibility: hidden;
 }
+/* apply placeholder styling and see what sticks */
 input::-webkit-datetime-edit-ampm-field[aria-valuetext=blank], 
 input::-webkit-datetime-edit-day-field[aria-valuetext=blank], 
 input::-webkit-datetime-edit-hour-field[aria-valuetext=blank], 
