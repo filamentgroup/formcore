@@ -105,6 +105,23 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 	color: #bbb;
 }
 
+/* specific placeholder text for input type="date" */
+::-webkit-datetime-edit-text {
+	visibility: hidden;
+}
+input::-webkit-datetime-edit-ampm-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-day-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-hour-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-millisecond-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-minute-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-month-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-second-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-week-field[aria-valuetext=blank], 
+input::-webkit-datetime-edit-year-field[aria-valuetext=blank] {
+	font: normal 16px/1.3 helvetica, sans-serif;
+	color: #bbb;
+}
+
 
 /* Use a separate class/element for label text so child elements don't inherit styles */
 .label-text, 
@@ -134,6 +151,7 @@ select {
 	font: bold 16px/1.3 helvetica, sans-serif; /* 16px = magic font size number to prevent iOS text zoom */
 	padding: .6em 16px;
 }
+
 .button,
 textarea,
 input[type="text"],
@@ -155,9 +173,6 @@ input[type="file"] {
 	border: 1px solid #bbb;
 	border-radius: .3em;	
 	color: #444;
-}
-input[type="file"] {
-	align-items: bottom; 
 }
 input[type="checkbox"],
 input[type="radio"] {
