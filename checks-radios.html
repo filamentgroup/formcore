@@ -13,85 +13,84 @@
 
 <!--#include virtual="ssi/masthead.html" -->
 
-	<form class="layout-a" novalidate>
+<h2>Checkboxes &amp; Radio Buttons</h2>
 
-	<h2>Checkboxes &amp; Radio Buttons</h2>	
+<form novalidate>	
 
-	<div class="clearfix">
-		<div class="sect-a">
-
-			<div class="form-group">
-				<label class="checkbox">
-					<input type="checkbox" name="opt1" id="opt1">
-					<span class="item">Description in sentence form.</span>
-				</label>
-			</div>
-
-			<div class="form-group checkbox-set clearfix">
-				<label class="checkbox">
-					<input type="checkbox" name="opt2" id="opt2">
-					<span class="item">Description in sentence form.</span>
-				</label>
-				<label class="checkbox">
-					<input type="checkbox" name="opt3" id="opt3">
-					<span class="item">Another description in sentence form.</span>
-				</label>
-			</div>
-
-			<p class="docs">With description text:</p>
-
-			<div class="form-group checkbox-set">
-				<label class="checkbox">
-					<input type="checkbox" name="opt11" id="opt11">
-					<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>
-				</label>
-				<label class="checkbox">
-					<input type="checkbox" name="opt12" id="opt12">
-					<span class="item"><b>Item 2</b></span>
-				</label>
-				<label class="checkbox">
-					<input type="checkbox" name="opt13" id="opt13">
-					<span class="item"><b>Item 3</b></span>
-				</label>
-			</div>
-
+<div class="layout-a clearfix">
+	<div class="sect-a">
+		<div class="form-group">
+			<label class="checkbox">
+				<input type="checkbox" name="opt1" id="opt1">
+				<span class="item">Description in sentence form.</span>
+			</label>
 		</div>
 
-		<div class="sect-b">
-			<div class="form-group radio-set clearfix">
-				<label class="radiobutton">
-					<input type="radio" name="options1" id="opt22">	
-					<span class="item">Description in sentence form.</span>	
-				</label>
-				<label class="radiobutton">
-					<input type="radio" name="options1" id="opt23">	
-					<span class="item">Another description in sentence form.</span>	
-				</label>
-			</div>
-
-			<p class="docs">With description text:</p>
-
-			<div class="form-group radio-set clearfix">
-				<label class="radiobutton">
-					<input type="radio" name="options" id="opt33">	
-					<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>	
-				</label>
-				<label class="radiobutton">
-					<input type="radio" name="options" id="opt34">	
-					<span class="item"><b>Item 2</b></span>	
-				</label>
-				<label class="radiobutton">
-					<input type="radio" name="options" id="opt35">	
-					<span class="item"><b>Item 3</b></span>	
-				</label>
-			</div>
+		<div class="form-group checkbox-set clearfix">
+			<label class="checkbox">
+				<input type="checkbox" name="opt2" id="opt2">
+				<span class="item">Description in sentence form.</span>
+			</label>
+			<label class="checkbox">
+				<input type="checkbox" name="opt3" id="opt3">
+				<span class="item">Another description in sentence form.</span>
+			</label>
 		</div>
+
+		<p class="docs">With description text:</p>
+
+		<div class="form-group checkbox-set">
+			<label class="checkbox">
+				<input type="checkbox" name="opt11" id="opt11">
+				<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>
+			</label>
+			<label class="checkbox">
+				<input type="checkbox" name="opt12" id="opt12">
+				<span class="item"><b>Item 2</b></span>
+			</label>
+			<label class="checkbox">
+				<input type="checkbox" name="opt13" id="opt13">
+				<span class="item"><b>Item 3</b></span>
+			</label>
+		</div>
+
 	</div>
 
-	<button class="button main-submit">Submit</button>
+	<div class="sect-b">
+		<div class="form-group radio-set clearfix">
+			<label class="radiobutton">
+				<input type="radio" name="options1" id="opt22">	
+				<span class="item">Description in sentence form.</span>	
+			</label>
+			<label class="radiobutton">
+				<input type="radio" name="options1" id="opt23">	
+				<span class="item">Another description in sentence form.</span>	
+			</label>
+		</div>
 
-	</form>
+		<p class="docs">With description text:</p>
 
-	<!--#include virtual="ssi/js.html" -->
+		<div class="form-group radio-set clearfix">
+			<label class="radiobutton">
+				<input type="radio" name="options" id="opt33">	
+				<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>	
+			</label>
+			<label class="radiobutton">
+				<input type="radio" name="options" id="opt34">	
+				<span class="item"><b>Item 2</b></span>	
+			</label>
+			<label class="radiobutton">
+				<input type="radio" name="options" id="opt35">	
+				<span class="item"><b>Item 3</b></span>	
+			</label>
+		</div>
+	</div>
+</div>
+
+<button class="button btn-submit">Submit</button>
+
+</form>
+
+<!--#include virtual="ssi/js.html" -->
 </body>
 </html>
