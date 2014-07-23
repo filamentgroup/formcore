@@ -311,20 +311,6 @@ input[type="week"]::-webkit-inner-spin-button {
 .custom-select {
 	position: relative;
 	display: block;
-}
-
-/* For the select element itself we negate every style except the text so we can see the button styles in the wrapper */
-.custom-select select {
-	width: 100%;
-	margin: 0;
-	outline: none;
-/* prefixed box-sizing rules necessary for older browsers */
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-/* remove select styling */
-	appearance: none;
-	-webkit-appearance: none;
 /* demo styles */
 	background: #f3f3f3; /* Old browsers */
 	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
@@ -334,6 +320,21 @@ input[type="week"]::-webkit-inner-spin-button {
 	background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+
+/* For the select element itself we negate every style except the text so we can see the button styles in the wrapper */
+.custom-select select {
+	width: 100%;
+	margin: 0;
+	outline: none;
+	background: none;
+/* prefixed box-sizing rules necessary for older browsers */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+/* remove select styling */
+	appearance: none;
+	-webkit-appearance: none;
 }
 .custom-select option {
 	font-weight: normal;
@@ -348,7 +349,7 @@ input[type="week"]::-webkit-inner-spin-button {
 	top: 50%;
 	right: 1em;
 	margin-top: -4px;
-	background: url(http://filamentgroup.com/files/select-arrow.png) no-repeat;
+	background: url(/img/select-arrow.png) no-repeat;
 	background-size: 100%;
 	z-index: 2;
 /* make the select behind the arrow clickable in some browsers */
