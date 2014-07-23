@@ -121,6 +121,7 @@ textarea {
 
 .button,
 textarea,
+.custom-select select,
 input[type="text"],
 input[type="search"],
 input[type="number"],
@@ -189,14 +190,17 @@ input[type=number].text-number::-webkit-outer-spin-button {
 	display: inline-block;
 	text-decoration: none;
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-	background: #f3f3f3; /* Old browsers */
-	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+	text-shadow: 1px 1px 1px #222;
+	border-color: #4d6a81;
+	color: #fff;
+	background-color: #4d6a81;
+	background-image: -moz-linear-gradient(top, rgba(255,255,255,0), rgba(0,0,0,.25)); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(rgba(255,255,255,0)), color-stop(rgba(0,0,0,.25))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top, rgba(255,255,255,0), rgba(0,0,0,.25)); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top, rgba(255,255,255,0), rgba(0,0,0,.25)); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top, rgba(255,255,255,0), rgba(0,0,0,.25)); /* IE10+ */
+	background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,.25)); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(255,255,255,0)', endColorstr='rgba(0,0,0,.25)',GradientType=0 ); /* IE6-9 */
 }
 .button.btn-small {
 	font-size: .6em;
@@ -247,7 +251,6 @@ input::-webkit-datetime-edit-year-field[aria-valuetext=blank] {
 	font: normal 16px/1.3 helvetica, sans-serif;
 	color: #bbb;
 }
-
 
 /* Chrome - adjust height of date/time inputs */
 input::-webkit-datetime-edit-fields-wrapper,
@@ -308,18 +311,12 @@ input[type="week"]::-webkit-inner-spin-button {
 .custom-select {
 	position: relative;
 	display: block;
-	overflow: hidden;
-}
-.custom-select.button {
-	padding: 0; /* Padding is applied to child select instead */
 }
 
 /* For the select element itself we negate every style except the text so we can see the button styles in the wrapper */
 .custom-select select {
 	width: 100%;
 	margin: 0;
-	background: none;
-	border: 1px solid transparent;
 	outline: none;
 /* prefixed box-sizing rules necessary for older browsers */
 	-webkit-box-sizing: border-box;
@@ -328,6 +325,15 @@ input[type="week"]::-webkit-inner-spin-button {
 /* remove select styling */
 	appearance: none;
 	-webkit-appearance: none;
+/* demo styles */
+	background: #f3f3f3; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 }
 .custom-select option {
 	font-weight: normal;
@@ -386,6 +392,10 @@ _::-moz-progress-bar, body:last-child .custom-select select {
 	text-overflow: "";
 /* for FF 30+ on Windows 8, we need to make the select a bit longer to hide the native arrow */
 	width: 110%;
+}
+/* hide container overflow */
+_::-moz-progress-bar, body:last-child .custom-select {
+	overflow: hidden;
 }
 
 /* Firefox 7+ focus style
