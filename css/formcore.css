@@ -112,11 +112,8 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 textarea,
 input,
 select {
-	font: bold 16px/1 helvetica, sans-serif; /* 16px = magic font size number to prevent iOS text zoom */
+	font: bold 16px/1.3 helvetica, sans-serif; /* 16px = magic font size number to prevent iOS text zoom */
 	padding: .6em 16px;
-}
-textarea {
-	line-height: 1.3;
 }
 
 .button,
@@ -139,7 +136,7 @@ input[type="file"] {
 	display: block;
 	width: 100%;
 	border: 1px solid #bbb;
-	border-radius: .3em;	
+	border-radius: 5px;	
 	color: #444;
 }
 input[type="checkbox"],
@@ -216,19 +213,19 @@ input[type=number].text-number::-webkit-outer-spin-button {
 
 /* Placeholder text in form elements - each rule must remain separate to work */
 ::-webkit-input-placeholder {
-	font: normal 16px/1.3 helvetica, sans-serif;
+	font-weight: normal;
 	color: #bbb;
 }
 :-moz-placeholder { /* Firefox 18- */
-	font: normal 16px/1.3 helvetica, sans-serif;
+	font-weight: normal;
 	color: #bbb;
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-	font: normal 16px/1.3 helvetica, sans-serif;
+	font-weight: normal;
 	color: #bbb;
 }
 :-ms-input-placeholder {
-	font: normal 16px/1.3 helvetica, sans-serif;
+	font-weight: normal;
 	color: #bbb;
 }
 
