@@ -35,7 +35,9 @@
 			});
 
 			$el.bind( "invalid", function(){
-				validator.invalidate();
+				if( !(this.validity && this.validity.patternMismatch) ){
+					validator.invalidate();
+				}
 			});
 
 			$el.closest( "form" ).bind( "submit", function( e ){

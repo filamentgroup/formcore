@@ -1,17 +1,13 @@
-/*! Shoestring - v0.1.0 - 2014-07-08
+/*! Shoestring - v0.1.3 - 2014-07-24
 * http://github.com/filamentgroup/shoestring/
-* Copyright (c) 2014 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */
-
-/*! shoestring - a simple framework for DOM utilities, targeting modern browsers without failing the rest. Copyright 2012 @scottjehl, Filament Group, Inc. Licensed MIT/GPLv2 */
-(function( w, undefined ){
-
-	"use strict";
-
+* Copyright (c) 2014 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
+(function( w, undefined ){	
 	var doc = w.document,
 		shoestring = function( prim, sec ){
 
 			var pType = typeof( prim ),
-				ret = [];
+				ret = [],
+				sel;
 
 			if( prim ){
 				// if string starting with <, make html
@@ -30,8 +26,20 @@
 					if( sec ){
 						return shoestring( sec ).find( prim );
 					}
-					for( var i = 0, sel = doc.querySelectorAll( prim ), il = sel.length; i < il; i++ ){
+					try {
+						sel = doc.querySelectorAll( prim );
+					} catch( e ) {
+						shoestring.error( 'queryselector', prim );
+					}
+					for( var i = 0, il = sel.length; i < il; i++ ){
 						ret[ i ] = sel[ i ];
+					}
+				}
+				else if( Object.prototype.toString.call( pType ) === '[object Array]' ||
+					pType === "object" && prim instanceof w.NodeList ){
+
+					for( var i2 = 0, il2 = prim.length; i2 < il2; i2++ ){
+						ret[ i2 ] = prim[ i2 ];
 					}
 				}
 				// object? passthrough
@@ -69,7 +77,12 @@
 		var ret = [],
 			finds;
 		this.each(function(){
-			finds = this.querySelectorAll( sel );
+			try {
+				finds = this.querySelectorAll( sel );
+			} catch( e ) {
+				shoestring.error( 'queryselector', sel );
+			}
+
 			for( var i = 0, il = finds.length; i < il; i++ ){
 				ret = ret.concat( finds[i] );
 			}
@@ -174,7 +187,7 @@
 
 	// DOM ready
 	// If DOM is already ready at exec time
-	if( doc.readyState === "complete" || ( doc.readyState === "interactive" && !w.navigator.userAgent.match( /MSIE|Trident/ )  ) ){
+	if( doc.readyState === "complete" || doc.readyState === "interactive" ){
 		runReady();
 	}
 	else {
@@ -191,11 +204,37 @@
 	// expose
 	w.shoestring = shoestring;
 
-}( this ));
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+	shoestring.enUS = {
+		errors: {
+			"prefix": "Shoestring does not support",
+
+			"click": "the click method. Try using trigger( 'click' ) instead.",
+			"css-get" : "getting computed attributes from the DOM.",
+			"event-namespaces": "event namespacing, especially on .unbind( '.myNamespace' ). An event namespace is treated as part of the event name.",
+			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
+			"live-delegate" : "the .live or .delegate methods. Use .bind or .on instead.",
+			"map": "the map method. Try using .each to make a new object.",
+			"next-selector" : "passing selectors into .next, try .next().filter( selector )",
+			"on-delegate" : "the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
+			"outer-width": "the outerWidth method. Try combining .width() with .css for padding-left, padding-right, and the border of the left and right side.",
+			"prev-selector" : "passing selectors into .prev, try .prev().filter( selector )",
+			"prevall-selector" : "passing selectors into .prevAll, try .prevAll().filter( selector )",
+			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
+			"text-setter": "setting text via the .text method.",
+			"trim": "the trim method. Try using replace(/^\\s+|\\s+$/g, ''), or just String.prototype.trim if you don't need to support IE8",
+			"map": "the map method. Try using .each to make a new object.",
+			"queryselector": "all CSS selectors on querySelector (varies per browser support). Specifically, this failed: "
+		}
+	};
+
+	shoestring.error = function( id, str ) {
+		var errors = shoestring.enUS.errors;
+		throw new Error( errors.prefix + " " + errors[id] + ( str ? " " + str : "" ) );
+	};
+
+
 
 	var xmlHttp = function() {
 		try {
@@ -259,15 +298,15 @@
 		async: true,
 		data: null
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.get = function( url, callback ){
 		return shoestring.ajax( url, { success: callback } );
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.load = function( url, callback ){
 		var self = this,
 			args = arguments,
@@ -282,17 +321,17 @@
 		shoestring.ajax( url, { success: intCB } );
 		return this;
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.post = function( url, data, callback ){
 		return shoestring.ajax( url, { data: data, method: "POST", success: callback } );
 	};
-}());
+
+
 // Extensions
 
 // keep this wrapper around the ones you use!
-(function( undefined ){
 	shoestring.fn.data = function( name, val ){
 		if( name !== undefined ){
 			if( val !== undefined ){
@@ -304,18 +343,16 @@
 				});
 			}
 			else {
-				return this[ 0 ].shoestringData && this[ 0 ].shoestringData[ name ];
+				return this.length && this[ 0 ].shoestringData ? this[ 0 ].shoestringData[ name ] : undefined;
 			}
 		}
 		else {
-			return this[ 0 ].shoestringData;
+			return this.length ? this[ 0 ].shoestringData || {} : undefined;
 		}
 	};
-}());
 // Extensions
 
 // keep this wrapper around the ones you use!
-(function( undefined ){
 	shoestring.fn.removeData = function( name ){
 		return this.each(function(){
 			if( name !== undefined && this.shoestringData ){
@@ -327,30 +364,11 @@
 			}
 		});
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
 	window.$ = shoestring;
-}());
-// Extensions
-(function( undefined ){
-	shoestring.fn.add = function( sel ){
-		var ret = [];
-		this.each(function( i ){
-			ret.push( this );
-		});
 
-		shoestring( sel ).each(function(){
-			ret.push( this );
-		});
 
-		return shoestring( ret );
-	};
-}());
-// Extensions
-(function( undefined ){
+
 	shoestring.fn.addClass = function( cname ){
 		var classes = cname.replace(/^\s+|\s+$/g, '').split( " " );
 		return this.each(function(){
@@ -361,9 +379,24 @@
 			}
 		});
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
+	shoestring.fn.add = function( sel ){
+		var ret = [];
+		this.each(function(){
+			ret.push( this );
+		});
+
+		shoestring( sel ).each(function(){
+			ret.push( this );
+		});
+
+		return shoestring( ret );
+	};
+
+
+
 	shoestring.fn.after = function( frag ){
 		if( typeof( frag ) === "string" || frag.nodeType !== undefined ){
 			frag = shoestring( frag );
@@ -381,9 +414,9 @@
 			shoestring( sel ).after( this );
 		});
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.append = function( frag ){
 		if( typeof( frag ) === "string" || frag.nodeType !== undefined ){
 			frag = shoestring( frag );
@@ -401,9 +434,8 @@
 		});
 	};
 
-}());
-// Extensions
-(function( undefined ){
+
+
 	shoestring.fn.attr = function( name, val ){
 		var nameStr = typeof( name ) === "string";
 		if( val !== undefined || !nameStr ){
@@ -421,12 +453,12 @@
 			});
 		}
 		else {
-			return this[ 0 ].getAttribute( name );
+			return this[ 0 ] ? this[ 0 ].getAttribute( name ) : undefined;
 		}
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.before = function( frag ){
 		if( typeof( frag ) === "string" || frag.nodeType !== undefined ){
 			frag = shoestring( frag );
@@ -443,9 +475,9 @@
 			shoestring( sel ).before( this );
 		});
 	};
-}());
-// Extensions.
-(function( undefined ){
+
+
+
 	shoestring.fn.clone = function() {
 		var ret = [];
 		this.each(function() {
@@ -453,9 +485,21 @@
 		});
 		return $( ret );
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
+	shoestring.fn.is = function( sel ){
+		var ret = false;
+		this.each(function(){
+			if( shoestring.inArray( this, shoestring( sel ) )  > -1 ){
+				ret = true;
+			}
+		});
+		return ret;
+	};
+
+
+
 	shoestring.fn.closest = function( sel ){
 		var ret = [];
 		if( !sel ){
@@ -463,77 +507,100 @@
 		}
 
 		this.each(function(){
-			var self = this,
-				generations = 0;
+			var element, $self = shoestring( element = this );
 
-			shoestring( sel ).each(function(){
-				if( self === this && !ret.length ){
-					ret.push( self );
-				}
-			});
-
-			if( !ret.length ){
-				shoestring( sel ).each(function(){
-					var i = 0,
-						otherSelf = self;
-
-					while( otherSelf.parentElement && ( !generations || i < generations ) ){
-						i++;
-						if( otherSelf.parentElement === this ){
-							ret.push( otherSelf.parentElement );
-							generations = i;
-						}
-						else{
-							otherSelf = otherSelf.parentElement;
-						}
-					}
-				});
+			if( $self.is(sel) ){
+				ret.push( this );
+				return;
 			}
 
+			while( element.parentElement ) {
+				if( shoestring(element.parentElement).is(sel) ){
+					ret.push( element.parentElement );
+					break;
+				}
+
+				element = element.parentElement;
+			}
 		});
+
 		return shoestring( ret );
 	};
-}());
-// Extensions.
-(function( undefined ){	// TODO: This code should be consistent with attr().
-	shoestring.fn.css = function( prop, val ){
+
+
+
+  shoestring.cssExceptions = {
+		'float': [ 'cssFloat', 'styleFloat' ] // styleFloat is IE8
+	};
+
+
+
+	var cssExceptions = shoestring.cssExceptions;
+
+	// IE8 uses marginRight instead of margin-right
+	function convertPropertyName( str ) {
+		return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
+			return character.toUpperCase();
+		});
+	}
+
+	function setStyle( element, property, value ) {
+		var convertedProperty = convertPropertyName(property);
+		element.style[ property ] = value;
+
+		if( convertedProperty !== property ) {
+			element.style[ convertedProperty ] = value;
+		}
+		if( cssExceptions[ property ] ) {
+			for( var j = 0, k = cssExceptions[ property ].length; j<k; j++ ) {
+				element.style[ cssExceptions[ property ][ j ] ] = value;
+			}
+		}
+	}
+
+	shoestring.fn.css = function( prop, value ){
+				if( typeof prop !== "object" && value === undefined ){
+			shoestring.error( "css-get" );
+		}
+		
+		if( !this[0] ){
+			return;
+		}
+
 		if( typeof prop === "object" ) {
 			return this.each(function() {
 				for( var key in prop ) {
 					if( prop.hasOwnProperty( key ) ) {
-						this.style[ key ] = prop[ key ];
+						setStyle( this, key, prop[key] );
 					}
 				}
 			});
-		}
-		else {
-			if( val !== undefined ){
+		}	else {
+			// assignment else retrieve first
+			if( value !== undefined ){
 				return this.each(function(){
-					this.style[ prop ] = val;
+					setStyle( this, prop, value );
 				});
 			}
-			else {
-				return window.getComputedStyle( this[ 0 ], null ).getPropertyValue( prop );
-			}
+
+			// NOTE saved for a distant ie8-less future: src/extenstions/dom/css/getStyle.js
+			// return shoestring.getStyle( this[0], prop );
 		}
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.fn.eq = function( num ){
 		if( this[ num ] ){
 			return shoestring( this[ num ] );
 		}
 		return shoestring([]);
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.filter = function( sel ){
-		var ret = [],
-			wsel =  shoestring( sel );
+		var ret = [];
 
 		this.each(function(){
 
@@ -541,6 +608,8 @@
 				var context = shoestring( document.createDocumentFragment() );
 				context[ 0 ].appendChild( this );
 				wsel = shoestring( sel, context );
+			} else {
+				wsel = shoestring( sel, this.parentNode );
 			}
 
 			if( shoestring.inArray( this, wsel ) > -1 ){
@@ -550,41 +619,46 @@
 
 		return shoestring( ret );
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
-	shoestring.fn.first = function(){
+
+  shoestring.fn.first = function(){
 		return this.eq( 0 );
 	};
-}());
 
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
 	shoestring.fn.get = function( num ){
 		return this[ num ];
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
-	shoestring.fn.height = function( num ){
+
+
+	shoestring.fn.dimension = function( name, num ){
+		var offsetName;
+
 		if( num === undefined ){
-			return this[ 0 ].offsetHeight;
-		}
-		else {
+			offsetName = name.replace(/^[a-z]/, function( letter ) {
+				return letter.toUpperCase();
+			});
+
+			return this[ 0 ][ "offset" + offsetName ];
+		} else {
+			// support integer values as pixels
+			num = typeof num === "string" ? num : num + "px";
+
 			return this.each(function(){
-				this.style.height = num;
+				this.style[ name ] = num;
 			});
 		}
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
+	shoestring.fn.height = function( num ){
+		return this.dimension( "height", num );
+	};
+
+
+
 	shoestring.fn.html = function( html ){
 		if( html ){
 			return this.each(function(){
@@ -599,111 +673,140 @@
 			return pile;
 		}
 	};
-}());
-// Extensions
 
-// index method
-(function( undefined ){
-	shoestring.fn.index = function( elem ){
 
-		// no arg? return number of prev siblings
-		if( elem === undefined ){
-			var ret = 0,
-				self = this[ 0 ];
 
-			while( self.previousElementSibling !== null && self.previousElementSibling !== undefined ){
-				self = self.previousElementSibling;
-				ret++;
+	function _getIndex( set, test ) {
+		var i, result, element;
+
+		for( i = result = 0; i < set.length; i++ ) {
+			element = set.item ? set.item(i) : set[i];
+
+			if( test(element) ){
+				return result;
 			}
-			return ret;
+
+			// ignore text nodes, etc
+			// NOTE may need to be more permissive
+			if( element.nodeType === 1 ){
+				result++;
+			}
 		}
-		else {
-			// arg? get its index within the jq obj
-			elem = shoestring( elem )[ 0 ];
 
-			for( var i = 0; i < this.length; i++ ){
-				if( this[ i ] === elem ){
-					return i;
-				}
-			}
-			return -1;
+		return -1;
+	}
+
+	shoestring.fn.index = function( selector ){
+		var self, children;
+
+		self = this;
+
+		// no arg? check the children, otherwise check each element that matches
+		if( selector === undefined ){
+			children = (this[0].parentNode || document.documentElement).childNodes;
+
+			// check if the element matches the first of the set
+			return _getIndex(children, function( element ) {
+				return self[0] === element;
+			});
+		} else {
+
+			// check if the element matches the first selected node from the parent
+			return _getIndex(self, function( element ) {
+				return element === (shoestring( selector, element.parentNode )[ 0 ]);
+			});
 		}
 	};
-}());
-// Extensions
-(function( undefined ){
-	shoestring.fn.is = function( sel ){
-		var ret = false;
-		this.each(function( i ){
-			if( shoestring.inArray( this, shoestring( sel ) )  > -1 ){
-				ret = true;
-			}
-		});
-		return ret;
-	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.fn.last = function(){
 		return this.eq( this.length - 1 );
 	};
-}());
 
-// Extensions
-(function( undefined ){
+
+
 	shoestring.fn.next = function(){
-		var ret = [],
-			next;
-		this.each(function( i ){
-			next = this.nextElementSibling;
-			if( next ){
-				ret = ret.concat( next );
+				if( arguments.length > 0 ){
+			shoestring.error( 'next-selector' );
+		}
+		
+		var result = [];
+
+		// TODO need to implement map
+		this.each(function() {
+			var children, item, found;
+
+			// get the child nodes for this member of the set
+			children = shoestring( this.parentNode )[0].childNodes;
+
+			for( var i = 0; i < children.length; i++ ){
+				item = children.item( i );
+
+				// found the item we needed (found) which means current item value is
+				// the next node in the list, as long as it's viable grab it
+				// NOTE may need to be more permissive
+				if( found && item.nodeType === 1 ){
+					result.push( item );
+					break;
+				}
+
+				// find the current item and mark it as found
+				if( item === this ){
+					found = true;
+				}
 			}
 		});
-		return shoestring(ret);
+
+		return shoestring( result );
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.not = function( sel ){
 		var ret = [];
-		this.each(function( i ){
-			if( shoestring.inArray( this, shoestring( sel ) ) === -1 ){
+
+		this.each(function(){
+			var found = shoestring( sel, this.parentNode );
+
+			if( shoestring.inArray(this, found) === -1 ){
 				ret.push( this );
 			}
 		});
+
 		return shoestring( ret );
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.fn.offset = function(){
 		return {
 			top: this[ 0 ].offsetTop,
 			left: this[ 0 ].offsetLeft
 		};
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.parent = function(){
 		var ret = [],
 			parent;
+
 		this.each(function(){
-			parent = this.parentElement;
+			// no parent node, assume top level
+			// TODO maybe this should be a more precise check for the document?
+			parent = this.parentElement || document.documentElement;
+
 			if( parent ){
 				ret.push( parent );
 			}
 		});
+
 		return shoestring(ret);
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.parents = function( sel ){
 		var ret = [];
 
@@ -719,8 +822,7 @@
 							ret.push( curr );
 						}
 					}
-				}
-				else {
+				} else {
 					if( shoestring.inArray( curr, ret ) === -1 ){
 						ret.push( curr );
 					}
@@ -729,21 +831,21 @@
 		});
 		return shoestring(ret);
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.prepend = function( frag ){
 		if( typeof( frag ) === "string" || frag.nodeType !== undefined ){
 			frag = shoestring( frag );
 		}
+
 		return this.each(function( i ){
 
 			for( var j = 0, jl = frag.length; j < jl; j++ ){
 				var insertEl = i > 0 ? frag[ j ].cloneNode( true ) : frag[ j ];
 				if ( this.firstChild ){
 					this.insertBefore( insertEl, this.firstChild );
-				}
-				else {
+				} else {
 					this.appendChild( insertEl );
 				}
 			}
@@ -755,51 +857,66 @@
 			shoestring( sel ).prepend( this );
 		});
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.prev = function(){
-		var ret = [],
-			next;
-		this.each(function( i ){
-			next = this.previousElementSibling;
-			if( next ){
-				ret = ret.concat( next );
+				if( arguments.length > 0 ){
+			shoestring.error( 'prev-selector' );
+		}
+		
+		var result = [];
+
+		// TODO need to implement map
+		this.each(function() {
+			var children, item, found;
+
+			// get the child nodes for this member of the set
+			children = shoestring( this.parentNode )[0].childNodes;
+
+			for( var i = children.length -1; i >= 0; i-- ){
+				item = children.item( i );
+
+				// found the item we needed (found) which means current item value is
+				// the next node in the list, as long as it's viable grab it
+				// NOTE may need to be more permissive
+				if( found && item.nodeType === 1 ){
+					result.push( item );
+					break;
+				}
+
+				// find the current item and mark it as found
+				if( item === this ){
+					found = true;
+				}
 			}
 		});
-		return shoestring(ret);
-	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+		return shoestring( result );
+	};
+
+
+
 	shoestring.fn.prevAll = function(){
-		var ret = [];
-		this.each(function( i ){
-			var self = this;
-			while( self.previousElementSibling ){
-				ret = ret.concat( self.previousElementSibling );
-				self = self.previousElementSibling;
+				if( arguments.length > 0 ){
+			shoestring.error( 'prevall-selector' );
+		}
+		
+		var result = [];
+
+		this.each(function() {
+			var $previous = shoestring( this ).prev();
+
+			while( $previous.length ){
+				result.push( $previous[0] );
+				$previous = $previous.prev();
 			}
 		});
-		return shoestring(ret);
-	};
-}());
 
-// Extensions
-(function( undefined ){
-	shoestring.fn.prop = function( name, val ){
-		name = shoestring.propFix[ name ] || name;
-		if( val !== undefined ){
-			return this.each(function(){
-				this[ name ] = val;
-			});
-		}
-		else {
-			return this[ 0 ][ name ];
-		}
+		return shoestring( result );
 	};
+
+
 
 	// Property normalization, a subset taken from jQuery src
 	shoestring.propFix = {
@@ -809,54 +926,82 @@
 		readonly: "readOnly",
 		tabindex: "tabIndex"
 	};
-}());
-// Extensions
-(function( undefined ){
-	shoestring.fn.remove = function( sel ){
-		return this.each(function(){
-			this.parentNode.removeChild( this );
-		});
+
+
+
+	shoestring.fn.prop = function( name, val ){
+		if( !this[0] ){
+			return;
+		}
+
+		name = shoestring.propFix[ name ] || name;
+
+		if( val !== undefined ){
+			return this.each(function(){
+				this[ name ] = val;
+			});
+		}	else {
+			return this[ 0 ][ name ];
+		}
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.removeAttr = function( attr ){
 		return this.each(function(){
 			this.removeAttribute( attr );
 		});
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
 	shoestring.fn.removeClass = function( cname ){
 		var classes = cname.replace(/^\s+|\s+$/g, '').split( " " );
 
 		return this.each(function(){
+			var newClassName, regex;
+
 			for( var i = 0, il = classes.length; i < il; i++ ){
 				if( this.className !== undefined ){
-					this.className = this.className.replace( new RegExp( "(^|\\s)" + classes[ i ] + "($|\\s)", "gmi" ), " " );
+					regex = new RegExp( "(^|\\s)" + classes[ i ] + "($|\\s)", "gmi" );
+					newClassName = this.className.replace( regex, " " );
+
+					this.className = newClassName.replace(/^\s+|\s+$/g, '');
 				}
 			}
 		});
 	};
-}());
-// Extensions
-(function( undefined ){
-	shoestring.fn.removeProp = function( prop ){
-		var name = shoestring.propFix && shoestring.propFix[ name ] || name;
+
+
+
+	shoestring.fn.remove = function(){
 		return this.each(function(){
-			this[ prop ] = undefined;
-			delete this[ prop ];
+			if( this.parentNode ) {
+				this.parentNode.removeChild( this );
+			}
 		});
 	};
-}());
-// Extensions
-(function( undefined ){
+
+
+
+	shoestring.fn.removeProp = function( prop ){
+		var name = shoestring.propFix[ prop ] || prop;
+
+		return this.each(function(){
+			this[ name ] = undefined;
+			delete this[ name ];
+		});
+	};
+
+
+
 	shoestring.fn.replaceWith = function( frag ){
 		if( typeof( frag ) === "string" ){
 			frag = shoestring( frag );
 		}
+
 		var ret = [];
+
 		this.each(function( i ){
 			for( var j = 0, jl = frag.length; j < jl; j++ ){
 				var insertEl = i > 0 ? frag[ j ].cloneNode( true ) : frag[ j ];
@@ -865,32 +1010,54 @@
 				ret.push( insertEl );
 			}
 		});
+
 		return shoestring( ret );
 	};
-}());
-// an incomplete but fairly sufficient form serialize function
-(function( undefined ){
+
+
+
+	shoestring.inputTypes = [
+		"text",
+		"hidden",
+		"password",
+		"color",
+		"date",
+		"datetime",
+		// "datetime\-local" matched by datetime
+		"email",
+		"month",
+		"number",
+		"range",
+		"search",
+		"tel",
+		"time",
+		"url",
+		"week"
+	];
+
+	shoestring.inputTypeTest = new RegExp( shoestring.inputTypes.join( "|" ) );
+
 	shoestring.fn.serialize = function(){
 		var data = {};
-		shoestring( "input, select", this ).each(function(){
-			var type = this.type,
-				name = this.name,
-				value = this.value;
 
-			if( /text|hidden|password|color|date|datetime|datetime\-local|email|month|number|range|search|tel|time|url|week/.test( type ) || ( type === "checkbox" || type === "radio" ) && this.checked ){
+		shoestring( "input, select", this ).each(function(){
+			var type = this.type, name = this.name,	value = this.value;
+
+			if( shoestring.inputTypeTest.test( type ) ||
+					( type === "checkbox" || type === "radio" ) &&
+					this.checked ){
+
 				data[ name ] = value;
-			}
-			else if( this.nodeName === "select" ){
+			}	else if( this.nodeName === "select" ){
 				data[ name ] = this.options[ this.selectedIndex ].nodeValue;
 			}
 		});
+
 		return data;
 	};
-}());
 
 
-// Extensions.
-(function( undefined ){
+
 	shoestring.fn.siblings = function(){
 		if( !this.length ) {
 			return shoestring( [] );
@@ -903,21 +1070,64 @@
 			if( el.nodeType === 1 && el !== this[ 0 ] ) {
 				sibs.push( el );
 			}
-		} while( el = el.nextSibling );
+
+      el = el.nextSibling;
+		} while( el );
 
 		return shoestring( sibs );
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
+	var getText = function( elem ){
+		var node,
+			ret = "",
+			i = 0,
+			nodeType = elem.nodeType;
+
+		if ( !nodeType ) {
+			// If no nodeType, this is expected to be an array
+			while ( (node = elem[i++]) ) {
+				// Do not traverse comment nodes
+				ret += getText( node );
+			}
+		} else if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
+			// Use textContent for elements
+			// innerText usage removed for consistency of new lines (jQuery #11153)
+			if ( typeof elem.textContent === "string" ) {
+				return elem.textContent;
+			} else {
+				// Traverse its children
+				for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
+					ret += getText( elem );
+				}
+			}
+		} else if ( nodeType === 3 || nodeType === 4 ) {
+			return elem.nodeValue;
+		}
+		// Do not include comment or processing instruction nodes
+
+		return ret;
+	};
+
+	shoestring.fn.text = function() {
+				if( arguments.length > 0 ){
+			shoestring.error( 'text-setter' );
+		}
+		
+		return getText( this );
+	};
+
+
+
+
 	shoestring.fn.val = function( val ){
+		var el;
 		if( val !== undefined ){
 			return this.each(function(){
 				if( this.tagName === "SELECT" ){
 					var optionSet, option,
-						options = elem.options,
+						options = this.options,
 						values = [],
 						i = options.length,
 						newIndex;
@@ -932,58 +1142,58 @@
 					}
 					// force browsers to behave consistently when non-matching value is set
 					if ( !optionSet ) {
-						elem.selectedIndex = -1;
+						this.selectedIndex = -1;
 					} else {
-						elem.selectedIndex = i;
+						this.selectedIndex = newIndex;
 					}
 				} else {
 					this.value = val;
 				}
 			});
-		}
-		else {
-			if( this.tagName === "SELECT" ){
-				return this.options[ this[0].selectedIndex ].value;
+		} else {
+			el = this[0];
+			if( el.tagName === "SELECT" ){
+				return el.options[ el.selectedIndex ].value;
 			} else {
-				return this[0].value;
+				return el.value;
 			}
 		}
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.fn.width = function( num ){
-		if( num === undefined ){
-			return this[ 0 ].offsetWidth;
-		}
-		else {
-			return this.each(function(){
-				this.style.width = num;
-			});
-		}
+		return this.dimension( "width", num );
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.fn.wrapInner = function( html ){
 		return this.each(function(){
 			var inH = this.innerHTML;
+
 			this.innerHTML = "";
 			shoestring( this ).append( shoestring( html ).html( inH ) );
 		});
 	};
-}());
 
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
-	shoestring.fn.bind = function( evt, callback ){
+
+	shoestring.fn.bind = function( evt, data, callback ){
+
+				if( arguments.length > 3 ){
+			shoestring.error( 'on-delegate' );
+		}
+		if( typeof data === "string" ){
+			shoestring.error( 'on-delegate' );
+		}
+				if( typeof data === "function" ){
+			callback = data;
+			data = null;
+		}
+
 		var evts = evt.split( " " ),
+			docEl = document.documentElement,
 			bindingname = callback.toString(),
 			boundEvents = function( el, evt, callback ) {
 				if ( !el.shoestringData ) {
@@ -995,23 +1205,30 @@
 				if ( !el.shoestringData.events[ evt ] ) {
 					el.shoestringData.events[ evt ] = [];
 				}
-				el.shoestringData.events[ evt ][ bindingname ] = callback.callfunc;
+				el.shoestringData.events[ evt ][ callback.name ] = callback.callfunc;
+				// IE custom events
+				el.shoestringData.events[ evt ][ '_' + callback.name ] = callback._callfunc;
 			};
 
 		function newCB( e ){
+			e.data = data;
 			return callback.apply( this, [ e ].concat( e._args ) );
 		}
-		function propChange( e, oEl ) {
-			var el = document.documentElement[ e.propertyName ].el;
+		function propChange( e, boundElement ) {
+			var lastEvent = document.documentElement[ e.propertyName ],
+				triggeredElement = lastEvent.el;
 
-			if( el !== undefined && oEl === el ) {
-				newCB.call( el, e );
+			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
+				newCB.call( triggeredElement, e );
 			}
 		}
+
 		return this.each(function(){
+			var callback, oEl = this;
+
 			for( var i = 0, il = evts.length; i < il; i++ ){
-				var evt = evts[ i ],
-					oEl = this;
+				var evt = evts[ i ];
+				callback = null;
 
 				if( "addEventListener" in this ){
 					this.addEventListener( evt, newCB, false );
@@ -1020,110 +1237,100 @@
 						this.attachEvent( "on" + evt, newCB );
 					} else {
 						// Custom event
-						document.documentElement.attachEvent( "onpropertychange", function( e ) {
-							propChange.call( this, e, oEl );
-						});
+						callback = (function() {
+							var eventName = evt;
+							return function( e ) {
+								if( e.propertyName === eventName ) {
+									propChange.call( this, e, oEl );
+								}
+							};
+						})();
+						docEl.attachEvent( "onpropertychange", callback );
 					}
 				}
-				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname });
+				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname, "_callfunc": callback });
 			}
 		});
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
-	shoestring.fn.on = function( evt, callback ){
-		var evts = evt.split( " " ),
-			sel = this.selector;
+	shoestring.fn.on = shoestring.fn.bind;
 
-		function newCB( e ){
-			shoestring( sel ).each(function(){
-				if( e.target === this ){
-					callback.apply( this, [ e ].concat( e._args ) );
-				}
-			});
-		}
-
-		for( var i = 0, il = evts.length; i < il; i++ ){
-			if( "addEventListener" in document ){
-				document.addEventListener( evts[ i ], newCB, false );
-			}
-			else if( document.attachEvent ){
-				document.attachEvent( "on" + evts[ i ], newCB );
-			}
-		}
-		return this;
+		shoestring.fn.live = function(){
+		shoestring.error( 'live-delegate' );
 	};
-	shoestring.fn.live = shoestring.fn.on;
-}());
+	shoestring.fn.delegate = function(){
+		shoestring.error( 'live-delegate' );
+	};
+		
 
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+	shoestring.fn.unbind = function( evt, callback ){
+		var evts = evt.split( " " ),
+			docEl = document.documentElement;
+		return this.each(function(){
+			var ev;
+			for( var i = 0, il = evts.length; i < il; i++ ){
+								if( evts[ i ].indexOf( "." ) === 0 ) {
+					shoestring.error( 'event-namespaces' );
+				}
+				
+				var bound = this.shoestringData.events[ evt ],
+					bindingname;
+				if( "removeEventListener" in window ){
+					if( callback !== undefined ) {
+						bindingname = callback.toString();
+						this.removeEventListener( evts[ i ], bound[ bindingname ], false );
+					} else {
+						for ( ev in bound ) {
+							this.removeEventListener( evts[ i ], bound[ ev ], false );
+						}
+					}
+				}
+				else if( this.detachEvent ){
+					if( callback !== undefined ) {
+						bindingname = callback.toString();
+						this.detachEvent( "on" + evts[ i ], bound[ bindingname ] );
+						// custom event
+						if( bound[ "_" + bindingname ] ) {
+							docEl.detachEvent( "onpropertychange", bound[ '_' + bindingname ] );
+						}
+					} else {
+						for ( ev in bound ) {
+							// since the _ev and ev will both be keys here, we’ll detach both methods for each
+							this.detachEvent( "on" + evts[ i ], bound[ ev ] );
+							// custom event
+							docEl.detachEvent( "onpropertychange", bound[ ev ] );
+						}
+					}
+				}
+			}
+		});
+	};
+
+
+
 	shoestring.fn.one = function( evt, callback ){
 		var evts = evt.split( " " );
 		return this.each(function(){
-			var cbs = {};
+			var cbs = {},
+				$t = shoestring( this );
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var thisevt = evts[ i ];
-				if( "addEventListener" in this ){
-					cbs[ thisevt ] = function( e ){
-						for( var j in cbs ) {
-							this.removeEventListener( j, cbs[ j ] );
-						}
-						callback.apply( this, [ e ].concat( e._args ) );
-					};
-					this.addEventListener( thisevt, cbs[ thisevt ], false );
-				}
-				else if( this.attachEvent ){
-					cbs[ thisevt ] = function( e ){
-						callback.apply( this, [ e ].concat( e._args ) );
-						for( var j in cbs ) {
-							this.detachEvent( "on" + j, cbs[ j ] );
-						}
-					};
-					this.attachEvent( "on" + thisevt, cbs[ thisevt ] );
-				}
-			}
-		});
-	};
-}());
-// Extensions
-
-// keep this wrapper around the ones you use!
-(function( undefined ){
-	shoestring.fn.trigger = function( evt, args ){
-		var evts = evt.split( " " );
-		return this.each(function(){
-			for( var i = 0, il = evts.length; i < il; i++ ){
-				// TODO needs IE8 support
-				if( document.createEvent ){
-					var event = document.createEvent( "Event" );
-					event.initEvent( evts[ i ], true, true );
-					event._args = args;
-					this.dispatchEvent( event );
-				} else if ( document.createEventObject ){
-					if( document.documentElement[ evts[ i ] ] === undefined ) {
-						document.documentElement[ evts[ i ] ] = {};
+				cbs[ thisevt ] = function( e ){
+					var $t = shoestring( this );
+					for( var j in cbs ) {
+						$t.unbind( j, cbs[ j ] );
 					}
-					document.documentElement[ evts[ i ] ] = {
-						"el" : this,
-						_args: args
-					};
-					document.documentElement[ evts[ i ] ][ evts[ i ] ]++;
-				}
+					callback.apply( this, [ e ].concat( e._args ) );
+				};
+				$t.bind( thisevt, cbs[ thisevt ] );
 			}
 		});
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.fn.triggerHandler = function( evt, args ){
 		var e = evt.split( " " )[ 0 ],
 			el = this[ 0 ],
@@ -1144,42 +1351,39 @@
 
 		return ret;
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
-	shoestring.fn.unbind = function( evt, callback ){
+
+
+	shoestring.fn.trigger = function( evt, args ){
 		var evts = evt.split( " " );
 		return this.each(function(){
 			for( var i = 0, il = evts.length; i < il; i++ ){
-				var bound = this.shoestringData.events[ evt ],
-					bindingname = callback.toString();
-				if( "removeEventListener" in window ){
-					if( callback !== undefined ) {
-						this.removeEventListener( evts[ i ], bound[ bindingname ], false );
+				if( document.createEvent ){
+					var event = document.createEvent( "Event" );
+					event.initEvent( evts[ i ], true, true );
+					event._args = args;
+					this.dispatchEvent( event );
+				} else if ( document.createEventObject ) {
+					if( this[ 'on' + evts[ i ] ] !== undefined ) {
+						this.fireEvent( 'on' + evts[ i ], document.createEventObject() );
 					} else {
-						for ( var ev in bound ) {
-							this.removeEventListener( evts[ i ], bound[ ev ], false );
-						}
+						document.documentElement[ evts[ i ] ] = {
+							"el": this,
+							_args: args
+						};
 					}
-				}
-				else if( this.detachEvent ){
-					this.detachEvent( "on" + bound[ bindingname ], callback );
 				}
 			}
 		});
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.each = function( obj, callback, args ){
 		var value,
 			i = 0,
 			length = obj.length,
-			isArray = ( typeof obj === "array" );
+			isArray = ( typeof obj === "object" && Object.prototype.toString.call(obj) === '[object Array]' );
 
 		if ( args ) {
 			if ( isArray ) {
@@ -1223,11 +1427,9 @@
 
 		return shoestring( obj );
 	};
-}());
-// Extensions
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
+
+
 	shoestring.merge = function( first, second ){
 		var l = second.length,
 			i = first.length,
@@ -1247,4 +1449,123 @@
 
 		return shoestring( first );
 	};
-}());
+
+
+
+
+	/* jshint unused: false */
+
+	var cssExceptions = shoestring.cssExceptions;
+
+	// IE8 uses marginRight instead of margin-right
+	function convertPropertyName( str ) {
+		return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
+			return character.toUpperCase();
+		});
+	}
+
+	function _getStyle( element, property ) {
+		var view = document.defaultView,
+				docElement = document.documentElement;
+
+		// if defaultView is available use getComputedStyle otherwise use currentStyle
+		if( view ){
+			return view
+				.getComputedStyle( element, null )
+				.getPropertyValue( property );
+		} else {
+			return docElement.currentStyle[ property ] ? element.currentStyle[ property ] : undefined;
+		}
+	}
+
+	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
+
+	function getStyle( element, property ) {
+		var convert, value, j, k;
+
+		if( cssExceptions[ property ] ) {
+			for( j = 0, k = cssExceptions[ property ].length; j < k; j++ ) {
+				value = _getStyle( element, cssExceptions[ property ][ j ] );
+
+				if( value ) {
+					return value;
+				}
+			}
+		}
+
+		for( j = 0, k = vendorPrefixes.length; j < k; j++ ) {
+			convert = convertPropertyName( vendorPrefixes[ j ] + property );
+
+			// VendorprefixKeyName || key-name
+			value = _getStyle( element, convert );
+
+			if( convert !== property ) {
+				value = value || _getStyle( element, property );
+			}
+
+			if( vendorPrefixes[ j ] ) {
+				// -vendorprefix-key-name
+				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
+			}
+
+			if( value ) {
+				return value;
+			}
+		}
+
+		return undefined;
+	}
+
+  shoestring._getStyle = getStyle;
+
+
+
+			shoestring.fn.hasClass = function(){
+		shoestring.error( 'has-class' );
+	};
+	
+
+
+			shoestring.fn.hide = function(){
+		shoestring.error( 'show-hide' );
+	};
+	
+
+
+			shoestring.fn.outerWidth = function(){
+		shoestring.error( 'outer-width' );
+	};
+	
+
+
+			shoestring.fn.show = function(){
+		shoestring.error( 'show-hide' );
+	};
+	
+
+
+			shoestring.fn.click = function(){
+		shoestring.error( 'click' );
+	};
+	
+
+
+			shoestring.map = function(){
+		shoestring.error( 'map' );
+	};
+	
+
+
+		shoestring.fn.map = function(){
+		shoestring.error( 'map' );
+	};
+	
+
+
+		shoestring.trim = function(){
+		shoestring.error( 'trim' );
+	};
+	
+
+
+})( this );
