@@ -187,8 +187,20 @@ input[type=number].text-number::-webkit-outer-spin-button {
 	display: inline-block;
 	text-decoration: none;
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-color: #ccc;	
+	background: #f3f3f3;
+	background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */	
+}
+.button.btn-primary, 
+.button.btn-submit {
 	text-shadow: 1px 1px 1px #222;
-	border-color: #4d6a81;
+	border-color: #4d6a81;	
 	color: #fff;
 	background-color: #4d6a81;
 	background-image: -moz-linear-gradient(top, rgba(255,255,255,0), rgba(0,0,0,.25)); /* FF3.6+ */
