@@ -272,7 +272,7 @@
   $.extend( Validator.prototype.copy, {
     "zip" : {
       "placeholder": "00000",
-      "message" : "ZIP Code should be 5 digits."
+      "message" : "ZIP Code should be 5 or 9 digits."
     }
   });
 
