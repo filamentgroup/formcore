@@ -1,4 +1,4 @@
-/*! Shoestring - v0.1.3 - 2014-07-24
+/*! Shoestring - v0.1.3 - 2014-07-28
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2014 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){	
@@ -221,11 +221,10 @@
 			"outer-width": "the outerWidth method. Try combining .width() with .css for padding-left, padding-right, and the border of the left and right side.",
 			"prev-selector" : "passing selectors into .prev, try .prev().filter( selector )",
 			"prevall-selector" : "passing selectors into .prevAll, try .prevAll().filter( selector )",
+			"queryselector": "all CSS selectors on querySelector (varies per browser support). Specifically, this failed: ",
 			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
 			"text-setter": "setting text via the .text method.",
-			"trim": "the trim method. Try using replace(/^\\s+|\\s+$/g, ''), or just String.prototype.trim if you don't need to support IE8",
-			"map": "the map method. Try using .each to make a new object.",
-			"queryselector": "all CSS selectors on querySelector (varies per browser support). Specifically, this failed: "
+			"trim": "the trim method. Try using replace(/^\\s+|\\s+$/g, ''), or just String.prototype.trim if you don't need to support IE8"
 		}
 	};
 
@@ -632,7 +631,9 @@
 
 
 
-	shoestring.fn.dimension = function( name, num ){
+	/* jshint unused: false */
+
+	function _dimension( set, name, num ){
 		var offsetName;
 
 		if( num === undefined ){
@@ -640,21 +641,21 @@
 				return letter.toUpperCase();
 			});
 
-			return this[ 0 ][ "offset" + offsetName ];
+			return set[ 0 ][ "offset" + offsetName ];
 		} else {
 			// support integer values as pixels
 			num = typeof num === "string" ? num : num + "px";
 
-			return this.each(function(){
+			return set.each(function(){
 				this.style[ name ] = num;
 			});
 		}
-	};
+	}
 
 
 
 	shoestring.fn.height = function( num ){
-		return this.dimension( "height", num );
+		return _dimension( this, "height", num );
 	};
 
 
@@ -1163,7 +1164,7 @@
 
 
 	shoestring.fn.width = function( num ){
-		return this.dimension( "width", num );
+		return _dimension( this, "width", num );
 	};
 
 
@@ -1212,11 +1213,20 @@
 
 		function newCB( e ){
 			e.data = data;
-			return callback.apply( this, [ e ].concat( e._args ) );
+
+			// thanks https://github.com/jonathantneal/EventListener
+			e.target = e.target || e.srcElement;
+			e.preventDefault = e.preventDefault || function () {
+				e.returnValue = false;
+			};
+			e.stopPropagation = function () {
+				e.cancelBubble = true;
+			};
+
+			return callback.apply(this, [ e ].concat( e._args ) );
 		}
 		function propChange( e, boundElement ) {
-			var lastEvent = document.documentElement[ e.propertyName ],
-				triggeredElement = lastEvent.el;
+			var triggeredElement = document.documentElement[ e.propertyName ].el;
 
 			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
 				newCB.call( triggeredElement, e );
@@ -1234,7 +1244,9 @@
 					this.addEventListener( evt, newCB, false );
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
-						this.attachEvent( "on" + evt, newCB );
+						this.attachEvent( "on" + evt, function(e) {
+							return newCB.call( oEl, e );
+						});
 					} else {
 						// Custom event
 						callback = (function() {
@@ -1566,6 +1578,49 @@
 		shoestring.error( 'trim' );
 	};
 	
+
+
+	(function() {
+		shoestring.trachedMethodsKey = "shoestringMethods";
+
+		// simple check for localStorage from http://diveintohtml5.info/storage.html
+		function supportsStorage() {
+			try {
+				return 'localStorage' in window && window.localStorage !== null;
+			} catch (e) {
+				return false;
+			}
+		}
+
+		// return a new function closed over the old implementation
+		function recordProxy( old, name ) {
+			return function() {
+				var tracked;
+				try {
+					tracked = JSON.parse(window.localStorage.getItem( shoestring.trackedMethodsKey ) || "{}");
+				} catch (e) {
+					if( e instanceof SyntaxError) {
+						tracked = {};
+					}
+				}
+
+				tracked[ name ] = true;
+				window.localStorage.setItem( shoestring.trackedMethodsKey, JSON.stringify(tracked) );
+
+				return old.apply(this, arguments);
+			};
+		}
+
+		// proxy each of the methods defined on fn
+		if( supportsStorage() ){
+			for( var method in shoestring.fn ){
+				if( shoestring.fn.hasOwnProperty(method) ) {
+					shoestring.fn[ method ] = recordProxy(shoestring.fn[ method ], method);
+				}
+			}
+		}
+	})();
+
 
 
 })( this );
