@@ -118,7 +118,7 @@ select {
 
 .button,
 textarea,
-.custom-select select,
+.custom-select,
 input[type="text"],
 input[type="search"],
 input[type="number"],
