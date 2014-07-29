@@ -45,16 +45,83 @@
 				</div>
 			</label> 
 
+			<button class="button btn-submit">Submit</button>
 		</div>
 
 		<!-- <div class="sect-b">
 			more examples and stuff			
 		</div> -->
 	</div>
-
-	<button class="button btn-submit">Submit</button>
-
 </form>
+
+<div class="layout-a clearfix">
+	<h3>Error feedback</h3>
+
+	<div class="sect-a">
+
+		<label class="form-group invalid">
+			<b class="label-text">Native select</b>
+			<select>
+				<option>Apples</option>
+				<option>Bananas</option>
+				<option>Grapes</option>
+				<option>Oranges</option>
+				<option selected>A very long option name to test wrapping</option>
+			</select>
+			<div class=" error-msg">Please make a selection.</div>
+		</label>
+
+
+		<label class="form-group invalid">
+			<b class="label-text">Custom-styled select</b>
+			<div class="custom-select">
+				<select>
+					<option>Apples</option>
+					<option>Bananas</option>
+					<option>Grapes</option>
+					<option>Oranges</option>
+					<option>A very long option name to test wrapping</option>
+				</select>
+			</div>
+			<div class=" error-msg">Please make a selection.</div>
+		</label> 
+
+	</div>
+</div>
+
+<div class="layout-a clearfix">
+	<h3>Disabled state</h3>
+
+	<div class="sect-a">
+
+		<label class="form-group disabled">
+			<b class="label-text">Native select</b>
+			<select disabled>
+				<option>Apples</option>
+				<option>Bananas</option>
+				<option>Grapes</option>
+				<option>Oranges</option>
+				<option selected>A very long option name to test wrapping</option>
+			</select>
+		</label>
+
+
+		<label class="form-group disabled">
+			<b class="label-text">Custom-styled select</b>
+			<div class="custom-select">
+				<select disabled>
+					<option>Apples</option>
+					<option>Bananas</option>
+					<option>Grapes</option>
+					<option>Oranges</option>
+					<option>A very long option name to test wrapping</option>
+				</select>
+			</div>
+		</label> 
+
+	</div>
+</div>
+
 
 <!--#include virtual="/ssi/js.html" -->
 </body>
