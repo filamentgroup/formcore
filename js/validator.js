@@ -113,10 +113,15 @@
 			this.copy.{TYPE}.message
 	 */
 	Validator.prototype.getErrorMessage = function( value ) {
-		var key = !value.length ? "required" : this.type,
-			msg = this.$element.attr( "data-message" ) ||
-				this.$element.attr( "data-" + key + "-message" ) ||
-				this.copy[ key ].message;
+		var key, msg;
+		if( !(value && value.length) ){
+			key = "required";
+		} else {
+			key = this.type;
+		}
+		msg = this.$element.attr( "data-message" ) ||
+			this.$element.attr( "data-" + key + "-message" ) ||
+			this.copy[ key ].message;
 
 		return this[ "message" + key ] ?
 			this[ "message" + key ].call( this, value, msg ) :
