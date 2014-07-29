@@ -58,7 +58,7 @@
 	};
 
 	Validator.prototype.getValue = function() {
-		var $els;
+		var $els, arr;
 
 		if( this._isSelect() ) {
 			$els = $( this.element.options[ this.element.selectedIndex ] );
@@ -67,9 +67,11 @@
 		}
 
 		if( $els ) {
-			return $els.map(function() {
-				return this.value !== "" ? this.value : null;
-			}).get();
+			arr = [];
+			$els.each(function(){
+				arr.push(this.value !== "" ? this.value : null);
+			});
+			return $( arr ).get();
 		}
 
 		return this.element.value;
