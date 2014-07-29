@@ -23,17 +23,17 @@
 	<div class="inner-layout clearfix"><!-- Use 'inner-layout' on the form field wrapper when fields are displayed in columns with `sect-inner-*` classes -->
 		<label class="form-group required sect-inner-a">
 			<b class="label-text">First Name</b>
-			<input type="text" id="fname" required>
+			<input type="text" id="fname" data-message="Please enter your first name." required>
 		</label>
 
 		<label class="form-group required sect-inner-b">
 			<b class="label-text">Last Name</b>
-			<input type="text" id="lname" required>
+			<input type="text" id="lname" data-message="Please enter your last name." required>
 		</label>
 
 		<label class="form-group">
 			<b class="label-text">Birthday</b>
-			<input type="date" data-validate="birthday" placeholder="mm dd yyyy">
+			<input type="text" data-validate="birthday" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="mm dd" required>
 		</label>
 
 		<label class="form-group">
@@ -103,7 +103,7 @@
 	<div class="inner-layout clearfix">
 		<label class="form-group required">
 			<b class="label-text">Street Address</b>
-			<input type="text" id="address" required>
+			<input type="text" id="address" data-message="Please enter your address." required>
 		</label>
 
 		<label class="form-group required sect-inner-a">
@@ -192,7 +192,7 @@
 	<div class="inner-layout clearfix">
 		<label class="form-group required">
 			<span class="label-text">Amount</span>
-			<input type="number" step="0.01" min="0" max="10000" required>
+			<input type="number" step="0.01" min="0" max="10000" data-message="Please specify an amount." required>
 		</label>
 		<label class="form-group required">
 			<span class="label-text">Card Number</span>
@@ -226,11 +226,11 @@
 		<label class="form-group required">
 			<span class="label-text">Gift Card Number</span>
 			<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
-			<input type="text" data-validate="credit" inputmode="numeric" pattern="[0-9]*" required>
+			<input type="text" inputmode="numeric" pattern="[0-9]*" minlength="8" maxlength="8" placeholder="8 digits" data-validate="minlength" data-message="Please enter an 8-digit card number." required>
 		</label>
 		<label class="form-group required sect-inner-a">
 			<span class="label-text">PIN</span>
-			<input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="4 Digits" required>
+			<input type="text" inputmode="numeric" pattern="[0-9]*" minlength="4" maxlength="4" placeholder="4 Digits" data-validate="minlength" data-message="Please enter a 4-digit PIN." required>
 		</label>
 		<div class="form-btns sect-inner-b">
 			<button class="button btn-submit">Submit</button>

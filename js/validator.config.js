@@ -103,7 +103,7 @@
       "placeholder": "YYYY MM"
     },
     "cvv" : {
-      "message" : "Security Codes require a valid card credit card number.",
+      "message" : "Security code requires a valid card credit card number.",
       "placeholder": "3–4 Digits",
       "visa": {
         "placeholder": "3 Digits",
@@ -272,7 +272,7 @@
   $.extend( Validator.prototype.copy, {
     "zip" : {
       "placeholder": "00000",
-      "message" : "ZIP Code should be 5 or 9 digits."
+      "message" : "ZIP Code should be 5 digits, or 9 digits in the form of 00000-0000."
     }
   });
 
