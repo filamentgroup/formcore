@@ -467,6 +467,7 @@ input[type="file"][disabled] {
 }
 .invalid input,
 .invalid select,
+.invalid .custom-select,
 .invalid textarea {
 	border-color: #DC0014;
 }

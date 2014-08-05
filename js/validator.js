@@ -18,6 +18,7 @@
 
 		this.type = this.$element.attr( "data-validate" );
 		this.required = this.$element.is( "[required]" );
+		this.invalidValue = this.$element.attr( "data-invalid-value" ) || "-1" ;
 	};
 
 	Validator.prototype.config = {};
@@ -58,7 +59,7 @@
 	};
 
 	Validator.prototype.getValue = function() {
-		var $els, arr;
+		var $els, arr, self = this;
 
 		if( this._isSelect() ) {
 			$els = $( this.element.options[ this.element.selectedIndex ] );
@@ -69,9 +70,11 @@
 		if( $els ) {
 			arr = [];
 			$els.each(function(){
-				arr.push(this.value !== "" ? this.value : null);
+				if( this.value !== "" && this.value !== self.invalidValue ){
+					arr.push(this.value !== "" ? this.value : null);
+				}
 			});
-			return $( arr ).get();
+			return arr;
 		}
 
 		return this.element.value;
@@ -80,8 +83,12 @@
 	Validator.prototype._isValid = function( value ) {
 		var result = false,
 			method = this[ 'validate' + this.type ];
+	
+		if( typeof value === "undefined" || value === null ) {
+			return !this.required;
+		}
 
-		if( value.length ) {
+		if( value.length ) {//string or array
 			if( !this.type ){
 				result = true;
 			} else if( this.type && method ){

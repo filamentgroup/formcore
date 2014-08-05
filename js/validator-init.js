@@ -21,7 +21,7 @@
 			var validator = new Validator( this, {
 				applyElement: $el.closest( ".form-group" ),
 				getErrorAnchor: function() {
-					return this.$element.closest( "input:not([type=checkbox]), textarea, .btn, label.checkbox" );
+					return this.$element.closest( "input:not([type=checkbox]), textarea, .btn, label.checkbox, .custom-select" );
 				}
 			});
 
