@@ -12,11 +12,12 @@
       throw new Error( "Element passed into ValidatorForm is not defined" );
     }
     opts = opts || {};
-    opts.title = opts.title || "L’annuncio è incompleta!";
-    opts.message = opts.message || "Si prega di ricontrollare il modulo sottostante e completare le informazioni richieste evidenziato in rosso."
+    opts.title = opts.title || "The form is invalid";
+    opts.message = opts.message || "Please review the form below and complete the required information.";
 
     this.opts = opts;
     this.element = element;
+		this.errorShowing = false;
   };
 
   ValidatorForm.prototype._createMarkup = function(){
@@ -25,8 +26,11 @@
 
   ValidatorForm.prototype._bindEvents = function(){
     var self = this;
-    $( w.document ).bind( 'error.validator', function( e ) {
-      self._createMarkup().prependTo( e.target );
+    $( self.element ).bind( 'error.validator', function( e ) {
+			if( !self.errorShowing ){
+				self._createMarkup().prependTo( e.target );
+				self.errorShowing = true;
+			}
     });
   };
 

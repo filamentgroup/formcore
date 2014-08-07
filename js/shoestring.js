@@ -1,4 +1,4 @@
-/*! Shoestring - v0.1.3 - 2014-07-28
+/*! Shoestring - v0.1.4 - 2014-08-06
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2014 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){	
@@ -534,6 +534,187 @@
 
 
 
+// NOTE this is taken directly from https://github.com/jonathantneal/polyfill
+// Window.prototype.getComputedStyle
+(function () {
+	function getComputedStylePixel(element, property, fontSize) {
+		element.document; // Internet Explorer sometimes struggles to read currentStyle until the element's document is accessed.
+
+		var
+		value = element.currentStyle[property].match(/([\d\.]+)(%|cm|em|in|mm|pc|pt|)/) || [0, 0, ''],
+		size = value[1],
+		suffix = value[2],
+		rootSize;
+
+		fontSize = !fontSize ? fontSize : /%|em/.test(suffix) && element.parentElement ? getComputedStylePixel(element.parentElement, 'fontSize', null) : 16;
+		rootSize = property === 'fontSize' ? fontSize : /width/i.test(property) ? element.clientWidth : element.clientHeight;
+
+		return suffix === '%' ? size / 100 * rootSize :
+		       suffix === 'cm' ? size * 0.3937 * 96 :
+		       suffix === 'em' ? size * fontSize :
+		       suffix === 'in' ? size * 96 :
+		       suffix === 'mm' ? size * 0.3937 * 96 / 10 :
+		       suffix === 'pc' ? size * 12 * 96 / 72 :
+		       suffix === 'pt' ? size * 96 / 72 :
+		       size;
+	}
+
+	function setShortStyleProperty(style, property) {
+		var
+		borderSuffix = property === 'border' ? 'Width' : '',
+		t = property + 'Top' + borderSuffix,
+		r = property + 'Right' + borderSuffix,
+		b = property + 'Bottom' + borderSuffix,
+		l = property + 'Left' + borderSuffix;
+
+		style[property] = (style[t] === style[r] && style[t] === style[b] && style[t] === style[l] ? [ style[t] ] :
+		                   style[t] === style[b] && style[l] === style[r] ? [ style[t], style[r] ] :
+		                   style[l] === style[r] ? [ style[t], style[r], style[b] ] :
+		                   [ style[t], style[r], style[b], style[l] ]).join(' ');
+	}
+
+	// <CSSStyleDeclaration>
+	function CSSStyleDeclaration(element) {
+		var
+		style = this,
+		currentStyle = element.currentStyle,
+		fontSize = getComputedStylePixel(element, 'fontSize'),
+		unCamelCase = function (match) {
+			return '-' + match.toLowerCase();
+		},
+		property;
+
+		for (property in currentStyle) {
+			Array.prototype.push.call(style, property === 'styleFloat' ? 'float' : property.replace(/[A-Z]/, unCamelCase));
+
+			if (property === 'width') {
+				style[property] = element.offsetWidth + 'px';
+			} else if (property === 'height') {
+				style[property] = element.offsetHeight + 'px';
+			} else if (property === 'styleFloat') {
+				style.float = currentStyle[property];
+			} else if (/margin.|padding.|border.+W/.test(property) && style[property] !== 'auto') {
+				style[property] = Math.round(getComputedStylePixel(element, property, fontSize)) + 'px';
+			} else if (/^outline/.test(property)) {
+				// errors on checking outline
+				try {
+					style[property] = currentStyle[property];
+				} catch (error) {
+					style.outlineColor = currentStyle.color;
+					style.outlineStyle = style.outlineStyle || 'none';
+					style.outlineWidth = style.outlineWidth || '0px';
+					style.outline = [style.outlineColor, style.outlineWidth, style.outlineStyle].join(' ');
+				}
+			} else {
+				style[property] = currentStyle[property];
+			}
+		}
+
+		setShortStyleProperty(style, 'margin');
+		setShortStyleProperty(style, 'padding');
+		setShortStyleProperty(style, 'border');
+
+		style.fontSize = Math.round(fontSize) + 'px';
+	}
+
+	CSSStyleDeclaration.prototype = {
+		constructor: CSSStyleDeclaration,
+		// <CSSStyleDeclaration>.getPropertyPriority
+		getPropertyPriority: function () {
+			throw new Error('NotSupportedError: DOM Exception 9');
+		},
+		// <CSSStyleDeclaration>.getPropertyValue
+		getPropertyValue: function (property) {
+			return this[property.replace(/-\w/g, function (match) {
+				return match[1].toUpperCase();
+			})];
+		},
+		// <CSSStyleDeclaration>.item
+		item: function (index) {
+			return this[index];
+		},
+		// <CSSStyleDeclaration>.removeProperty
+		removeProperty: function () {
+			throw new Error('NoModificationAllowedError: DOM Exception 7');
+		},
+		// <CSSStyleDeclaration>.setProperty
+		setProperty: function () {
+			throw new Error('NoModificationAllowedError: DOM Exception 7');
+		},
+		// <CSSStyleDeclaration>.getPropertyCSSValue
+		getPropertyCSSValue: function () {
+			throw new Error('NotSupportedError: DOM Exception 9');
+		}
+	};
+
+  if( !window.getComputedStyle ) {
+	  // <window>.getComputedStyle
+	  window.getComputedStyle = Window.prototype.getComputedStyle = function (element) {
+		  return new CSSStyleDeclaration(element);
+	  };
+  }
+})();
+
+
+
+	/* jshint unused: false */
+
+	var cssExceptions = shoestring.cssExceptions;
+
+	// IE8 uses marginRight instead of margin-right
+	function convertPropertyName( str ) {
+		return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
+			return character.toUpperCase();
+		});
+	}
+
+	function _getStyle( element, property ) {
+		// polyfilled in getComputedStyle module
+		return window.getComputedStyle( element, null ).getPropertyValue( property );
+	}
+
+	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
+
+	function getStyle( element, property ) {
+		var convert, value, j, k;
+
+		if( cssExceptions[ property ] ) {
+			for( j = 0, k = cssExceptions[ property ].length; j < k; j++ ) {
+				value = _getStyle( element, cssExceptions[ property ][ j ] );
+
+				if( value ) {
+					return value;
+				}
+			}
+		}
+
+		for( j = 0, k = vendorPrefixes.length; j < k; j++ ) {
+			convert = convertPropertyName( vendorPrefixes[ j ] + property );
+
+			// VendorprefixKeyName || key-name
+			value = _getStyle( element, convert );
+
+			if( convert !== property ) {
+				value = value || _getStyle( element, property );
+			}
+
+			if( vendorPrefixes[ j ] ) {
+				// -vendorprefix-key-name
+				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
+			}
+
+			if( value ) {
+				return value;
+			}
+		}
+
+		return undefined;
+	}
+
+  shoestring._getStyle = getStyle;
+
+
+
 	var cssExceptions = shoestring.cssExceptions;
 
 	// IE8 uses marginRight instead of margin-right
@@ -558,10 +739,6 @@
 	}
 
 	shoestring.fn.css = function( prop, value ){
-				if( typeof prop !== "object" && value === undefined ){
-			shoestring.error( "css-get" );
-		}
-		
 		if( !this[0] ){
 			return;
 		}
@@ -582,8 +759,7 @@
 				});
 			}
 
-			// NOTE saved for a distant ie8-less future: src/extenstions/dom/css/getStyle.js
-			// return shoestring.getStyle( this[0], prop );
+			return shoestring.getStyle( this[0], prop );
 		}
 	};
 
@@ -1180,7 +1356,7 @@
 
 
 
-	shoestring.fn.bind = function( evt, data, callback ){
+	shoestring.fn.bind = function( evt, data, originalCallback ){
 
 				if( arguments.length > 3 ){
 			shoestring.error( 'on-delegate' );
@@ -1189,14 +1365,13 @@
 			shoestring.error( 'on-delegate' );
 		}
 				if( typeof data === "function" ){
-			callback = data;
+			originalCallback = data;
 			data = null;
 		}
 
 		var evts = evt.split( " " ),
 			docEl = document.documentElement,
-			bindingname = callback.toString(),
-			boundEvents = function( el, evt, callback ) {
+			addToEventCache = function( el, evt, callback ) {
 				if ( !el.shoestringData ) {
 					el.shoestringData = {};
 				}
@@ -1206,50 +1381,96 @@
 				if ( !el.shoestringData.events[ evt ] ) {
 					el.shoestringData.events[ evt ] = [];
 				}
-				el.shoestringData.events[ evt ][ callback.name ] = callback.callfunc;
-				// IE custom events
-				el.shoestringData.events[ evt ][ '_' + callback.name ] = callback._callfunc;
+				var obj = {};
+				if( callback.customCallfunc ) {
+					obj.isCustomEvent = true;
+				}
+				obj.callback = callback.customCallfunc || callback.callfunc;
+				obj.originalCallback = callback.originalCallback;
+
+				el.shoestringData.events[ evt ].push( obj );
 			};
 
-		function newCB( e ){
+		function encasedCallback( e ){
 			e.data = data;
+			var returnTrue = function(){
+				return true;
+			};
+			e.isDefaultPrevented = function(){
+				return false;
+			};
+			var originalPreventDefault = e.preventDefault;
+			var preventDefaultConstructor = function(){
+				if( originalPreventDefault ) {
+					return function(){
+						e.isDefaultPrevented = returnTrue;
+						originalPreventDefault.call(e);
+					};
+				} else {
+					return function(){
+						e.isDefaultPrevented = returnTrue;
+						e.returnValue = false;
+					};
+				}
+			};
 
 			// thanks https://github.com/jonathantneal/EventListener
 			e.target = e.target || e.srcElement;
-			e.preventDefault = e.preventDefault || function () {
-				e.returnValue = false;
-			};
-			e.stopPropagation = function () {
+			e.preventDefault = preventDefaultConstructor();
+			e.stopPropagation = e.stopPropagation || function () {
 				e.cancelBubble = true;
 			};
 
-			return callback.apply(this, [ e ].concat( e._args ) );
+			return originalCallback.apply(this, [ e ].concat( e._args ) );
 		}
-		function propChange( e, boundElement ) {
-			var triggeredElement = document.documentElement[ e.propertyName ].el;
+
+		// This is exclusively for custom events on browsers without addEventListener (IE8)
+		function propChange( originalEvent, boundElement ) {
+			var triggeredElement = document.documentElement[ originalEvent.propertyName ].el;
 
 			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
-				newCB.call( triggeredElement, e );
+				encasedCallback.call( triggeredElement, originalEvent );
+			}
+		}
+
+		// In IE8 the events trigger in a reverse order. This code unbinds and
+		// rebinds all callbacks on an element in the correct order.
+		function reorderEvents( eventName ) {
+			if( !this.attachEvent ) {
+				// do onthing
+				return;
+			} else if( this.shoestringData && this.shoestringData.events ) {
+				var otherEvents = this.shoestringData.events[ eventName ];
+				for( var j = otherEvents.length - 1; j >= 0; j-- ) {
+					if( !otherEvents[ j ].isCustomEvent ) {
+						this.detachEvent( "on" + eventName, otherEvents[ j ].callback );
+						this.attachEvent( "on" + eventName, otherEvents[ j ].callback );
+					} else {
+						docEl.detachEvent( "onpropertychange", otherEvents[ j ].callback );
+						docEl.attachEvent( "onpropertychange", otherEvents[ j ].callback );
+					}
+				}
 			}
 		}
 
 		return this.each(function(){
-			var callback, oEl = this;
+			var domEventCallback, customEventCallback, oEl = this;
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var evt = evts[ i ];
-				callback = null;
+				domEventCallback = null;
+				customEventCallback = null;
 
 				if( "addEventListener" in this ){
-					this.addEventListener( evt, newCB, false );
+					this.addEventListener( evt, encasedCallback, false );
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
-						this.attachEvent( "on" + evt, function(e) {
-							return newCB.call( oEl, e );
-						});
+						domEventCallback = function( originalEvent ) {
+							return encasedCallback.call( oEl, originalEvent );
+						};
+						this.attachEvent( "on" + evt, domEventCallback );
 					} else {
-						// Custom event
-						callback = (function() {
+						customEventCallback = (function() {
 							var eventName = evt;
 							return function( e ) {
 								if( e.propertyName === eventName ) {
@@ -1257,10 +1478,17 @@
 								}
 							};
 						})();
-						docEl.attachEvent( "onpropertychange", callback );
+						docEl.attachEvent( "onpropertychange", customEventCallback );
 					}
 				}
-				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname, "_callfunc": callback });
+
+				addToEventCache( this, evts[ i ], {
+					callfunc: domEventCallback || encasedCallback,
+					customCallfunc: customEventCallback,
+					originalCallback: originalCallback
+				});
+
+				reorderEvents.call( oEl, evt );
 			}
 		});
 	};
@@ -1280,38 +1508,34 @@
 		var evts = evt.split( " " ),
 			docEl = document.documentElement;
 		return this.each(function(){
-			var ev;
+			if( !this.shoestringData || !this.shoestringData.events ) {
+				return;
+			}
+
 			for( var i = 0, il = evts.length; i < il; i++ ){
 								if( evts[ i ].indexOf( "." ) === 0 ) {
 					shoestring.error( 'event-namespaces' );
 				}
 				
-				var bound = this.shoestringData.events[ evt ],
-					bindingname;
-				if( "removeEventListener" in window ){
-					if( callback !== undefined ) {
-						bindingname = callback.toString();
-						this.removeEventListener( evts[ i ], bound[ bindingname ], false );
-					} else {
-						for ( ev in bound ) {
-							this.removeEventListener( evts[ i ], bound[ ev ], false );
-						}
-					}
-				}
-				else if( this.detachEvent ){
-					if( callback !== undefined ) {
-						bindingname = callback.toString();
-						this.detachEvent( "on" + evts[ i ], bound[ bindingname ] );
-						// custom event
-						if( bound[ "_" + bindingname ] ) {
-							docEl.detachEvent( "onpropertychange", bound[ '_' + bindingname ] );
-						}
-					} else {
-						for ( ev in bound ) {
-							// since the _ev and ev will both be keys here, we’ll detach both methods for each
-							this.detachEvent( "on" + evts[ i ], bound[ ev ] );
-							// custom event
-							docEl.detachEvent( "onpropertychange", bound[ ev ] );
+				var bound = this.shoestringData.events[ evts[ i ] ];
+				if( bound ) {
+					for( var j = 0, jl = bound.length; j < jl; j++ ) {
+						if( "removeEventListener" in window ){
+							if( callback === undefined ) {
+								this.removeEventListener( evts[ i ], bound[ j ].callback, false );
+							} else if( callback === bound[ j ].originalCallback ) {
+								this.removeEventListener( evts[ i ], bound[ j ].callback, false );
+							}
+						} else if( this.detachEvent ){
+							if( callback === undefined ) {
+								this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
+								// custom event
+								docEl.detachEvent( "onpropertychange", bound[ j ].callback );
+							} else if( callback === bound[ j ].originalCallback ) {
+								this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
+								// custom event
+								docEl.detachEvent( "onpropertychange", bound[ j ].callback );
+							}
 						}
 					}
 				}
@@ -1349,6 +1573,7 @@
 			ret;
 
 		// TODO needs IE8 support
+		// See this.fireEvent( 'on' + evts[ i ], document.createEventObject() ); instead of click() etc in trigger.
 		if( document.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
 			var bindings = el.shoestringData.events[ e ];
 			for (var i in bindings ){
@@ -1376,8 +1601,8 @@
 					event._args = args;
 					this.dispatchEvent( event );
 				} else if ( document.createEventObject ) {
-					if( this[ 'on' + evts[ i ] ] !== undefined ) {
-						this.fireEvent( 'on' + evts[ i ], document.createEventObject() );
+					if( ( "" + this[ evts[ i ] ] ).indexOf( "function" ) > -1 ) {
+						this[ evts[ i ] ]();
 					} else {
 						document.documentElement[ evts[ i ] ] = {
 							"el": this,
@@ -1462,73 +1687,6 @@
 		return shoestring( first );
 	};
 
-
-
-
-	/* jshint unused: false */
-
-	var cssExceptions = shoestring.cssExceptions;
-
-	// IE8 uses marginRight instead of margin-right
-	function convertPropertyName( str ) {
-		return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
-			return character.toUpperCase();
-		});
-	}
-
-	function _getStyle( element, property ) {
-		var view = document.defaultView,
-				docElement = document.documentElement;
-
-		// if defaultView is available use getComputedStyle otherwise use currentStyle
-		if( view ){
-			return view
-				.getComputedStyle( element, null )
-				.getPropertyValue( property );
-		} else {
-			return docElement.currentStyle[ property ] ? element.currentStyle[ property ] : undefined;
-		}
-	}
-
-	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
-
-	function getStyle( element, property ) {
-		var convert, value, j, k;
-
-		if( cssExceptions[ property ] ) {
-			for( j = 0, k = cssExceptions[ property ].length; j < k; j++ ) {
-				value = _getStyle( element, cssExceptions[ property ][ j ] );
-
-				if( value ) {
-					return value;
-				}
-			}
-		}
-
-		for( j = 0, k = vendorPrefixes.length; j < k; j++ ) {
-			convert = convertPropertyName( vendorPrefixes[ j ] + property );
-
-			// VendorprefixKeyName || key-name
-			value = _getStyle( element, convert );
-
-			if( convert !== property ) {
-				value = value || _getStyle( element, property );
-			}
-
-			if( vendorPrefixes[ j ] ) {
-				// -vendorprefix-key-name
-				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
-			}
-
-			if( value ) {
-				return value;
-			}
-		}
-
-		return undefined;
-	}
-
-  shoestring._getStyle = getStyle;
 
 
 
