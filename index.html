@@ -206,8 +206,8 @@
 		
 		<label class="form-group required sect-inner-a">
 			<span class="label-text">Expiration</span>
-			<!-- DEV NOTE: Some browsers, like Safari in iOS, will display this as a dropdown.  Those that don't support the 'month' input type will fall back to 'text' and use the pattern, data-pattern, maxlength, and placeholder attributes.  -->
-			<input type="month" data-validate="ccexpiration" pattern="[0-9]*" data-pattern="" maxlength="7" placeholder="YYYY MM" required>
+			<!-- DEV NOTE: Some browsers, like Safari in iOS and Chrome will display this as a dropdown.  Those that don't support the 'month' input type will fall back to 'text' and use the maxlength, and placeholder attributes.  -->
+			<input type="month" data-validate="ccexpiration" maxlength="7" placeholder="YYYY-MM" required>
 		</label>
 		<label class="form-group required sect-inner-b">
 			<span class="label-text">Security Code</span>
