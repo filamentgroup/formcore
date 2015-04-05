@@ -27,12 +27,13 @@
 					$inp.replaceWith( $newinp );
 				}
 					
-				toggleMask();
-				$tog.insertBefore( $newinp );
+				var $inp = $el.find( "input" ),
+						type = $inp.attr( "type" );
 
-				$tog.bind( "click", function(){
-					toggleMask();
-				});
+				$tog.html( ( type === "text" ? "hide" : "show" ) + " password" );
+				$tog.insertBefore( $inp );
+
+				$tog.bind( "click", toggleMask );
 		});
 	};
 
