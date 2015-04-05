@@ -497,6 +497,10 @@ input[type="file"][disabled] {
 	display: none;
 }
 
+.hidden {
+	display: none;
+}
+
 
 @media ( min-width: 600px ) {
 	.layout-a .sect-a,
