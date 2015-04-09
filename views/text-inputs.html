@@ -15,7 +15,7 @@
 
 <!--#include virtual="/ssi/masthead.html" -->	
 
-<div class="docs-main">
+<div class="docs-main" data-input-val-toggle>
 <h2>Text Inputs</h2>
 
 <form novalidate data-validatorform data-error-title="The Form is incomplete" data-error-message="Go back there and fix it.">
@@ -50,7 +50,12 @@
 
 		<label class="form-group">
 			<b class="label-text">Number</b>
-			<input type="number" data-validate="numeric">
+			<input type="number" data-validate="number">
+		</label>
+
+		<label class="form-group">
+			<b class="label-text">Numeric Input (can have spaces/dashes)</b>
+			<input type="number" data-validate="numeric" inputmode="numeric" data-pattern="[0-9]*" data-numeric-input>
 		</label>
 
 		<label class="form-group">
@@ -67,6 +72,7 @@
 			<b class="label-text">Date</b>
 			<input type="date" data-validate="date">
 		</label>
+
 	</div>
 
 	<div class="sect-b">

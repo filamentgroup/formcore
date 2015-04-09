@@ -190,8 +190,11 @@
 /* global jQuery:true */
 (function( Validator, $ ) {
   $.extend( Validator.prototype.config, {
-    "numeric": {
+    "number": {
       "pattern": "[0-9]+"
+    },
+    "numeric": {
+      "pattern": "[^a-z][^A-Z]"
     }
   });
 
@@ -200,8 +203,11 @@
 /* global jQuery:true */
 (function( Validator, $ ) {
   $.extend( Validator.prototype.copy, {
-    "numeric": {
+    "number": {
       "message": "Needs to be a number."
+    },
+    "numeric": {
+      "message": "Needs to be a number or a symbol."
     }
   });
 
