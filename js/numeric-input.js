@@ -8,30 +8,28 @@
 		this.pattern = this.$el.attr( "data-pattern" );
 	};
 
-	NumericInput.prototype.init = function(){
-		this.el.pattern = this.pattern;
+	NumericInput.prototype.bindEvents = function(){
 
-		this.$el.on( "keydown", function( event ){
+		this.$el.on( "keypress", function( event ){
 
 			var handled = false;
 			if (event.key !== undefined) {
-				//Handle the event with KeyboardEvent.key and set handled true.
-				console.log( "Key" );
-				console.log( event.key );
-			} else if (event.keyIdentifier !== undefined) {
-				// Handle the event with KeyboardEvent.keyIdentifier and set handled true.
-				console.log( "Key Identifier" );
-				console.log( event.keyIdentifier );
+				handled = isNaN(parseInt(event.key, 10)) && event.key !== "Tab" && event.key !== "Enter";
 			} else if (event.keyCode !== undefined) {
-			// Handle the event with KeyboardEvent.keyCode and set handled true.
-				console.log( "Key Code" );
-				console.log( event.keyCode );
+				var code = event.keyCode;
+				handled = (code < 48 || code > 57) && code !== 13;
 			}
+
 			if (handled) {
 				// Suppress "double action" if event handled
 				event.preventDefault();
 			}
 		});
+	};
+
+	NumericInput.prototype.init = function(){
+		this.el.pattern = this.pattern;
+		this.bindEvents();
 	};
 
 	window.NumericInput = NumericInput;
