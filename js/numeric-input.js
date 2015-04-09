@@ -14,7 +14,12 @@
 
 			var handled = false;
 			if (event.key !== undefined) {
-				handled = isNaN(parseInt(event.key, 10)) && event.key !== "Tab" && event.key !== "Enter";
+				var key = event.key;
+				console.log( key );
+				handled = isNaN(parseInt(key, 10)) &&
+					key !== "Tab" &&
+					key !== "Enter" &&
+					key !== "Escape";
 			} else if (event.keyCode !== undefined) {
 				var code = event.keyCode;
 				handled = (code < 48 || code > 57) && code !== 13;
