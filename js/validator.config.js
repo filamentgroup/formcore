@@ -192,9 +192,6 @@
   $.extend( Validator.prototype.config, {
     "number": {
       "pattern": "[0-9]+"
-    },
-    "numeric": {
-      "pattern": "[^a-z][^A-Z]"
     }
   });
 
@@ -205,9 +202,6 @@
   $.extend( Validator.prototype.copy, {
     "number": {
       "message": "Needs to be a number."
-    },
-    "numeric": {
-      "message": "Needs to be a number or a symbol."
     }
   });
 
