@@ -20,7 +20,7 @@
 			var togglers = [];
 			$.each( formGroups, function( idx, el ){
 				var t = new Toggler( el );
-				t.input.bind( "change", function( e ){
+				t.input.bind( "keyup", function( e ){
 					t.update();
 				});
 				togglers.push( t );
