@@ -1,4 +1,4 @@
-/*! Shoestring - v1.0.3 - 2015-04-09
+/*! Shoestring - v1.0.3 - 2015-04-10
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2015 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){
@@ -59,7 +59,7 @@
 
 		// array like objects or node lists
 		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-				prim instanceof window.NodeList ){
+				(window.NodeList && prim instanceof window.NodeList) ){
 
 			return new Shoestring( prim, prim );
 		}
@@ -924,9 +924,14 @@
 
 		if( !window.getComputedStyle ) {
 			// <window>.getComputedStyle
-			window.getComputedStyle = Window.prototype.getComputedStyle = function (element) {
+			// NOTE Window is not defined in all browsers
+			window.getComputedStyle = function (element) {
 				return new CSSStyleDeclaration(element);
 			};
+
+			if ( window.Window ) {
+				window.Window.prototype.getComputedStyle = window.getComputedStyle;
+			}
 		}
 	})();
 
