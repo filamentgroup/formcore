@@ -17,7 +17,9 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 .form-btns.sect-inner-b {
 	margin-top: 1em;
 }
-
+.form-group.sect-inner-b {
+	clear: none;
+}
 
 @media ( min-width: 600px ) {
 	.layout-a .sect-a,

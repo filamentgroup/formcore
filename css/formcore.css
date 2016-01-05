@@ -10,9 +10,6 @@
 	display: block;
 	position: relative;
 }
-.form-group.sect-inner-b {
-	clear: none;
-}
 .btn.btn-mask-pw,
 .button.btn-mask-pw {
 	position: absolute;
