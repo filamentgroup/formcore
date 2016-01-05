@@ -205,15 +205,10 @@ input[type="week"]::-webkit-inner-spin-button {
 	float: left;
 	max-width: 80%;
 }
-.checkbox .item b,
-.radiobutton .item b {
-	font-family: $fontSemiBold;
-}
 .checkbox .item-desc,
 .radiobutton .item-desc {
 	font-size: .9em;
 	display: block;
-	color: $gray-tertiary;
 }
 
 
