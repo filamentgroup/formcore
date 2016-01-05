@@ -15,7 +15,6 @@
 			var handled = false;
 			if (event.key !== undefined) {
 				var key = event.key;
-				console.log( key );
 				handled = isNaN(parseInt(key, 10)) &&
 					key !== "Tab" &&
 					key !== "Enter" &&
