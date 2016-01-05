@@ -1,19 +1,5 @@
 
 
-/* Layout styles */
-
-/* Generic section classes can be used for interior columns that can be scoped to 
-break into cols at different breakpoints; wrap them in a .inner-layout container */
-.sect-inner-a,
-.sect-inner-b {
-	width: 48%;
-}
-.sect-inner-a {
-	float: left;
-}
-.sect-inner-b {
-	float: right;
-}
 
 
 .form-group,
@@ -27,6 +13,7 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 .form-group.sect-inner-b {
 	clear: none;
 }
+.btn.btn-mask-pw,
 .button.btn-mask-pw {
 	position: absolute;
 	top: -1.2em;
@@ -34,10 +21,6 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 	width: auto;
 }
 
-.form-btns.sect-inner-a,
-.form-btns.sect-inner-b {
-	margin-top: 1em;
-}
 
 
 /* Use a separate class/element for label text so child elements don't inherit styles */
@@ -61,7 +44,8 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 
 
 /* Button-like styling for inputs and button elements */
-.button, 
+.btn,
+.button,
 textarea,
 input,
 select {
@@ -69,6 +53,7 @@ select {
 	padding: .6em 16px;
 }
 
+.btn,
 .button,
 textarea,
 .custom-select,
@@ -136,36 +121,7 @@ input[type=number].text-number::-webkit-outer-spin-button {
 	margin: 0; 
 }
 
-.button {
-	display: inline-block;
-	text-decoration: none;
-	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-	border-color: #ccc;	
-	background: #f3f3f3;
-	background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
-}
-.button.btn-primary, 
-.button.btn-submit {
-	text-shadow: 1px 1px 1px #222;
-	border-color: #4d6a81;	
-	color: #fff;
-	background-color: #4d6a81;
-	background-image: -webkit-linear-gradient(top, rgba(255,255,255,0), rgba(0,0,0,.25)); /* Chrome10+,Safari5.1+ */
-	background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,.25)); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(255,255,255,0)', endColorstr='rgba(0,0,0,.25)',GradientType=0 ); /* IE6-9 */
-}
-.button.btn-small {
-	font-size: .6em;
-	padding: .5em 8px .4em;
-	text-transform: uppercase;
-}
-.btn-submit {
-	margin: 0 0 2em;
-	max-width: 200px;
-	float: right;
-}
+
 
 
 /* Placeholder text in form elements - each rule must remain separate to work */
@@ -265,6 +221,7 @@ input[type="week"]::-webkit-inner-spin-button {
 
 
 /* feedback states */
+.btn:focus, 
 .button:focus, 
 textarea:focus,
 input:focus,
@@ -293,25 +250,6 @@ input[type="file"][disabled] {
 	background-color: transparent;
 }
 
-
-.hidden {
-	display: none;
-}
-
-
-@media ( min-width: 600px ) {
-	.layout-a .sect-a,
-	.layout-a .sect-b {
-		float: left;
-		width: 47%;
-	}
-	.layout-a .sect-b {
-		float: right;
-		padding-left: 3%;
-		border-left: 1px solid #ddd;
-	}
-
-}
 
 @media ( min-width: 900px ) {
 	.has-helper {

@@ -1,0 +1,30 @@
+.button {
+	display: inline-block;
+	text-decoration: none;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-color: #ccc;	
+	background: #f3f3f3;
+	background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+.button.btn-primary, 
+.button.btn-submit {
+	text-shadow: 1px 1px 1px #222;
+	border-color: #4d6a81;	
+	color: #fff;
+	background-color: #4d6a81;
+	background-image: -webkit-linear-gradient(top, rgba(255,255,255,0), rgba(0,0,0,.25)); /* Chrome10+,Safari5.1+ */
+	background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,.25)); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(255,255,255,0)', endColorstr='rgba(0,0,0,.25)',GradientType=0 ); /* IE6-9 */
+}
+.button.btn-small {
+	font-size: .6em;
+	padding: .5em 8px .4em;
+	text-transform: uppercase;
+}
+.btn-submit {
+	margin: 0 0 2em;
+	max-width: 200px;
+	float: right;
+}

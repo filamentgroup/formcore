@@ -1,0 +1,34 @@
+/* Layout styles */
+
+/* Generic section classes can be used for interior columns that can be scoped to 
+break into cols at different breakpoints; wrap them in a .inner-layout container */
+.sect-inner-a,
+.sect-inner-b {
+	width: 48%;
+}
+.sect-inner-a {
+	float: left;
+}
+.sect-inner-b {
+	float: right;
+}
+
+.form-btns.sect-inner-a,
+.form-btns.sect-inner-b {
+	margin-top: 1em;
+}
+
+
+@media ( min-width: 600px ) {
+	.layout-a .sect-a,
+	.layout-a .sect-b {
+		float: left;
+		width: 47%;
+	}
+	.layout-a .sect-b {
+		float: right;
+		padding-left: 3%;
+		border-left: 1px solid #ddd;
+	}
+
+}
