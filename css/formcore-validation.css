@@ -1,0 +1,42 @@
+.error-msg {
+	margin: .3em 0 0;
+	font-size: .8em;
+}
+.invalid .error-msg {
+	color: #DC0014;
+}
+.invalid .error-msg + .radiobutton {
+	margin-top: .5em;
+}
+.invalid input,
+.invalid select,
+.invalid .custom-select,
+.invalid textarea {
+	border-color: #DC0014;
+}
+.invalid .checkbox input,
+.invalid .radiobutton input {
+	position: relative;
+}
+.invalid .checkbox input:before,
+.invalid .radiobutton input:before {
+	content: " ";
+	display: block;
+	width: 80%;
+	height: 80%;
+	border: 2px solid #DC0014;
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	z-index: 1;
+	border-radius: 2px;
+}
+.invalid .radiobutton input:before {	
+	top: 0;
+	left: 0;
+	border-radius: 1em;
+}
+.invalid .checkbox input:checked:before,
+.invalid .radiobutton input:checked:before {
+	display: none;
+}
