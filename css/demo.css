@@ -1,0 +1,46 @@
+body {
+	background-color: #fff;
+	font-family: helvetica, sans-serif;
+	margin: 0;
+}
+.demo-nav {
+	margin: 1em 0;
+	padding: 0;
+	list-style-type: none;
+}
+.demo-nav li {
+	display: inline-block;
+	padding-right: 1em;
+	border-right: 1px solid #ddd;
+	margin: .5em 1em .5em 0;
+}
+.demo-nav li:last-child {
+	padding-right: 0;
+	border-right: none;
+	margin-right: 0;
+}
+h2 {
+	margin: 2em 0 1em;
+}
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+	*zoom: 1;
+}
+
+/* Use this for labels/elements that are in the markup purely for audible/accessibility purposes, and are always hidden */
+.a11y-only {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
