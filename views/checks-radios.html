@@ -16,137 +16,149 @@
 <div class="docs-main">
 <h2>Checkboxes &amp; Radio Buttons</h2>
 
-<div class="layout-a clearfix">
-	<div class="sect-a">
-<form novalidate data-validatorform data-error-title="The Form is incomplete" data-error-message="Go back there and fix it.">
+<div data-xrayhtml>
+<h3 class="xraytitle">Checkbox Selection</h3>
 
-		<div class="form-group">
-			<label class="checkbox">
-				<input type="checkbox" name="opt1" id="opt1">
-				<span class="item">Description in sentence form.</span>
-			</label>
-		</div>
-
-		<div class="form-group checkbox-set clearfix">
-			<label class="checkbox">
-				<input type="checkbox" name="opt2" id="opt2">
-				<span class="item">Description in sentence form.</span>
-			</label>
-			<label class="checkbox">
-				<input type="checkbox" name="opt3" id="opt3">
-				<span class="item">Another description in sentence form.</span>
-			</label>
-		</div>
-
-		<p class="docs">With description text:</p>
-
-		<div class="form-group checkbox-set">
-			<label class="checkbox">
-				<input type="checkbox" name="opt11" id="opt11">
-				<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>
-			</label>
-			<label class="checkbox">
-				<input type="checkbox" name="opt12" id="opt12">
-				<span class="item"><b>Item 2</b></span>
-			</label>
-			<label class="checkbox">
-				<input type="checkbox" name="opt13" id="opt13">
-				<span class="item"><b>Item 3</b></span>
-			</label>
-		</div>
-
-		<button class="button btn-submit">Submit</button>
-
-		</form>
-	</div>
-
-	<div class="sect-b">
-		<form novalidate data-validatorform data-error-title="The Form is incomplete" data-error-message="Go back there and fix it.">
-		
-		<div class="form-group radio-set clearfix">
-			<label class="radiobutton">
-				<input type="radio" name="options1" id="opt22">	
-				<span class="item">Description in sentence form.</span>	
-			</label>
-			<label class="radiobutton">
-				<input type="radio" name="options1" id="opt23">	
-				<span class="item">Another description in sentence form.</span>	
-			</label>
-		</div>
-
-		<p class="docs">With description text:</p>
-
-		<div class="form-group radio-set clearfix">
-			<label class="radiobutton">
-				<input type="radio" name="options" id="opt33">	
-				<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>	
-			</label>
-			<label class="radiobutton">
-				<input type="radio" name="options" id="opt34">	
-				<span class="item"><b>Item 2</b></span>	
-			</label>
-			<label class="radiobutton">
-				<input type="radio" name="options" id="opt35">	
-				<span class="item"><b>Item 3</b></span>	
-			</label>
-		</div>
-
-		<button class="button btn-submit">Submit</button>
-
-		</form>
-	</div>
+<div class="form-group">
+	<label class="checkbox">
+		<input type="checkbox" name="opt1" id="opt1">
+		<span class="item">Description in sentence form.</span>
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="opt2" id="opt2">
+		<span class="item">Description in sentence form.</span>
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="opt3" id="opt3">
+		<span class="item">Another description in sentence form.</span>
+	</label>
 </div>
 
-<h3>Error feedback</h3>
+</div><!-- /data-xrayhtml -->
 
-<div class="form-group radio-set clearfix invalid">
-	<div class="error-msg">Please make a selection:</div>
+<div data-xrayhtml>
+<h3 class="xraytitle">Checkbox Selection with Description Text</h3>
+
+<div class="form-group">
+	<label class="checkbox">
+		<input type="checkbox" name="opt11" id="opt11">
+		<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="opt12" id="opt12">
+		<span class="item"><b>Item 2</b></span>
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="opt13" id="opt13">
+		<span class="item"><b>Item 3</b></span>
+	</label>
+</div>
+
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Radio Selection</h3>
+
+<div class="form-group">
 	<label class="radiobutton">
-		<input type="radio" name="options" id="opt334">	
+		<input type="radio" name="options1" id="opt22">	
+		<span class="item">Description in sentence form.</span>	
+	</label>
+	<label class="radiobutton">
+		<input type="radio" name="options1" id="opt23">	
+		<span class="item">Another description in sentence form.</span>	
+	</label>
+</div>
+
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Radio Selection with Description Text</h3>
+
+<div class="form-group">
+	<label class="radiobutton">
+		<input type="radio" name="options" id="opt33">	
 		<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>	
 	</label>
 	<label class="radiobutton">
-		<input type="radio" name="options" id="opt344">	
+		<input type="radio" name="options" id="opt34">	
 		<span class="item"><b>Item 2</b></span>	
 	</label>
 	<label class="radiobutton">
-		<input type="radio" name="options" id="opt354">	
+		<input type="radio" name="options" id="opt35">	
 		<span class="item"><b>Item 3</b></span>	
 	</label>
 </div>
 
-<div class="form-group invalid">
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Error Message</h3>
+
+<div class="form-group invalid" data-validator-anchor>
+	<label class="radiobutton">
+		<input type="radio" name="radio-err" required value="item-1">
+		<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>	
+	</label>
+	<label class="radiobutton">
+		<input type="radio" name="radio-err" required value="item-2">
+		<span class="item"><b>Item 2</b></span>	
+	</label>
+	<label class="radiobutton">
+		<input type="radio" name="radio-err" required value="item-3">
+		<span class="item"><b>Item 3</b></span>	
+	</label>
+</div>
+<div class="error-msg">Please make a selection.</div>
+
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Error Messaging</h3>
+
+<div class="form-group invalid" data-validator-anchor>
 	<label class="checkbox">
-		<input type="checkbox" name="opt14" id="opt14">
+		<input type="checkbox" name="checkbox-err" required value="terms-and-conditions">
 		<span class="item">I agree to the <a href="#">Terms &amp; Conditions</a></span>
 	</label>
-	<div class="error-msg">Please agree to the Terms &amp; Conditions to continue.</div>
 </div>
+<div class="error-msg">Please agree to the Terms &amp; Conditions to continue.</div>
 
-<h3>Disabled state</h3>
+</div><!-- /data-xrayhtml -->
 
-<div class="form-group radio-set clearfix disabled">
+<div data-xrayhtml>
+<h3 class="xraytitle">Disabled State</h3>
+
+<div class="form-group disabled">
 	<label class="radiobutton">
-		<input type="radio" name="options" id="opt335" disabled>	
+		<input type="radio" name="radio-disabled" disabled>
 		<span class="item"><b>Item 1</b> <span class="item-desc">Additional info about this item can go here.</span></span>	
 	</label>
 	<label class="radiobutton">
-		<input type="radio" name="options" id="opt345" disabled>	
+		<input type="radio" name="radio-disabled" disabled>
 		<span class="item"><b>Item 2</b></span>	
 	</label>
 	<label class="radiobutton">
-		<input type="radio" name="options" id="opt355" disabled>	
+		<input type="radio" name="radio-disabled" disabled>
 		<span class="item"><b>Item 3</b></span>	
 	</label>
 </div>
+
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Disabled State</h3>
 
 <div class="form-group disabled">
 	<label class="checkbox">
-		<input type="checkbox" name="opt15" id="opt15" disabled>
+		<input type="checkbox" name="checkbox-disabled" disabled>
 		<span class="item">I agree to the <a href="#">Terms &amp; Conditions</a></span>
 	</label>
 </div>
-</div>
+
+</div><!-- /data-xrayhtml -->
+
+</div><!-- /docs-main -->
 
 
 </body>
