@@ -17,14 +17,25 @@
 
 <form novalidate data-validatorform data-error-title="The Form is incomplete" data-error-message="Go back there and fix it.">
 
+<div data-xrayhtml>
+<h3 class="xraytitle">Single Line Text</h3>
+<label class="form-group">
+	<b class="label-text">Text</b>
+	<input type="text">
+</label>
+</div>
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Multi-line Text, grows with text</h3>
+<label class="form-group">
+	<b class="label-text">Text</b>
+	<textarea></textarea>
+</label>
+</div>
+
 <div class="layout-a clearfix">
 
 	<div class="sect-a">
-		<label class="form-group">
-			<b class="label-text">Text</b>
-			<input type="text">
-		</label>
-
 		<label class="form-group required">
 			<b class="label-text">Required field</b>
 			<input type="text" required>
