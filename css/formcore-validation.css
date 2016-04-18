@@ -2,7 +2,6 @@
 	margin-top: .5em;
 }
 .invalid input,
-.invalid select,
 .invalid .custom-select,
 .invalid textarea {
 	border-color: #DC0014;

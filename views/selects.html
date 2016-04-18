@@ -16,139 +16,94 @@
 <div class="docs-main">
 <h2>Selects</h2>
 
-<form novalidate data-validatorform data-error-title="The Form is incomplete" data-error-message="Go back there and fix it.">
-	<div class="layout-a clearfix">
 
-		<div class="sect-a">
-
-			<label class="form-group">
-				<b class="label-text">Native select</b>
-				<select>
-					<option>Apples</option>
-					<option>Bananas</option>
-					<option>Grapes</option>
-					<option>Oranges</option>
-					<option selected>A very long option name to test wrapping</option>
-				</select>
-			</label>
-
-
-			<label class="form-group">
-				<b class="label-text">Custom-styled select</b>
-				<div class="custom-select">
-					<select>
-						<option>Apples</option>
-						<option>Bananas</option>
-						<option>Grapes</option>
-						<option>Oranges</option>
-						<option>A very long option name to test wrapping</option>
-					</select>
-				</div>
-			</label>
-
-			<label class="form-group">
-				<b class="label-text">Custom-styled select</b>
-				<div class="custom-select">
-					<select>
-						<option selected>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-					</select>
-				</div>
-			</label>
-
-			<label class="form-group">
-				<b class="label-text">Disabled Default Option Custom-styled select</b>
-				<div class="custom-select">
-					<select>
-						<option value="-1" selected disabled>Select a number</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-					</select>
-				</div>
-			</label> 
-
-			<button class="button btn-submit">Submit</button>
-		</div>
-
-		<!-- <div class="sect-b">
-			more examples and stuff			
-		</div> -->
+<div data-xrayhtml>
+<h3 class="xraytitle">Custom Styled Select</h3>
+<label class="form-group">
+	<b class="label-text">Custom-styled select</b>
+	<div class="custom-select">
+		<select>
+			<option>Apples</option>
+			<option>Bananas</option>
+			<option>Grapes</option>
+			<option>Oranges</option>
+			<option>A very long option name to test wrapping</option>
+		</select>
 	</div>
-</form>
+</label>
+</div>
 
-<div class="layout-a clearfix">
-	<h3>Error feedback</h3>
+<div data-xrayhtml>
+<h3 class="xraytitle">Short Custom Styled Select</h3>
+<label class="form-group">
+	<b class="label-text">Custom-styled select</b>
+	<div class="custom-select">
+		<select>
+			<option selected>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+		</select>
+	</div>
+</label>
+</div>
 
-	<div class="sect-a">
-
-		<label class="form-group invalid">
-			<b class="label-text">Native select</b>
+<div data-xrayhtml>
+<h3 class="xraytitle">Custom Styled Select with Disabled Default Option</h3>
+	<label class="form-group">
+		<b class="label-text">Disabled Default Option Custom-styled select</b>
+		<div class="custom-select">
 			<select>
-				<option>Apples</option>
-				<option>Bananas</option>
-				<option>Grapes</option>
-				<option>Oranges</option>
-				<option selected>A very long option name to test wrapping</option>
+				<option value="-1" selected disabled>Select a number</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
 			</select>
-			<div class=" error-msg">Please make a selection.</div>
-		</label>
+		</div>
+	</label>
+</div>
 
 
-		<label class="form-group invalid">
-			<b class="label-text">Custom-styled select</b>
-			<div class="custom-select">
-				<select>
-					<option>Apples</option>
-					<option>Bananas</option>
-					<option>Grapes</option>
-					<option>Oranges</option>
-					<option>A very long option name to test wrapping</option>
-				</select>
-			</div>
-			<div class=" error-msg">Please make a selection.</div>
-		</label> 
+<div data-xrayhtml>
+<h3 class="xraytitle">Custom Styled Select, Error State</h3>
 
+<label class="form-group invalid">
+	<b class="label-text">Custom-styled select</b>
+	<div class="custom-select">
+		<select required>
+			<option>Apples</option>
+			<option>Bananas</option>
+			<option>Grapes</option>
+			<option>Oranges</option>
+			<option>A very long option name to test wrapping</option>
+		</select>
 	</div>
+</label> 
+<div class="error-msg">This is required.</div>
+
 </div>
 
-<div class="layout-a clearfix">
-	<h3>Disabled state</h3>
 
-	<div class="sect-a">
+<div data-xrayhtml>
+<h3 class="xraytitle">Custom Styled Select, Disabled State</h3>
 
-		<label class="form-group disabled">
-			<b class="label-text">Native select</b>
-			<select disabled>
-				<option>Apples</option>
-				<option>Bananas</option>
-				<option>Grapes</option>
-				<option>Oranges</option>
-				<option selected>A very long option name to test wrapping</option>
-			</select>
-		</label>
-
-
-		<label class="form-group disabled">
-			<b class="label-text">Custom-styled select</b>
-			<div class="custom-select">
-				<select disabled>
-					<option>Apples</option>
-					<option>Bananas</option>
-					<option>Grapes</option>
-					<option>Oranges</option>
-					<option>A very long option name to test wrapping</option>
-				</select>
-			</div>
-		</label> 
-
+<label class="form-group disabled">
+	<b class="label-text">Custom-styled select</b>
+	<div class="custom-select">
+		<select disabled>
+			<option>Apples</option>
+			<option>Bananas</option>
+			<option>Grapes</option>
+			<option>Oranges</option>
+			<option>A very long option name to test wrapping</option>
+		</select>
 	</div>
-</div>
+</label> 
 
 </div>
+
+</div><!-- /docs-main -->
 
 </body>
 </html>

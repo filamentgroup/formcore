@@ -4,6 +4,9 @@
 	border-radius: .3em;
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 }
+.custom-select.custom-select {
+	display: inline-block;
+}
 .custom-select select {
 	/* General select styles: change as needed */
 	font-family: sans-serif;
