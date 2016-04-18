@@ -22,9 +22,9 @@
 
 	// auto-init on enhance (which is called on domready)
 	$( document ).bind( "enhance", function( e ){
-		var attr = "[data-enhanced-" + pluginName  + "]";
+		var attr = "data-enhanced-" + pluginName;
 		$( initSelector, e.target ).filter( function() {
-			return !$( this ).is( attr );
+			return !$( this ).is( "[" + attr + "]" );
 		}).attr( attr, "" )[ pluginName ]();
 	});
 

@@ -7,7 +7,7 @@
 		this.$el = $( el );
 		this.allowFloat = this.$el.is( '[data-float]' );
 
-		var ua, isFirefoxDesktop;
+		var ua, isFirefoxDesktop, self = this;
 		ua = navigator.userAgent.toLowerCase();
 
 		// Issue #267 and #521
@@ -29,7 +29,9 @@
 		// `NaN` which is falsey meaning there is no max length. The max length
 		// is then `Infinity`.
 		this.maxLength = parseInt(this.$el.attr( "maxlength" ), 10) || Infinity;
-		this.$el.on( "keypress", $.proxy(this.onKeypress, this));
+		this.$el.on( "keypress", function( e ) {
+			return self.onKeypress.call( self, e );
+		});
 	};
 
 	NumericInput.allowedKeys = [
