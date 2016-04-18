@@ -17,13 +17,15 @@
 	$.fn[ pluginName ] = function(){
 		return this.each(function(){
 			var input = new NumericInput( this );
-			input.init();
 		});
 	};
 
 	// auto-init on enhance (which is called on domready)
 	$( document ).bind( "enhance", function( e ){
-		$( initSelector, e.target )[ pluginName ]();
+		var attr = "[data-enhanced-" + pluginName  + "]";
+		$( initSelector, e.target ).filter( function() {
+			return !$( this ).is( attr );
+		}).attr( attr, "" )[ pluginName ]();
 	});
 
 }( jQuery, NumericInput, this ));

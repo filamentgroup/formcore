@@ -3,6 +3,7 @@
   "description": "A set of form pieces",
   "version": "0.1.0",
   "homepage": "https://github.com/filamentgroup/formcore",
+  "private": true,
   "author": {
     "name": "Filament Group",
     "email": "hello@filamentgroup.com",
@@ -21,10 +22,14 @@
     "node": ">= 0.8.0"
   },
   "devDependencies": {
+    "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt": "~0.4.2"
+    "xrayhtml": "^2.0.2"
   },
   "dependencies": {
-    "fg-select-css": "^1.0.2"
+    "fg-select-css": "^1.0.3",
+    "politespace": "^0.1.8",
+    "shoestring": "^1.0.3",
+    "validator": "git+ssh://git@github.com/filamentgroup/validator.git#v2.0.2"
   }
 }
