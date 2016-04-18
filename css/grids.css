@@ -29,6 +29,7 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 	}
 	.layout-a .sect-b {
 		float: right;
+		width: 50%;
 		padding-left: 3%;
 		border-left: 1px solid #ddd;
 	}
