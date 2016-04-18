@@ -13,7 +13,7 @@
 		return this.each(function(){
 				var el = this,
 						$el = $( this ),
-						$tog = $( "<b class='button btn-small btn-mask-pw'>"),
+						$tog = $( "<button type='button' class='button btn-small btn-mask-pw'>"),
 						$newinp;
 					
 				function toggleMask() {
