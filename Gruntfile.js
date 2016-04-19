@@ -30,7 +30,10 @@ module.exports = function(grunt) {
 					'node_modules/validator/dist/validator.config.js',
 					'node_modules/validator/src/validator.page.js',
 					'node_modules/validator/src/validator.page-init.js',
-					'node_modules/validator/dist/validator-init.js'
+					'node_modules/validator/dist/validator-init.js',
+					'node_modules/politespace/src/politespace.js',
+					'node_modules/politespace/src/politespace-creditcard.js',
+					'node_modules/politespace/src/politespace-init.js'
 				],
 				dest: 'dist/dependencies.js'
 			},
@@ -39,7 +42,8 @@ module.exports = function(grunt) {
 					'node_modules/xrayhtml/dist/xrayhtml.css',
 					'node_modules/validator/dist/validator.css',
 					'node_modules/fg-select-css/src/select-css.css',
-					'node_modules/fg-select-css/src/select-css-compat.css'
+					'node_modules/fg-select-css/src/select-css-compat.css',
+					'node_modules/politespace/src/politespace.css'
 				],
 				dest: 'dist/dependencies.css'
 			}
