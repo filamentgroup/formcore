@@ -13,8 +13,13 @@
 	display: block;
 	position: relative;
 }
-.form-group {
-	overflow: hidden;
+.form-group:before,
+.form-group:after {
+	content: " ";
+	display: table;
+}
+.form-group:after {
+	clear: both;
 }
 .form-group + .error-msg {
 	margin-top: -1.384615385em; /* -18px /13 */

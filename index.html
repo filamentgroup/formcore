@@ -16,12 +16,11 @@
 <div class="docs-main" data-input-val-toggle>
 <h2>Examples</h2>
 
-<div class="layout-a clearfix">
-<div class="sect-a">
-
 <h3>Create an Account</h3>
+<div data-xrayhtml>
+
 <form novalidate data-validatorform>
-	<div class="inner-layout clearfix"><!-- Use 'inner-layout' on the form field wrapper when fields are displayed in columns with `sect-inner-*` classes -->
+	<div class="sect-group">
 		<div class="sect-inner-a">
 			<label class="form-group required">
 				<b class="label-text">First Name</b>
@@ -36,27 +35,41 @@
 			</label>
 		</div>
 
-		<label class="form-group">
-			<b class="label-text">Birthday</b>
-			<input type="text" data-validate="birthday" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="mm dd" required>
-		</label>
+		<div class="sect-group-a">
+			<div class="sect-inner-a">
+				<label class="form-group required">
+					<b class="label-text">Birthday</b>
+					<div class="custom-select">
+						<select>
+							<option>Month…</option>
+							<option>January</option>
+							<option>February</option>
+							<option>March</option>
+							<option>April</option>
+							<option>May</option>
+							<option>June</option>
+							<option>July</option>
+							<option>August</option>
+							<option>September</option>
+							<option>October</option>
+							<option>November</option>
+							<option>December</option>
+						</select>
+					</div>
+				</label>
+			</div>
+
+			<div class="sect-inner-b">
+				<label class="form-group">
+					<b class="label-text">Day</b>
+					<input type="number" inputmode="numeric" data-pattern="[0-9]*" data-numeric-input data-validate="numeric" min="1" max="31">
+				</label>
+			</div>
+		</div><!-- /.sect-group-a -->
 
 		<label class="form-group">
-			<b class="label-text">Profile Photo</b>
-			<input type="file">
-		</label>
-	</div>
-	<div class="form-btns clearfix">
-		<button class="button btn-submit">Submit</button>
-	</div>
-</form>
-			
-<h3>Create Password</h3>
-<form novalidate data-validatorform>
-	<div class="has-helper"><!-- Use 'has-helper' on the field wrapper to set the right-side padding when one or more fields have helper text -->
-		<label class="form-group required">
-			<span class="label-text">Email</span>
-			<input type="email" data-validate="email" required>
+			<b class="label-text">Email</b>
+			<input type="email" data-validate="email">
 		</label>
 
 		<label class="form-group required">
@@ -67,16 +80,15 @@
 
 		<label class="form-group required">
 			<b class="label-text">Confirm Password</b>
-			<input type="password" minlength="6" data-validate="passwordconfirm" required>
+			<input type="password" minlength="6" data-validate="passwordconfirm" required data-password-confirm>
 		</label>
-	
-		<div class="form-btns clearfix">
-			<button class="button btn-submit">Submit</button>
-		</div>
 	</div>
 </form>
 
+</div><!-- /data-xrayhtml -->
+
 <h3>Log In</h3>
+<div data-xrayhtml>
 <form novalidate data-validatorform>
 	<label class="form-group required">
 		<span class="label-text">Email</span>
@@ -92,20 +104,13 @@
 		<input type="checkbox" name="opt1" id="opt1">
 		<span class="item">Remember me</span>
 	</label>
-
-	<div class="form-btns clearfix">
-		<button class="button btn-submit">Submit</button>
-	</div>
 </form>
-
-
-</div><!-- /sect-a -->
-<div class="sect-b">
-
+</div><!-- /data-xrayhtml -->
 
 <h3>Shipping Address</h3>
+<div data-xrayhtml>
 <form novalidate data-validatorform>
-	<div class="inner-layout clearfix">
+	<div class="sect-group">
 		<label class="form-group required">
 			<b class="label-text">Street Address</b>
 			<input type="text" id="address" data-message="Please enter your address." required>
@@ -191,15 +196,13 @@
 			</div>
 		</label>	
 	</div>
-	<div class="form-btns clearfix">
-		<button class="button btn-submit">Submit</button>
-	</div>
 </form>
+</div><!-- /data-xrayhtml -->
 
-<!-- Credit Card TODO: politespace, auto-recognize cc type to show thumbnail -->
 <h3>Payment</h3>
+<div data-xrayhtml>
 <form novalidate data-validatorform>
-	<div class="inner-layout clearfix">
+	<div class="sect-group">
 		<label class="form-group required">
 			<span class="label-text">Amount</span>
 			<input type="number" step="0.01" min="0" max="10000" data-message="Please specify an amount." required>
@@ -229,14 +232,13 @@
 			<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="00000-0000" required>
 		</label>
 	</div>
-	<div class="form-btns clearfix">
-		<button class="button btn-submit">Submit</button>
-	</div>
 </form>
+</div><!-- /data-xrayhtml -->
 
 <h3>Redeem Gift Card</h3>
+<div data-xrayhtml>
 <form novalidate data-validatorform>
-	<div class="inner-layout clearfix">
+	<div class="sect-group">
 		<label class="form-group required">
 			<span class="label-text">Gift Card Number</span>
 			<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
@@ -248,11 +250,13 @@
 				<input type="text" inputmode="numeric" pattern="[0-9]*" minlength="4" maxlength="4" placeholder="4 Digits" data-validate="minlength" data-message="Please enter a 4-digit PIN." required>
 			</label>
 		</div>
-		<div class="form-btns sect-inner-b">
-			<button class="button btn-submit">Submit</button>
+		<div class="sect-inner-b">
+			
 		</div>
-	</div>	
+	</div>
 </form>
+</div><!-- /data-xrayhtml -->
+
 
 <!-- Send Credit
 Currency radio toggle (USD, Euro) 
@@ -260,8 +264,7 @@ Amount $ (numeric, required, deal with different currencies placement of symbols
 Email (email, required)
 Checkbox for gift message - if checkbox is checked, related input must have a value -->
 
-</div><!-- /sect-b -->
-</div><!-- /layout-a -->
+
 </div><!-- /docs-main -->
 
 </body>

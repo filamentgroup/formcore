@@ -1,7 +1,20 @@
 /* Layout styles */
 
+.sect-group {
+	max-width: 30em;
+}
+
+.sect-group:before,
+.sect-group:after {
+	content: " ";
+	display: table;
+}
+.sect-group:after {
+	clear: both;
+}
+
 /* Generic section classes can be used for interior columns that can be scoped to 
-break into cols at different breakpoints; wrap them in a .inner-layout container */
+break into cols at different breakpoints */
 .sect-inner-a,
 .sect-inner-b {
 	width: 48%;
@@ -13,25 +26,17 @@ break into cols at different breakpoints; wrap them in a .inner-layout container
 	float: right;
 }
 
+.sect-group-a > .sect-inner-a {
+	width: 68%;
+}
+.sect-group-a > .sect-inner-b {
+	width: 28%;
+}
+
 .form-btns.sect-inner-a,
 .form-btns.sect-inner-b {
 	margin-top: 1em;
 }
 .form-group.sect-inner-b {
 	clear: none;
-}
-
-@media ( min-width: 600px ) {
-	.layout-a .sect-a,
-	.layout-a .sect-b {
-		float: left;
-		width: 47%;
-	}
-	.layout-a .sect-b {
-		float: right;
-		width: 50%;
-		padding-left: 3%;
-		border-left: 1px solid #ddd;
-	}
-
 }

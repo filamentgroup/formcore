@@ -49,3 +49,22 @@ h2 {
 	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
 	clip: rect(1px, 1px, 1px, 1px);
 }
+
+/* xrayhtml helper */
+.snippet:before,
+.snippet:after {
+	content: " ";
+	display: table;
+}
+.snippet:after {
+	clear: both;
+}
+.xrayhtml .source-panel {
+	overflow: auto;
+	max-height: 12.5em;
+}
+.xrayhtml .source-panel code {
+	font-weight: 400;
+	font-family: monospace;
+	font-size: .875em;
+}
