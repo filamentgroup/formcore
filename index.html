@@ -204,32 +204,67 @@
 <form novalidate data-validatorform>
 	<div class="sect-group">
 		<label class="form-group required">
-			<span class="label-text">Amount</span>
-			<input type="number" step="0.01" min="0" max="10000" data-message="Please specify an amount." required>
-		</label>
-		<label class="form-group required">
 			<span class="label-text">Card Number</span>
-			<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
-			<input type="text" data-validate="credit" inputmode="numeric" pattern="[0-9]*" required data-revalidate="cvv">
+			<input type="text" data-validate="credit" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-politespace data-politespace-creditcard data-politespace-creditcard-maxlength maxlength="16" required>
 		</label>
 		
-		<div class="sect-inner-a">
-			<label class="form-group required">
-				<span class="label-text">Expiration</span>
-				<!-- DEV NOTE: Some browsers, like Safari in iOS and Chrome will display this as a dropdown.  Those that don't support the 'month' input type will fall back to 'text' and use the maxlength, and placeholder attributes.  -->
-				<input type="month" data-validate="ccexpiration" maxlength="7" placeholder="YYYY-MM" required>
-			</label>
-		</div>
-		<div class="sect-inner-b">
-			<label class="form-group required">
-				<span class="label-text">Security Code</span>
-				<input type="text" data-validate="cvv" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="3–4 Digits" data-revalidate="credit" required>
-			</label>
-		</div>
-		
+		<div class="sect-group sect-group-b">
+			<div class="sect-inner-a">
+				<label class="form-group required">
+					<b class="label-text">Expires</b>
+					<div class="custom-select">
+						<select required>
+							<option value="-1" selected disabled>Month</option>
+							<option value="1">01 - January</option>
+							<option value="2">02 - February</option>
+							<option value="3">03 - March</option>
+							<option value="4">04 - April</option>
+							<option value="5">05 - May</option>
+							<option value="6">06 - June</option>
+							<option value="7">07 - July</option>
+							<option value="8">08 - August</option>
+							<option value="9">09 - September</option>
+							<option value="10">10 - October</option>
+							<option value="11">11 - November</option>
+							<option value="12">12 - December</option>
+						</select>
+					</div>
+				</label>
+			</div>
+			<div class="sect-inner-b">
+				<label class="form-group required">
+					<b class="label-text">Year</b>
+					<div class="custom-select">
+						<select required>
+							<option value="-1" selected disabled>Year</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+							<option value="2020">2020</option>
+							<option value="2021">2021</option>
+							<option value="2022">2022</option>
+							<option value="2023">2023</option>
+							<option value="2024">2024</option>
+						</select>
+					</div>
+				</label>
+			</div>
+		</div><!-- /.sect-group-b -->
+
+		<label class="form-group required">
+			<span class="label-text">Security Code</span>
+			<input type="text" data-validate="cvv" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="3–4 Digits" data-revalidate="credit" required>
+		</label>
+
+		<label class="form-group required">
+			<span class="label-text">Name on Card</span>
+			<input type="text" required>
+		</label>
+
 		<label class="form-group required">
 			<span class="label-text">ZIP Code</span>
-			<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="00000-0000" required>
+			<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="00000" required data-politespace data-grouplength="5," data-delimiter="-">
 		</label>
 	</div>
 </form>

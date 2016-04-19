@@ -32,6 +32,12 @@ break into cols at different breakpoints */
 .sect-group-a > .sect-inner-b {
 	width: 28%;
 }
+.sect-group-b > .sect-inner-a {
+	width: 58%;
+}
+.sect-group-b > .sect-inner-b {
+	width: 38%;
+}
 
 .form-btns.sect-inner-a,
 .form-btns.sect-inner-b {
