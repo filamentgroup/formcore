@@ -49,17 +49,6 @@
 </label>
 </div>
 
-
-<div data-xrayhtml>
-<h3 class="xraytitle">Integer Numeric Input</h3>
-
-<label class="form-group">
-	<b class="label-text">Number</b>
-	<input type="number" inputmode="numeric" data-pattern="[0-9]*" data-numeric-input data-validate="numeric">
-</label>
-
-</div><!-- /data-xrayhtml -->
-
 <div data-xrayhtml>
 <h3 class="xraytitle">US Telephone Number</h3>
 
@@ -124,13 +113,24 @@
 </label>
 </div><!-- /data-xrayhtml -->
 
+<div data-xrayhtml>
+<h3 class="xraytitle">Integer Numeric Input</h3>
+
+<label class="form-group">
+	<b class="label-text">Number</b>
+	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric">
+</label>
+
+</div><!-- /data-xrayhtml -->
+
+
 <h3>Prices</h3>
 
 <div data-xrayhtml>
 <h3 class="xraytitle">Price (Full Dollar Amounts)</h3>
 <label class="form-group required">
 	<span class="label-text">Price ($)</span>
-	<input type="number" data-validate="numeric" pattern="[0-9]*" class="char-12" data-numeric-input data-politespace data-grouplength="3" data-delimiter="," data-reverse>
+	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric" data-politespace data-grouplength="3" data-delimiter="," data-reverse>
 </label>
 </div><!-- /data-xrayhtml -->
 
@@ -140,7 +140,7 @@
 <h3 class="xraytitle">Price (Dollars and Cents)</h3>
 <label class="form-group required">
 	<span class="label-text">Price ($)</span>
-	<input type="text" pattern="[0-9]*" class="char-12" data-numeric-input data-float data-politespace data-grouplength="3" data-delimiter="," data-decimal-mark="." data-reverse>
+	<input type="text" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-float data-politespace data-grouplength="3" data-delimiter="," data-decimal-mark="." data-reverse>
 </label>
 </div><!-- /data-xrayhtml -->
 

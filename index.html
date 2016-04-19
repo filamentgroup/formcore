@@ -37,7 +37,7 @@
 
 		<div class="sect-group-a">
 			<div class="sect-inner-a">
-				<label class="form-group required">
+				<label class="form-group">
 					<b class="label-text">Birthday</b>
 					<div class="custom-select">
 						<select>
@@ -180,8 +180,7 @@
 		<div class="sect-inner-b">
 			<label class="form-group required">
 				<span class="label-text">ZIP Code</span>
-				<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
-				<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="00000-0000" required>
+				<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="10" placeholder="00000" data-politespace data-grouplength="5," data-delimiter="-">
 			</label>
 		</div>
 
@@ -276,13 +275,12 @@
 	<div class="sect-group">
 		<label class="form-group required">
 			<span class="label-text">Gift Card Number</span>
-			<!-- DEV NOTE: To trigger the correct numeric keypad in iOS 7, the pattern regex must be /[0-9]*/. -->
-			<input type="text" inputmode="numeric" pattern="[0-9]*" minlength="8" maxlength="8" placeholder="8 digits" data-validate="minlength" data-message="Please enter an 8-digit card number." required>
+			<input type="number" inputmode="numeric" pattern="[0-9]*" minlength="8" maxlength="8" placeholder="8 digits" data-validate="minlength" data-message="Please enter an 8-digit card number." required>
 		</label>
 		<div class="sect-inner-a">
 			<label class="form-group required">
 				<span class="label-text">PIN</span>
-				<input type="text" inputmode="numeric" pattern="[0-9]*" minlength="4" maxlength="4" placeholder="4 Digits" data-validate="minlength" data-message="Please enter a 4-digit PIN." required>
+				<input type="number" inputmode="numeric" pattern="[0-9]*" minlength="4" maxlength="4" placeholder="4 Digits" data-validate="minlength" data-message="Please enter a 4-digit PIN." required>
 			</label>
 		</div>
 		<div class="sect-inner-b">
