@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
+    "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-jshint": "~0.6.0",
     "xrayhtml": "^2.0.2"
   },

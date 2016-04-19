@@ -1,0 +1,284 @@
+/*! X-rayHTML - v2.0.2 - 2016-01-22
+* https://github.com/filamentgroup/x-rayhtml
+* Copyright (c) 2016 ; Licensed MIT */
+
+.xrayhtml {
+	border: 1px solid rgba(0,0,0,.1);
+	border-radius: .3em;
+	margin: 1.5em 0 2.5em 0;
+	padding: 1em 1em 2em;
+}
+.xrayhtml .xraytitle {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font: .75em sans-serif;
+	color: rgba(0,0,0,.5);
+	background-color: #fff;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+	top: -2.166666667em; /* 26px */
+	padding-left: .1em;
+	padding-right: .1em;
+	z-index: 3;
+	margin: 0;
+}
+.xrayhtml.method-flip:before {
+	background-color: rgba(255,255,255,.6);
+}
+.xrayhtml .source-panel {
+	background: #f7f7f7;
+	margin-top: 2em;
+	tab-size: 2;
+}
+.xrayhtml .source-panel pre {
+	margin: 0;
+}
+.xrayhtml .source-panel code {
+	white-space: pre-wrap;
+}
+.xrayhtml.method-flip .source-panel {
+	margin-top: 0;
+	border-radius: 0.3em;
+}
+.xrayhtml.method-inline .source-panel {
+	margin: 2em -1em -2em -1em !important; /* Prism style override. */
+	border-top: 1px solid rgba(0,0,0,.1);
+	border-radius: 0 0 .3em .3em;
+}
+.xrayhtml pre {
+	padding: 16px;
+	margin: 0 !important; /* Prism style override. */
+	border-radius: 0 0 .3em .3em;
+}
+.xrayhtml code {
+	white-space: pre-wrap !important; /* Prism style override. */
+}
+
+.xrayhtml.antipattern {
+	border-color: #C9282D;
+}
+.xrayhtml.antipattern .xraytitle {
+	color: #d75e72;
+	font-weight: 700;
+}
+
+/* Flip Animation */
+
+.method-flip {
+	-webkit-perspective: 2500px;
+	-moz-perspective: 2500px;
+	perspective: 2500px;
+}
+.method-flip .snippet {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	min-height: 100%;
+}
+.method-flip .source-panel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow-x: scroll;
+}
+
+.method-flip .snippet {
+	-webkit-transform: rotateY(0deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+
+	-moz-transform: rotateY(0deg);
+	-moz-transform-style: preserve-3d;
+	-moz-backface-visibility: hidden;
+
+	-webkit-transition: -webkit-transform .4s ease-in-out;
+	-moz-transition: -moz-transform .4s ease-in-out;
+}
+.method-flip.view-source .snippet {
+	z-index: 1;
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+}
+.method-flip .source-panel {
+	-webkit-transform: rotateY(-180deg);
+	-webkit-backface-visibility: hidden;
+
+	-moz-transform: rotateY(-180deg);
+	-moz-backface-visibility: hidden;
+
+	-moz-transition: all .4s ease-in-out;
+	-webkit-transition: all .4s ease-in-out;
+}
+.method-flip.view-source .source-panel {
+	z-index: 2;
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+}
+
+.method-flip.view-source .xraytitle {
+	background-color: transparent;
+	background-image: linear-gradient(
+		to bottom,
+		transparent,
+		transparent 40%,
+		#ffffff 40%,
+		transparent);
+}
+/*! validator - v2.0.3 - 2016-04-18
+* https://github.com/filamentgroup/validator
+* Copyright (c) 2016 Filament Group; Licensed MIT */
+/*[required],
+[data-validate] {
+}
+.invalid {
+}*/
+
+.invalid [required],
+.invalid [data-validate] {
+  border-color: #dc0014;
+}
+.error-msg {
+  font-style: italic;
+  font-size: .8125em;
+  color: #dc0014;
+}
+/* Container used for styling the custom select, the buttom class below adds the
+ * bg gradient, corners, etc. */
+.custom-select {
+	position: relative;
+	display: block;
+}
+
+/* This is the native select, we're making everything but the text invisible so
+ * we can see the button styles in the wrapper */
+.custom-select select {
+	width: 100%;
+	margin: 0;
+	outline: none;
+	padding: .6em .8em .5em .8em;
+
+	/* Prefixed box-sizing rules necessary for older browsers */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	/* Font size must be 16px to prevent iOS page zoom on focus */
+	font-size: 16px;
+}
+
+
+/* Custom arrow sits on top of the select - could be an image, SVG, icon font,
+ * etc. or the arrow could just baked into the bg image on the select. */
+.custom-select::after {
+	content: " ";
+	position: absolute;
+	top: 50%;
+	right: 1em;
+	z-index: 2;
+	/* These hacks make the select behind the arrow clickable in some browsers */
+	pointer-events: none;
+	display: none;
+}
+
+@supports ( -webkit-appearance: none ) or ( appearance: none )
+	/* Firefox <= 34 has a false positive on @supports( -moz-appearance: none )
+	 * @supports ( mask-type: alpha ) is Firefox 35+
+	 */
+	or ( ( -moz-appearance: none ) and ( mask-type: alpha ) ) {
+	
+	/* Show custom arrow */
+	.custom-select::after {
+		display: block;
+	}
+
+	/* Remove select styling */
+	.custom-select select {
+		padding-right: 2em; /* Match-01 */
+		/* inside @supports so that iOS <= 8 display the native arrow */
+		background: none; /* Match-04 */
+		/* inside @supports so that Android <= 4.3 display the native arrow */
+		border: 1px solid transparent; /* Match-05 */
+
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+	}
+	.custom-select select:focus {
+		border-color: #aaa; /* Match-03 */
+	}
+}
+/* Adds Firefox < 35 support */
+/* FIREFOX won't let us hide the native select arrow, so we have to make it wider than needed and clip it via overflow on the parent container. The percentage width is a fallback since FF 4+ supports calc() so we can just add a fixed amount of extra width to push the native arrow out of view. We're applying this hack across all FF versions because all the previous hacks were too fragile and complex. You might want to consider not using this hack and using the native select arrow in FF. Note this makes the menus wider than the select button because they display at the specified width and aren't clipped. Targeting hack via http://browserhacks.com/#hack-758bff81c5c32351b02e10480b5ed48e */
+/* Show only the native arrow */
+@-moz-document url-prefix() {
+	/* Warning: this kills the focus outline style */
+	.custom-select {
+		overflow: hidden;
+	}
+	.custom-select::after {
+		display: block;
+	}
+	/* Make the native select extra wide so the arrow is clipped. 1.5em seems to be enough to safely clip it */
+	.custom-select select {
+		overflow: -moz-hidden-unscrollable;
+		padding-right: .4em;
+		background: none; /* Match-04 */
+		border: 1px solid transparent; /* Match-05 */
+		/* Firefox < 4 */
+		min-width: 6em;
+		width: 130%;
+		/* Firefox 4-15 */
+		min-width: -moz-calc(0em);
+		width: -moz-calc(100% + 2.4em);
+		/* Firefox 16+ */
+		min-width: calc(0em);
+		width: calc(100% + 2.4em);
+	}
+
+	/* Firefox 35+ that supports hiding the native select can have a proper 100% width, no need for the overflow clip trick */
+	@supports ( mask-type: alpha ) {
+		.custom-select {
+			overflow: visible;
+		}
+		.custom-select select {
+			-moz-appearance: none;
+			width: 100%;
+			padding-right: 2em; /* Match-01 padding-right */
+		}
+	}
+}
+
+/* Firefox focus has odd artifacts around the text, this kills that. See https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring */
+.custom-select select:-moz-focusring {
+	color: transparent;
+	text-shadow: 0 0 0 #000;
+}
+
+/* IE 10/11+ - This hides native dropdown button arrow so it will have the custom appearance. Targeting media query hack via http://browserhacks.com/#hack-28f493d247a12ab654f6c3637f6978d5 - looking for better ways to achieve this targeting */
+/* The second rule removes the odd blue bg color behind the text in the select button in IE 10/11 and sets the text color to match the focus style's - fix via http://stackoverflow.com/questions/17553300/change-ie-background-color-on-unopened-focused-select-box */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+	.custom-select select::-ms-expand {
+		display: none;
+	}
+	.custom-select select:focus {
+		border-color: #aaa; /* Match-03 */
+	}
+	.custom-select select:focus::-ms-value {
+		background: transparent;
+		color: #222; /* Match-02*/
+	}
+	.custom-select select {
+		padding-right: 2em; /* Match-01 */
+		background: none; /* Match-04 */
+		border: 1px solid transparent; /* Match-05 */
+	}
+	.custom-select::after {
+		display: block;
+	}
+}
