@@ -27,7 +27,7 @@
 					remove.push( "plural" );
 				}
 				var hitMax = max && newval === 0;
-				var hitMin = min && newval < 0;
+				var hitMin = min && newval <= 0;
 				if( hitMax || hitMin ){
 					add.push( "limit " + ( hitMax ? "max" : "min" ) );
 					$label.html( "0" );
