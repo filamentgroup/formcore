@@ -1,0 +1,14 @@
+.character-counter {
+	line-height: 2;
+}
+.character-counter .singular,
+.character-counter .plural {
+	display: none;
+}
+.character-counter.singular .singular,
+.character-counter.plural .plural {
+	display: inline;
+}
+.character-counter.limit.min {
+	display: none;
+}
