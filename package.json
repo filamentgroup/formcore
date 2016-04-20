@@ -28,9 +28,10 @@
     "xrayhtml": "^2.0.2"
   },
   "dependencies": {
+    "creditable": "^1.0.1",
     "fg-select-css": "^1.0.3",
-    "politespace": "^0.1.8",
+    "politespace": "^0.1.9",
     "shoestring": "^1.0.3",
-    "validator": "git+ssh://git@github.com/filamentgroup/validator.git#v2.0.3"
+    "validator": "filamentgroup/validator.git#v2.0.4"
   }
 }
