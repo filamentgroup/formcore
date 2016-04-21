@@ -101,8 +101,31 @@
 <h3 class="xraytitle">Credit Card</h3>
 <label class="form-group">
 	<b class="label-text">Credit Card</b>
-	<input type="text" data-validate="credit" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-politespace data-politespace-creditcard data-politespace-creditcard-maxlength maxlength="16">
+	<input type="text"
+		inputmode="numeric" pattern="[0-9]*" data-numeric-input
+		data-politespace data-grouplength="4" data-politespace-creditcard data-politespace-creditcard-maxlength
+		data-validate="credit" required maxlength="16">
 </label>
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Credit Card with Image Preview</h3>
+<div class="sect-group creditcarddisplay" data-validator-anchor>
+	<label class="sect-inner-a form-group required">
+		<span class="label-text">Card Number</span>
+		<input type="text"
+			inputmode="numeric" pattern="[0-9]*" data-numeric-input
+			data-politespace data-grouplength="4" data-politespace-creditcard data-politespace-creditcard-maxlength
+			data-validate="credit" required maxlength="16"
+			data-credit-card-display>
+	</label>
+	<div class="sect-inner-b">
+		<p class="creditcarddisplay_desc">We accept:</p>
+		<span class="creditcarddisplay_type creditcarddisplay_type-visa icon-card-visa">Visa</span>
+		<span class="creditcarddisplay_type creditcarddisplay_type-mastercard icon-card-mastercard">Mastercard</span>
+		<span class="creditcarddisplay_type creditcarddisplay_type-amex icon-card-amex">AMEX</span>
+	</div>
+</div>
 </div><!-- /data-xrayhtml -->
 
 <div data-xrayhtml>
