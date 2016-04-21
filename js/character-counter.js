@@ -18,7 +18,7 @@
 				newval = ( max || min ) - this.value.length;
 				$label.html( "" + newval );
 				var add = [];
-				var remove = [ "limit" ];
+				var remove = [ "min max limit" ];
 				if( newval !== 1 ) {
 					remove.push( "singular" );
 					add.push( "plural" );
