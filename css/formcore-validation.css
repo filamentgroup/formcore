@@ -23,7 +23,7 @@
 	z-index: 1;
 	border-radius: 2px;
 }
-.invalid .radiobutton input:before {	
+.invalid .radiobutton input:before {
 	top: 0;
 	left: 0;
 	border-radius: 1em;

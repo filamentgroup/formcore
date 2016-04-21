@@ -35,7 +35,7 @@
 /* Use a separate class/element for label text so child elements don't inherit styles */
 .label-text, 
 .helper {
-	font-size: .7em;	
+	font-size: .75em;
 }
 .label-text {
 	display: block;
@@ -50,6 +50,9 @@
 	color: #DC0014;
 	margin-left: .3em;
 }
+.label-text-helper {
+	font-size: 1.083333333em; /* 13px /12 */
+}
 
 
 /* Button-like styling for inputs and button elements */
@@ -60,13 +63,15 @@ input,
 select {
 	font-size: 16px;
 	line-height: 1.3;
+}
+textarea,
+input {
 	padding: .6em 1em;
 }
 
 .btn,
 .button,
 textarea,
-.custom-select,
 input[type="text"],
 input[type="search"],
 input[type="number"],
@@ -84,11 +89,8 @@ input[type="file"] {
 	display: block;
 	width: 100%;
 	border: 1px solid #bbb;
-	border-radius: 5px;	
+	border-radius: 5px;
 	color: #444;
-}
-.custom-select {
-	width: auto;
 }
 input[type="checkbox"],
 input[type="radio"] {
@@ -171,7 +173,7 @@ input::-webkit-datetime-edit-month-field[aria-valuetext=blank],
 input::-webkit-datetime-edit-second-field[aria-valuetext=blank], 
 input::-webkit-datetime-edit-week-field[aria-valuetext=blank], 
 input::-webkit-datetime-edit-year-field[aria-valuetext=blank] {
-	font: normal 16px/1.3 helvetica, sans-serif;
+	font: normal 16px/1.3 sans-serif;
 	color: #bbb;
 }
 
@@ -229,21 +231,33 @@ input[type="week"]::-webkit-inner-spin-button {
 
 
 /* feedback states */
+textarea:focus,
+input[type="text"]:focus,
+input[type="radio"]:focus,
+input[type="search"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus {
+	outline: none;
+	border-color: $link-blue;
+	box-shadow: inset 0 0 0 2px rgba(163,215,243,.40);
+}
 .btn:focus,
 .button:focus,
-textarea:focus,
-input:focus,
 select:focus {
 	outline: none;
-}
-.btn:focus, 
-.button:focus, 
-textarea:focus,
-input:focus {
 	box-shadow: 0 0 0 3px rgba(180,222,250, .75);
 }
 input[type="checkbox"] {
 	border-radius: 10%;
+}
+input[type="checkbox"]:focus {
+	border-radius: 10%;
+	outline-color: $link-blue;
+	outline-width: 2px;
+	box-shadow: inset 0 0 0 2px rgba(163,215,243,.40);
 }
 input[type="radio"] {
 	border-radius: 100%;
