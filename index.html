@@ -201,71 +201,80 @@
 <h3>Payment</h3>
 <div data-xrayhtml>
 <form novalidate data-validatorform>
-	<div class="sect-group">
-		<label class="form-group required">
+	<div class="sect-group creditcarddisplay" data-validator-anchor>
+		<label class="sect-inner-a form-group required">
 			<span class="label-text">Card Number</span>
-			<input type="text" data-validate="credit" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-politespace data-politespace-creditcard data-politespace-creditcard-maxlength maxlength="16" required>
+			<input type="text"
+				inputmode="numeric" pattern="[0-9]*" data-numeric-input
+				data-politespace data-grouplength="4" data-politespace-creditcard data-politespace-creditcard-maxlength
+				data-validate="credit" required maxlength="16"
+				data-credit-card-display>
 		</label>
-		
-		<div class="sect-group sect-group-b">
-			<div class="sect-inner-a">
-				<label class="form-group required">
-					<b class="label-text">Expires</b>
-					<div class="custom-select">
-						<select required>
-							<option value="-1" selected disabled>Month</option>
-							<option value="1">01 - January</option>
-							<option value="2">02 - February</option>
-							<option value="3">03 - March</option>
-							<option value="4">04 - April</option>
-							<option value="5">05 - May</option>
-							<option value="6">06 - June</option>
-							<option value="7">07 - July</option>
-							<option value="8">08 - August</option>
-							<option value="9">09 - September</option>
-							<option value="10">10 - October</option>
-							<option value="11">11 - November</option>
-							<option value="12">12 - December</option>
-						</select>
-					</div>
-				</label>
-			</div>
-			<div class="sect-inner-b">
-				<label class="form-group required">
-					<b class="label-text">Year</b>
-					<div class="custom-select">
-						<select required>
-							<option value="-1" selected disabled>Year</option>
-							<option value="2016">2016</option>
-							<option value="2017">2017</option>
-							<option value="2018">2018</option>
-							<option value="2019">2019</option>
-							<option value="2020">2020</option>
-							<option value="2021">2021</option>
-							<option value="2022">2022</option>
-							<option value="2023">2023</option>
-							<option value="2024">2024</option>
-						</select>
-					</div>
-				</label>
-			</div>
-		</div><!-- /.sect-group-b -->
-
-		<label class="form-group required">
-			<span class="label-text">Security Code</span>
-			<input type="text" data-validate="cvv" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="3–4 Digits" data-revalidate="credit" required>
-		</label>
-
-		<label class="form-group required">
-			<span class="label-text">Name on Card</span>
-			<input type="text" required>
-		</label>
-
-		<label class="form-group required">
-			<span class="label-text">ZIP Code</span>
-			<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="00000" required data-politespace data-grouplength="5," data-delimiter="-">
-		</label>
+		<div class="sect-inner-b">
+			<p class="creditcarddisplay_desc">We accept:</p>
+			<span class="creditcarddisplay_type creditcarddisplay_type-visa icon-card-visa">Visa</span>
+			<span class="creditcarddisplay_type creditcarddisplay_type-mastercard icon-card-mastercard">Mastercard</span>
+			<span class="creditcarddisplay_type creditcarddisplay_type-amex icon-card-amex">AMEX</span>
+		</div>
 	</div>
+	<div class="sect-group sect-group-b">
+		<div class="sect-inner-a">
+			<label class="form-group required">
+				<b class="label-text">Expires</b>
+				<div class="custom-select">
+					<select required>
+						<option value="-1" selected disabled>Month</option>
+						<option value="1">01 - January</option>
+						<option value="2">02 - February</option>
+						<option value="3">03 - March</option>
+						<option value="4">04 - April</option>
+						<option value="5">05 - May</option>
+						<option value="6">06 - June</option>
+						<option value="7">07 - July</option>
+						<option value="8">08 - August</option>
+						<option value="9">09 - September</option>
+						<option value="10">10 - October</option>
+						<option value="11">11 - November</option>
+						<option value="12">12 - December</option>
+					</select>
+				</div>
+			</label>
+		</div>
+		<div class="sect-inner-b">
+			<label class="form-group required">
+				<b class="label-text">Year</b>
+				<div class="custom-select">
+					<select required>
+						<option value="-1" selected disabled>Year</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+						<option value="2021">2021</option>
+						<option value="2022">2022</option>
+						<option value="2023">2023</option>
+						<option value="2024">2024</option>
+					</select>
+				</div>
+			</label>
+		</div>
+	</div><!-- /.sect-group-b -->
+
+	<label class="form-group required">
+		<span class="label-text">Security Code</span>
+		<input type="text" data-validate="cvv" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="3–4 Digits" data-revalidate="credit" required>
+	</label>
+
+	<label class="form-group required">
+		<span class="label-text">Name on Card</span>
+		<input type="text" required>
+	</label>
+
+	<label class="form-group required">
+		<span class="label-text">ZIP Code</span>
+		<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="00000" required data-politespace data-grouplength="5," data-delimiter="-">
+	</label>
 </form>
 </div><!-- /data-xrayhtml -->
 

@@ -1,0 +1,54 @@
+.creditcarddisplay > .sect-inner-a {
+	float: left;
+	width: 100%;
+	padding-left: 5.8em;
+	margin-left: -5.8em;
+}
+.creditcarddisplay > .sect-inner-b {
+	float: right;
+	width: 5.4375em; /* 87px */
+}
+.creditcarddisplay_desc {
+	font-size: .75em;
+	margin-top: 0;
+	margin-bottom: .333333333em; /* 4px */
+}
+.grunticon .creditcarddisplay_desc {
+	margin-top: 1.666666667em; /* 20px */
+}
+.creditcarddisplay-active .creditcarddisplay_desc {
+	height: 0;
+	overflow: hidden;
+	margin-top: 1.25em; /* 15px */
+}
+.creditcarddisplay_type {
+	font-size: .6875em;
+}
+.grunticon .creditcarddisplay_type {
+	width: 26px;
+	height: 16px;
+	background-size: contain;
+	display: inline-block;
+	text-indent: -9999px;
+	line-height: 1;
+}
+.creditcarddisplay-active .creditcarddisplay_type {
+	display: none;
+}
+.creditcarddisplay-visa .creditcarddisplay_type-visa,
+.creditcarddisplay-amex .creditcarddisplay_type-amex,
+.creditcarddisplay-mastercard .creditcarddisplay_type-mastercard,
+.creditcarddisplay-discover .creditcarddisplay_type-discover {
+	display: block;
+	font-size: .875em;
+	line-height: 40px;
+}
+.grunticon .creditcarddisplay-visa .creditcarddisplay_type-visa,
+.grunticon .creditcarddisplay-amex .creditcarddisplay_type-amex,
+.grunticon .creditcarddisplay-mastercard .creditcarddisplay_type-mastercard,
+.grunticon .creditcarddisplay-discover .creditcarddisplay_type-discover {
+	display: block;
+	width: 63px;
+	height: 40px;
+	background-size: 63px 40px;
+}

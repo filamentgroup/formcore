@@ -21,10 +21,6 @@
 .form-group:after {
 	clear: both;
 }
-.form-group + .error-msg {
-	margin-top: -1.384615385em; /* -18px /13 */
-	margin-bottom: 1em;
-}
 
 .btn.btn-mask-pw,
 .button.btn-mask-pw {

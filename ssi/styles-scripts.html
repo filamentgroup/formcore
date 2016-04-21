@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/formcore-button.css">
 <link rel="stylesheet" href="/css/grids.css">
 <link rel="stylesheet" href="/css/character-counter.css">
+<link rel="stylesheet" href="/css/credit-card-display.css">
 
 <script src="/dist/dependencies.js"></script>
 
@@ -16,8 +17,11 @@
 <script src="/js/password-init.js"></script>
 <script src="/js/textarea-grow.js"></script>
 <script src="/js/character-counter.js"></script>
+<script src="/js/credit-card-display.js"></script>
 <script src="https://filamentgroup.github.io/demo-head/loadfont.js"></script>
 <script>
+	grunticon([ "/dist/grunticon/icons.data.svg.css", "/dist/grunticon/icons.data.png.css", "/dist/grunticon/icons.fallback.css" ]);
+
 	$(function(){
 		$( document ).trigger( "enhance" );
 	});

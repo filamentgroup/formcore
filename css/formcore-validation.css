@@ -32,3 +32,13 @@
 .invalid .radiobutton input:checked:before {
 	display: none;
 }
+
+.form-group + .error-msg,
+.sect-group + .error-msg {
+	margin-top: -1.384615385em; /* -18px /13 */
+	margin-bottom: 1em;
+}
+.sect-group + .error-msg {
+	float: left;
+	width: 100%;
+}

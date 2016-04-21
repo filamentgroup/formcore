@@ -24,6 +24,7 @@ module.exports = function(grunt) {
 			options: {},
 			js: {
 				src: [
+					'node_modules/grunt-grunticon/example/output/grunticon.loader.js',
 					'node_modules/shoestring/dist/shoestring.js',
 					'node_modules/xrayhtml/dist/xrayhtml.js',
 					'node_modules/creditable/creditablecardtype.js',
@@ -49,15 +50,31 @@ module.exports = function(grunt) {
 				],
 				dest: 'dist/dependencies.css'
 			}
-		}
+		},
+		grunticon: {
+			all: {
+				files: [{
+					expand: true,
+					cwd: 'img/icons/',
+					src: [ '*.svg' ],
+					dest: "dist/grunticon/"
+				}],
+				options: {
+					cssprefix: '.icon-',
+					cssbasepath: "/",
+					customselectors: {}
+				}
+			}
+		},
 	});
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-grunticon');
 
 	// By default, lint and run all tests.
-	grunt.registerTask('default', ['jshint', 'concat']);
+	grunt.registerTask('default', ['jshint', 'concat', 'grunticon']);
 	grunt.registerTask('stage', ['default']);
 
 };
