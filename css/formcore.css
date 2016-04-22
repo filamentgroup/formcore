@@ -69,8 +69,6 @@ input {
 	padding: .6em 1em;
 }
 
-.btn,
-.button,
 textarea,
 input[type="text"],
 input[type="search"],
@@ -88,6 +86,24 @@ input[type="week"],
 input[type="file"] {
 	display: block;
 	width: 100%;
+}
+.btn,
+.button,
+textarea,
+input[type="text"],
+input[type="search"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="datetime"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="file"] {
 	border: 1px solid #bbb;
 	border-radius: 5px;
 	color: #444;
