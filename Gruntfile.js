@@ -28,6 +28,7 @@ module.exports = function(grunt) {
 					'node_modules/shoestring/dist/shoestring.js',
 					'node_modules/xrayhtml/dist/xrayhtml.js',
 					'node_modules/creditable/creditablecardtype.js',
+					'node_modules/creditable/creditablesecuritycode.js',
 					// politespace should come before validator
 					'node_modules/politespace/src/politespace.js',
 					'node_modules/politespace/src/politespace-creditcard.js',

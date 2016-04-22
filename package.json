@@ -28,11 +28,11 @@
     "xrayhtml": "^2.0.2"
   },
   "dependencies": {
-    "creditable": "^1.0.1",
+    "creditable": "^1.0.3",
     "fg-select-css": "^1.0.3",
     "grunt-grunticon": "^2.2.2",
     "politespace": "^0.1.9",
     "shoestring": "^1.0.3",
-    "validator": "filamentgroup/validator.git#v2.0.4"
+    "validator": "filamentgroup/validator.git#v2.0.5"
   }
 }
