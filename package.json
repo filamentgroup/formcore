@@ -33,6 +33,6 @@
     "grunt-grunticon": "^2.2.2",
     "politespace": "^0.1.9",
     "shoestring": "^1.0.3",
-    "validator": "filamentgroup/validator.git#v2.0.4"
+    "validator": "git://github.com/filamentgroup/validator.git#v2.0.4"
   }
 }
