@@ -2542,6 +2542,55 @@ window.jQuery = window.jQuery || window.shoestring;
 
 }( typeof global !== "undefined" ? global : this ));
 
+// Input a credit card number string, returns a key signifying the type of credit card it is
+(function( w, $ ) {
+	"use strict";
+
+	var lengths = {
+		MASTERCARD: 3,
+		VISA: 3,
+		DISCOVER: 3,
+		AMEX: 4
+	};
+
+	function CreditableSecurityCode( securityCodeElement ) {
+		this.$el = $( securityCodeElement );
+		this.$creditCard = this.$el.closest( "form" ).find( "[data-creditable-creditcard]" );
+
+		var self = this;
+		this.$creditCard.on( "change", function() {
+			var maxlen = self.getMaxlength();
+			self.$el.attr({
+				maxlength: maxlen,
+				placeholder: self.getPlaceholder( maxlen )
+			});
+		});
+	}
+
+	CreditableSecurityCode.prototype.getMaxlength = function() {
+		return lengths[ CreditableCardType( this.$creditCard.val() ) ];
+	};
+
+	CreditableSecurityCode.prototype.getPlaceholder = function( maxlen ) {
+		return ( new Array( maxlen || this.getMaxlength() ) ).join( "0" ) + "0";
+	};
+
+	$(document).on( "enhance", function( e ) {
+		$( e.target ).find( "[data-creditable-securitycode]" ).each(function() {
+			var $t = $( this );
+			var key = "creditable-securitycode";
+
+			if( !$t.data( key ) ) {
+				$t.data( key, new CreditableSecurityCode( this ) );
+			}
+		});
+	});
+
+	CreditableSecurityCode.LENGTHS = lengths;
+	w.CreditableSecurityCode = CreditableSecurityCode;
+
+}( typeof global !== "undefined" ? global : this, jQuery ));
+
 (function( w, $ ){
 	"use strict";
 
@@ -2797,7 +2846,7 @@ window.jQuery = window.jQuery || window.shoestring;
 
 }( jQuery ));
 
-/*! validator - v2.0.4 - 2016-04-20
+/*! validator - v2.0.5 - 2016-04-22
 * https://github.com/filamentgroup/validator
 * Copyright (c) 2016 Filament Group; Licensed MIT */
 (function( $, w ){
@@ -3048,12 +3097,7 @@ window.jQuery = window.jQuery || window.shoestring;
 
 	Validator.prototype.validatecredit = function( value ){
 		var number = value.replace( /\s/g , '').replace( /-/g, ''),
-			card = this._getCreditType( number ),
-			cvv = card && this.copy.cvv;
-
-		if( card && cvv ) {
-			this._findCvvField().attr( 'placeholder', cvv[ card.id ].placeholder );
-		}
+			card = this._getCreditType( number );
 
 		return card && new RegExp( card.fullRegex ).test( number ) || false;
 	};
@@ -3243,7 +3287,7 @@ window.jQuery = window.jQuery || window.shoestring;
 	};
 }( Validator, jQuery, this ));
 
-/*! validator - v2.0.4 - 2016-04-20
+/*! validator - v2.0.5 - 2016-04-22
 * https://github.com/filamentgroup/validator
 * Copyright (c) 2016 Filament Group; Licensed MIT */
 // Input a credit card number string, returns a key signifying the type of credit card it is
@@ -3268,12 +3312,7 @@ window.jQuery = window.jQuery || window.shoestring;
 	}
 
 	CreditableCardType.TYPES = types;
-
-	if( typeof exports === "object" ) {
-		module.exports = CreditableCardType;
-	} else {
-		w.CreditableCardType = CreditableCardType;
-	}
+	w.CreditableCardType = CreditableCardType;
 
 }( typeof global !== "undefined" ? global : this ));
 
@@ -3381,21 +3420,16 @@ window.jQuery = window.jQuery || window.shoestring;
 		},
 		"cvv" : {
 			"message" : "Security code requires a valid card credit card number.",
-			"placeholder": "3–4 Digits",
 			"visa": {
-				"placeholder": "3 Digits",
 				"message": "Visa cards should have a 3 digit security code."
 			},
 			"mastercard": {
-				"placeholder": "3 Digits",
 				"message": "Mastercards should have a 3 digit security code."
 			},
 			"discover": {
-				"placeholder": "3 Digits",
 				"message": "Discover cards should have a 3 digit security code."
 			},
 			"amex": {
-				"placeholder": "4 Digits",
 				"message": "American Express cards should have a 4 digit security code."
 			}
 		}
@@ -3630,7 +3664,7 @@ window.jQuery = window.jQuery || window.shoestring;
 
 }( jQuery, this ));
 
-/*! validator - v2.0.4 - 2016-04-20
+/*! validator - v2.0.5 - 2016-04-22
 * https://github.com/filamentgroup/validator
 * Copyright (c) 2016 Filament Group; Licensed MIT */
 /* global Validator:true */
