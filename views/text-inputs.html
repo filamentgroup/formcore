@@ -34,6 +34,25 @@
 </div>
 
 <div data-xrayhtml>
+<h3 class="xraytitle">Name</h3>
+<div class="sect-group">
+	<div class="sect-inner-a">
+		<label class="form-group">
+			<b class="label-text">First Name</b>
+			<input type="text" autocapitalize="words">
+		</label>
+	</div>
+
+	<div class="sect-inner-b">
+		<label class="form-group ">
+			<b class="label-text">Last Name</b>
+			<input type="text" autocapitalize="words">
+		</label>
+	</div>
+</div>
+</div>
+
+<div data-xrayhtml>
 <h3 class="xraytitle">Multi-line Text, grows with text</h3>
 <label class="form-group">
 	<b class="label-text">Text</b>
@@ -90,10 +109,10 @@
 </div>
 
 <div data-xrayhtml>
-<h3 class="xraytitle">E-mail</h3>
+<h3 class="xraytitle">Email</h3>
 <label class="form-group">
 	<b class="label-text">Email</b>
-	<input type="email" data-validate="email">
+	<input type="email" data-validate="email" autocorrect="off" autocapitalize="none" spellcheck="false">
 </label>
 </div><!-- /data-xrayhtml -->
 
@@ -131,10 +150,18 @@
 </div><!-- /data-xrayhtml -->
 
 <div data-xrayhtml>
-<h3 class="xraytitle">US ZIP Code</h3>
+<h3 class="xraytitle">US ZIP Code, allows 5 digits</h3>
 <label class="form-group">
 	<span class="label-text">ZIP Code</span>
-	<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="00000" data-politespace data-grouplength="5," data-delimiter="-">
+	<input type="number" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="00000" data-numeric-input class="formcore-disable-spinner">
+</label>
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">US ZIP Code, allows full 9 digits</h3>
+<label class="form-group">
+	<span class="label-text">ZIP Code</span>
+	<input type="number" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="00000" data-numeric-input data-politespace data-grouplength="5," data-delimiter="-" class="formcore-disable-spinner">
 </label>
 </div><!-- /data-xrayhtml -->
 

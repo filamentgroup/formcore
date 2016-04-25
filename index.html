@@ -24,14 +24,14 @@
 		<div class="sect-inner-a">
 			<label class="form-group required">
 				<b class="label-text">First Name</b>
-				<input type="text" id="fname" data-message="Please enter your first name." required>
+				<input type="text" data-message="Please enter your first name." required  autocapitalize="words">
 			</label>
 		</div>
 
 		<div class="sect-inner-b">
 			<label class="form-group required">
 				<b class="label-text">Last Name</b>
-				<input type="text" id="lname" data-message="Please enter your last name." required>
+				<input type="text" data-message="Please enter your last name." required autocapitalize="words">
 			</label>
 		</div>
 
@@ -69,7 +69,7 @@
 
 		<label class="form-group">
 			<b class="label-text">Email</b>
-			<input type="email" data-validate="email" required>
+			<input type="email" data-validate="email" required autocorrect="off" autocapitalize="none" spellcheck="false">
 		</label>
 
 		<label class="form-group required">
@@ -113,7 +113,12 @@
 	<div class="sect-group">
 		<label class="form-group required">
 			<b class="label-text">Street Address</b>
-			<input type="text" id="address" data-message="Please enter your address." required>
+			<input type="text" data-message="Please enter your address." required>
+		</label>
+
+		<label class="form-group required">
+			<b class="label-text">City</b>
+			<input type="text" data-message="Please enter your city." required autocapitalize="words">
 		</label>
 
 		<div class="sect-inner-a">
@@ -180,7 +185,7 @@
 		<div class="sect-inner-b">
 			<label class="form-group required">
 				<span class="label-text">ZIP Code</span>
-				<input type="text" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="00000" data-politespace data-grouplength="5," data-delimiter="-">
+				<input type="number" data-validate="zip" inputmode="numeric" pattern="[0-9]*" maxlength="9" placeholder="00000" data-numeric-input data-politespace data-grouplength="5," data-delimiter="-" class="formcore-disable-spinner">
 			</label>
 		</div>
 
@@ -207,7 +212,7 @@
 			<input type="text"
 				inputmode="numeric" pattern="[0-9]*" data-numeric-input
 				data-politespace data-grouplength="4" data-politespace-creditcard data-politespace-creditcard-maxlength
-				required maxlength="16"
+				required maxlength="16" data-validate="creditcard"
 				data-credit-card-display
 				data-creditable-creditcard
 				placeholder="0000 0000 0000 0000">

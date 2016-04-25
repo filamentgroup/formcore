@@ -29,6 +29,9 @@
 	right: 0;
 	width: auto;
 }
+.form-group .politespace-proxy {
+	display: block;
+}
 
 
 
@@ -207,6 +210,11 @@ input::-webkit-datetime-edit-year-field {
 	padding: 0;
 }
 /* OK, this is getting ugly. */
+.formcore-disable-spinner::-webkit-inner-spin-button,
+.formcore-disable-spinner::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
 input[type="date"]::-webkit-inner-spin-button, 
 input[type="datetime"]::-webkit-inner-spin-button, 
 input[type="datetime-local"]::-webkit-inner-spin-button, 
