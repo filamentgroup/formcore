@@ -28,7 +28,7 @@
     "xrayhtml": "^2.0.2"
   },
   "dependencies": {
-    "creditable": "^1.0.6",
+    "creditable": "^1.0.7",
     "fg-select-css": "^1.0.3",
     "grunt-grunticon": "^2.2.2",
     "politespace": "^0.1.9",

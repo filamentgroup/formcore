@@ -25,12 +25,10 @@
 			}
 		}
 
-		// if maxLength isn't defined on `$el` then `parseInt` will return
-		// `NaN` which is falsey meaning there is no max length. The max length
-		// is then `Infinity`.
-		this.maxLength = parseInt(this.$el.attr( "maxlength" ), 10) || Infinity;
-		this.$el.on( "keypress", function( e ) {
-			return self.onKeypress.call( self, e );
+		this.$el.on( "focus", function( e ) {
+			self.initMaxlength();
+		}).on( "keypress", function( e ) {
+			self.onKeypress.call( self, e );
 		});
 	};
 
@@ -43,6 +41,17 @@
 		"ArrowLeft",
 		"."
 	];
+
+	NumericInput.prototype.initMaxlength = function(){
+		// if maxLength isn't defined on `$el` then `parseInt` will return
+		// `NaN` which is falsey meaning there is no max length. The max length
+		// is then `Infinity`.
+
+		// Will also accept the number of digits in max
+		this.maxLength = parseInt( this.$el.attr( "maxlength" ), 10 ) ||
+			( "" + ( Math.abs( parseInt( this.$el.attr( "max" ), 10 ) ) || "" ) ).length ||
+			Infinity;
+	};
 
 	NumericInput.prototype.onKeypress = function( event ){
 		var prevented = false;
