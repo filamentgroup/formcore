@@ -148,14 +148,6 @@ input[type="week"] {
 	-webkit-appearance: none;
 }
 
-/* opt out of spinner in numeric inputs */
-input[type=number].text-number::-webkit-inner-spin-button, 
-input[type=number].text-number::-webkit-outer-spin-button { 
-	-webkit-appearance: none; 
-	margin: 0; 
-}
-
-
 
 
 /* Placeholder text in form elements - each rule must remain separate to work */
@@ -209,12 +201,15 @@ input::-webkit-datetime-edit-week-field,
 input::-webkit-datetime-edit-year-field {
 	padding: 0;
 }
-/* OK, this is getting ugly. */
+input[type="number"].formcore-disable-spinner {
+	-moz-appearance: textfield;
+}
 .formcore-disable-spinner::-webkit-inner-spin-button,
 .formcore-disable-spinner::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
+/* OK, this is getting ugly. */
 input[type="date"]::-webkit-inner-spin-button, 
 input[type="datetime"]::-webkit-inner-spin-button, 
 input[type="datetime-local"]::-webkit-inner-spin-button, 
