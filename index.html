@@ -209,13 +209,14 @@
 	<div class="sect-group creditcarddisplay" data-validator-anchor>
 		<label class="sect-inner-a form-group required">
 			<span class="label-text">Card Number</span>
-			<input type="text"
+			<input type="number"
 				inputmode="numeric" pattern="[0-9]*" data-numeric-input
 				data-politespace data-grouplength="4" data-politespace-creditcard data-politespace-creditcard-maxlength
 				required maxlength="16" data-validate="credit"
 				data-credit-card-display
 				data-creditable-creditcard
-				placeholder="0000 0000 0000 0000">
+				placeholder="0000 0000 0000 0000"
+				class="formcore-disable-spinner">
 		</label>
 		<div class="sect-inner-b">
 			<p class="creditcarddisplay_desc">We accept:</p>
