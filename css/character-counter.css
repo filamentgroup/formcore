@@ -1,6 +1,3 @@
-.character-counter {
-	line-height: 2;
-}
 .character-counter .singular,
 .character-counter .plural {
 	display: none;
