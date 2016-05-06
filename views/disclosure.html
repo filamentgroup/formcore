@@ -22,15 +22,16 @@
 	<b class="label-text">Select</b>
 	<div class="custom-select">
 		<select>
-			<option>Apples</option>
+			<option data-disclosure="selectchoice-1">Apples</option>
 			<option data-disclosure="selectchoice-2">Bananas</option>
-			<option>Grapes</option>
+			<option data-disclosure="selectchoice-1 selectchoice-2">Grapes</option>
 			<option>Oranges</option>
 			<option>A very long option name to test wrapping</option>
 		</select>
 	</div>
 </label>
-<p class="disclosure hidden" id="selectchoice-2">This is displayed when Bananas is selected.</p>
+<p class="disclosure hidden" id="selectchoice-1">This is displayed when Apples (or Grapes) is selected.</p>
+<p class="disclosure hidden" id="selectchoice-2">This is displayed when Bananas (or Grapes) is selected.</p>
 </div>
 
 <div data-xrayhtml>
