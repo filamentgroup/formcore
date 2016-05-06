@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<title>formcore</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--#include virtual="/ssi/styles-scripts.html" -->
+</head>
+
+
+<body>
+
+<!--#include virtual="/ssi/masthead.html" -->
+
+<div class="docs-main">
+<h2>Form Element Disclosure</h2>
+
+<form>
+
+<div data-xrayhtml>
+<label class="form-group">
+	<b class="label-text">Select</b>
+	<div class="custom-select">
+		<select>
+			<option>Apples</option>
+			<option data-disclosure="selectchoice-2">Bananas</option>
+			<option>Grapes</option>
+			<option>Oranges</option>
+			<option>A very long option name to test wrapping</option>
+		</select>
+	</div>
+</label>
+<p class="disclosure hidden" id="selectchoice-2">This is displayed when Bananas is selected.</p>
+</div>
+
+<div data-xrayhtml>
+<div class="form-group">
+	<label class="radiobutton">
+		<input type="radio" name="options1" data-disclosure="radiochoice-1">
+		<span class="item">Choice 1</span>
+	</label>
+	<label class="radiobutton">
+		<input type="radio" name="options1" data-disclosure="radiochoice-2">
+		<span class="item">Choice 2</span>
+	</label>
+</div>
+<p class="disclosure hidden" id="radiochoice-1">This is displayed when choice 1 is selected.</p>
+<p class="disclosure hidden" id="radiochoice-2">This is displayed when choice 2 is selected.</p>
+</div>
+
+<div data-xrayhtml>
+<h2 class="xraytitle">Checkboxes point to same disclosure</h2>
+<div class="form-group">
+	<label class="checkbox">
+		<input type="checkbox" name="options2" data-disclosure="checkchoice-0">
+		<span class="item">Choice 1</span>
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="options2" data-disclosure="checkchoice-0">
+		<span class="item">Choice 2</span>
+	</label>
+</div>
+<p class="disclosure hidden" id="checkchoice-0">This is displayed when either choice is selected.</p>
+</div>
+
+<div data-xrayhtml>
+<h2 class="xraytitle">Checkboxes point to different disclosures</h2>
+<div class="form-group">
+	<label class="checkbox">
+		<input type="checkbox" name="options3" data-disclosure="checkchoice-1">
+		<span class="item">Choice 1</span>
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="options3" data-disclosure="checkchoice-2">
+		<span class="item">Choice 2</span>
+	</label>
+</div>
+<p class="disclosure hidden" id="checkchoice-1">This is displayed when choice 1 is selected.</p>
+<p class="disclosure hidden" id="checkchoice-2">This is displayed when choice 2 is selected.</p>
+</div>
+
+</form>
+</div>
+
+</body>
+</html>
