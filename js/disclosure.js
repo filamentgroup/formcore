@@ -6,10 +6,10 @@
 		// progressive disclosure -- works with checkboxes and radios
 		$( e.target ).find( "[data-disclosure]" ).each(function(){
 			var $t = $( this );
-			if( $t.data( "disclosure" ) ) {
+			if( $t.data( "disclosure-init" ) ) {
 				return;
 			}
-			$t.data( "disclosure", true );
+			$t.data( "disclosure-init", true );
 
 			var ids = $t.attr( "data-disclosure" ).split( " " );
 
