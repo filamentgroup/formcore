@@ -6,13 +6,13 @@
 		this.characterCounter.call( el );
 	}
 
-  var length = function( e ){
-    if( /Safari|Chrome/.test(window.navigator.userAgent) ){
-      return e.value.replace(/[\n\r]/g, "__").length
-    }
+	var length = function( e ){
+		if( /Safari|Chrome/.test(window.navigator.userAgent) ){
+			return e.value.replace(/[\n\r]/g, "__").length
+		}
 
-    return e.value.length;
-  }
+		return e.value.length;
+	}
 
 	CharacterCounter.prototype.characterCounter = function() {
 		var $label = $( "[data-maxlength-count='" + this.id + "'],[data-minlength-count='" + this.id + "']" ),
