@@ -25,9 +25,12 @@
 			}
 		}
 
+		this.isNavDisabled =
+			this.$el.attr("data-numeric-input-nav-disabled") !== null;
+
 		this.$el.on( "focus", function( e ) {
 			self.initMaxlength();
-		}).on( "keypress", function( e ) {
+		}).on( "keydown", function( e ) {
 			self.onKeypress.call( self, e );
 		});
 	};
@@ -39,6 +42,8 @@
 		"Backspace",
 		"ArrowRight",
 		"ArrowLeft",
+		"ArrowUp",
+		"ArrowDown",
 		"."
 	];
 
@@ -102,6 +107,11 @@
 		$.each(NumericInput.allowedKeys, function(i, e){
 			if( e === key ) { isAllowed = true;	 }
 		});
+
+		// the numeric navigation of values may be disabled
+		if( this.isNavDisabled && (key == "ArrowUp" || key == "ArrowDown") ){
+			isAllowed = false;
+		}
 
 		return event.altKey || event.ctrlKey || event.metaKey || isAllowed;
 	};
