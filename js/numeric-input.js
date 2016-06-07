@@ -31,20 +31,20 @@
 		this.$el.on( "focus", function( e ) {
 			self.initMaxlength();
 		}).on( "keydown", function( e ) {
-			self.onKeypress.call( self, e );
+			self.onKeydown.call( self, e );
 		});
 	};
 
 	NumericInput.allowedKeys = [
-		"Tab",
-		"Enter",
-		"Escape",
-		"Backspace",
-		"ArrowRight",
-		"ArrowLeft",
-		"ArrowUp",
-		"ArrowDown",
-		"."
+		9, // Tab
+		13, // Enter
+		27, //Escape
+		8, // Backspace
+		39, // ArrowRight
+		37, // ArrowLeft
+		38, // ArrowUp
+		40, // ArrowDown
+		190 // .
 	];
 
 	NumericInput.prototype.initMaxlength = function(){
@@ -58,7 +58,7 @@
 			Infinity;
 	};
 
-	NumericInput.prototype.onKeypress = function( event ){
+	NumericInput.prototype.onKeydown = function( event ){
 		var prevented = false;
 
 		// The key pressed is allowed, no exceptions
@@ -101,15 +101,17 @@
 	};
 
 	NumericInput.prototype.isKeyAllowed = function( event ) {
-		var isAllowed = false, key = event.key;
+		var isAllowed = false, key = event.keyCode;
 
 		// indexOf not supported everywhere for arrays
 		$.each(NumericInput.allowedKeys, function(i, e){
-			if( e === key ) { isAllowed = true;	 }
+			if( e === key ) {
+				isAllowed = true;
+			}
 		});
 
-		// the numeric navigation of values may be disabled
-		if( this.isNavDisabled && (key == "ArrowUp" || key == "ArrowDown") ){
+		// the up/down arrow key numeric navigation of values may be disabled
+		if( this.isNavDisabled && (key == 38 || key == 40) ){
 			isAllowed = false;
 		}
 
