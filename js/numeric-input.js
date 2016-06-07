@@ -26,7 +26,9 @@
 		}
 
 		this.isNavDisabled =
-			this.$el.attr("data-numeric-input-nav-disabled") !== null;
+			(this.$el.attr("data-numeric-input-nav-disabled") !== null &&
+			 this.$el.attr("data-numeric-input-nav-disabled") !== undefined) ||
+			this.$el.hasClass("formcore-disabled-spinner");
 
 		this.$el.on( "focus", function( e ) {
 			self.initMaxlength();
