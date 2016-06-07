@@ -43,8 +43,7 @@
 		39, // ArrowRight
 		37, // ArrowLeft
 		38, // ArrowUp
-		40, // ArrowDown
-		190 // .
+		40 // ArrowDown
 	];
 
 	NumericInput.prototype.initMaxlength = function(){
@@ -60,26 +59,21 @@
 
 	NumericInput.prototype.onKeydown = function( event ){
 		var prevented = false;
-
 		// The key pressed is allowed, no exceptions
 		// modifier keys and keys listed in allowedKeys property
+
 		if( this.isKeyAllowed( event ) ){
 			return;
 		}
-
-		if (event.key !== undefined) {
-			var key = event.key;
-			// handle anything that's not a number
-			prevented = isNaN(parseInt(key, 10));
-		} else if (event.keyCode !== undefined) {
+		if (event.keyCode !== undefined) {
 			var code = event.keyCode;
 			// allow '.', return
 			// disallow anything less than 48 or greater than 57
 			prevented = (code < 48 || code > 57) &&
-				code !== 13 &&
-				( !this.allowFloat || code !== 46 );
+				!this.isInputTextSelected() &&
+				( !this.allowFloat || code !== 190);
 
-			if( this.allowFloat && code === 46 && this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) {
+			if( this.allowFloat && code === 190 && this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) {
 				prevented = true;
 			}
 		}
@@ -132,7 +126,6 @@
 		} else if (document.selection && document.selection.type != "Control") {
 			selectionText = document.selection.createRange().text;
 		}
-
 		return selectionText ? this.$el.val().indexOf(selectionText) > -1 : false;
 	};
 
