@@ -9,14 +9,12 @@
 	CharacterCounter.prototype.characterCounter = function() {
 		var $label = $( "[data-maxlength-count='" + this.id + "'],[data-minlength-count='" + this.id + "']" ),
 			$parent = $label.parent().addClass( "character-counter plural" ),
-			  max = parseFloat( $( this ).attr( "maxlength" ) ),
+		  max = parseFloat( $( this ).attr( "maxlength" ) ),
 			min = parseFloat( $( this ).attr( "minlength" ) ),
 			newval;
 
 		if ( $label.length ){
 			$( this ).unbind( ".charcount") .bind( "input.charcount keyup.charcount", function(){
-        console.log(this.value);
-        console.log(this.value.length);
 				newval = ( max || min ) - this.value.length;
 				$label.html( "" + newval );
 				var add = [];
@@ -39,10 +37,10 @@
 		}
 	};
 
-  CharacterCounter.selectors = [
-    "textarea[maxlength]",
-    "textarea[minlength]"
-  ]
+	CharacterCounter.selectors = [
+		"textarea[maxlength]",
+		"textarea[minlength]"
+	]
 
 	$( w.document ).bind( "enhance", function( e ) {
 		//textarea max-length counter
