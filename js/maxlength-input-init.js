@@ -12,7 +12,7 @@
 	var document = window.document;
 
 	var pluginName = "maxlength-input",
-			initSelector = "[data-" + pluginName + "]";
+			initSelector = "[maxlength]"; // data-" + pluginName + "]";
 
 	$.fn[ pluginName ] = function(){
 		return this.each(function(){
