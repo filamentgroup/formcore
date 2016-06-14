@@ -28,12 +28,14 @@
 		this.isNavDisabled =
 			(this.$el.attr("data-numeric-input-nav-disabled") !== null &&
 			 this.$el.attr("data-numeric-input-nav-disabled") !== undefined) ||
-			this.$el.hasClass("formcore-disable-spinner");
+			(this.$el.attr("class") || "").indexOf("formcore-disable-spinner") >= 0;
 
 		this.$el.on( "focus", function( e ) {
 			self.initMaxlength();
 		}).on( "keydown", function( e ) {
 			self.onKeydown.call( self, e );
+		}).on( "paste", function( e ){
+			self.onPaste( e );
 		});
 	};
 
@@ -80,7 +82,6 @@
 			}
 		}
 
-
 		// Suppress "double action" if event prevented
 		//
 		// Kill keypress if the max length has been exceeded and the text
@@ -94,6 +95,30 @@
 		if((this.isMaxLengthExceeded() && !this.isInputTextSelected()) || prevented) {
 			event.preventDefault();
 		}
+	};
+
+	NumericInput.prototype.onPaste = function( e ){
+		var event = e.originalEvent || e;
+
+		// http://stackoverflow.com/questions/6035071/intercept-paste-event-in-javascript
+		var pastedText;
+
+		if (window.clipboardData && window.clipboardData.getData) { // IE
+			pastedText = window.clipboardData.getData('Text');
+		} else if (event.clipboardData && event.clipboardData.getData) {
+			pastedText = event.clipboardData.getData('text/plain');
+		}
+
+		// if we were unable to get the pasted text avoid doing anything
+		if( !pastedText ){
+			return;
+		}
+
+		// otherwise force the text to look right
+		this.el.value = pastedText.replace(/[^0-9\.,]*/g, "");
+
+		// prevent the original paste behavior
+		event.preventDefault();
 	};
 
 	NumericInput.prototype.isKeyAllowed = function( event ) {
