@@ -9,7 +9,7 @@
 	CharacterCounter.prototype.characterCounter = function() {
 		var $label = $( "[data-maxlength-count='" + this.id + "'],[data-minlength-count='" + this.id + "']" ),
 			$parent = $label.parent().addClass( "character-counter plural" ),
-		  max = parseFloat( $( this ).attr( "maxlength" ) ),
+			max = parseFloat( $( this ).attr( "maxlength" ) ),
 			min = parseFloat( $( this ).attr( "minlength" ) ),
 			newval;
 
