@@ -41,8 +41,7 @@
 
   CharacterCounter.selectors = [
     "textarea[maxlength]",
-    "textarea[minlength]",
-    "textarea[data-formcore-maxlength]"
+    "textarea[minlength]"
   ]
 
 	$( w.document ).bind( "enhance", function( e ) {

@@ -12,7 +12,7 @@
 	var document = window.document;
 
 	var pluginName = "maxlength-input",
-			initSelector = "[maxlength]"; // data-" + pluginName + "]";
+			initSelector = "textarea[maxlength]"
 
 	$.fn[ pluginName ] = function(){
 		return this.each(function(){
@@ -23,9 +23,7 @@
 	// auto-init on enhance (which is called on domready)
 	$( document ).bind( "enhance", function( e ){
 		var attr = "data-enhanced-" + pluginName;
-		$( initSelector, e.target ).filter( function() {
-			return !$( this ).is( "[" + attr + "]" );
-		}).attr( attr, "" )[ pluginName ]();
+		$( initSelector, e.target )[ pluginName ]();
 	});
 
 }( jQuery, MaxlengthInput, this ));
