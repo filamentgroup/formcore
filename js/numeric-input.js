@@ -40,14 +40,19 @@
 	};
 
 	NumericInput.allowedKeys = [
+		8, // Backspace
 		9, // Tab
 		13, // Enter
-		27, //Escape
-		8, // Backspace
-		39, // ArrowRight
+		27, // Escape
+		33, // Pgup
+		34, // Pgdown
+		35, // End
+		36, // Home
 		37, // ArrowLeft
 		38, // ArrowUp
-		40 // ArrowDown
+		39, // ArrowRight
+		40, // ArrowDown
+		46 // Delete
 	];
 
 	NumericInput.prototype.initMaxlength = function(){
@@ -61,6 +66,15 @@
 			Infinity;
 	};
 
+	NumericInput.prototype.isCodeNumeric = function( code ){
+		return code >= 48 && code <= 57 ||
+			code >= 96 && code <= 105;
+	};
+
+	NumericInput.prototype.isCodeDecimalPoint = function( code ){
+		return code === 110 || code === 190; // different keycodes for numpad
+	};
+
 	NumericInput.prototype.onKeydown = function( event ){
 		var prevented = false;
 		// The key pressed is allowed, no exceptions
@@ -71,13 +85,12 @@
 		}
 		if (event.keyCode !== undefined) {
 			var code = event.keyCode;
-			// allow '.', return
-			// disallow anything less than 48 or greater than 57
-			prevented = (code < 48 || code > 57) &&
-				!this.isInputTextSelected() &&
-				( !this.allowFloat || code !== 190);
 
-			if( this.allowFloat && code === 190 && this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) {
+			prevented = !this.isCodeNumeric( code ) &&
+				!this.isInputTextSelected() &&
+				( !this.allowFloat || !this.isCodeDecimalPoint( code ) );
+
+			if( this.allowFloat && this.isCodeDecimalPoint( code ) && this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) {
 				prevented = true;
 			}
 		}

@@ -2716,18 +2716,6 @@ window.jQuery = window.jQuery || window.shoestring;
 		}
 	};
 
-	// TODO likely needs more conform checks for other input types and configs
-	// they can be added as needed here
-	Politespace.prototype.conform = function( text ) {
-		var fixed = text;
-
-		if( this.$element.attr("type") === "number" ){
-			fixed = fixed.replace(/[^0-9]/, "");
-		}
-
-		return fixed;
-	}
-
 	Politespace.prototype.createProxy = function() {
 		if( !this.useProxy() ) {
 			return;
@@ -2831,31 +2819,6 @@ window.jQuery = window.jQuery || window.shoestring;
 					if( polite.useProxy() ) {
 						polite.updateProxy();
 					}
-				})
-				.bind( "paste", function(event){
-
-					// http://stackoverflow.com/questions/6035071/intercept-paste-event-in-javascript
-					var pastedText;
-
-					if (window.clipboardData && window.clipboardData.getData) { // IE
-						pastedText = window.clipboardData.getData('Text');
-					} else if (event.clipboardData && event.clipboardData.getData) {
-						pastedText = event.clipboardData.getData('text/plain');
-					}
-
-					// if we were unable to get the pasted text avoid doing anything
-					if( !pastedText ){
-						return;
-					}
-
-					// otherwise force the text to look right
-					this.value = polite.conform(pastedText);
-
-					// prevent the original paste behavior
-					event.preventDefault();
-
-					// and update the state of the plugin
-					polite.update();
 				})
 				.bind( "input keydown", function() {
 					$( this ).trigger( "politespace-input" );
