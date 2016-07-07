@@ -7,7 +7,7 @@
 		this.$el = $( el );
 		this.allowFloat = this.$el.is( '[data-float]' );
 
-		var ua, isFirefoxDesktop, self = this;
+		var ua, isFirefoxDesktop, isSafari6, self = this;
 		ua = navigator.userAgent.toLowerCase();
 
 		// Issue #267 and #521
@@ -19,7 +19,13 @@
 		// NOTE if they make one for windows mobile it may match "Windonws"
 		isFirefoxDesktop = /Windows|Macintosh|Linux/.test(ua) && /Firefox/.test(ua);
 
-		if( isFirefoxDesktop ){
+		// Safari 6 removes leading zeros with type="number"
+		// This is a bad user agent sniff but is limited to an outdated version
+		// of Safari (this bug is fixed in 7+). This behavior cannot be feature
+		// tested due to the bug not exhibiting when setting the .value property.
+		isSafari6 = !!ua.match( /safari/i ) && !!ua.match( /version\/6\./i ) && !window.chrome;
+
+		if( isFirefoxDesktop || isSafari6 ){
 			if( this.$el.attr( "type" ) === "number" ) {
 				this.$el.attr( "type", "text" );
 			}
