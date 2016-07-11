@@ -7,7 +7,7 @@
 		this.$el = $( el );
 		this.allowFloat = this.$el.is( '[data-float]' );
 
-		var ua, isFirefoxDesktop, self = this;
+		var ua, isFirefoxDesktop, isSafari6, self = this;
 		ua = navigator.userAgent.toLowerCase();
 
 		// Issue #267 and #521
@@ -19,7 +19,13 @@
 		// NOTE if they make one for windows mobile it may match "Windonws"
 		isFirefoxDesktop = /Windows|Macintosh|Linux/.test(ua) && /Firefox/.test(ua);
 
-		if( isFirefoxDesktop ){
+		// Safari 6 removes leading zeros with type="number"
+		// This is a bad user agent sniff but is limited to an outdated version
+		// of Safari (this bug is fixed in 7+). This behavior cannot be feature
+		// tested due to the bug not exhibiting when setting the .value property.
+		isSafari6 = !!ua.match( /safari/i ) && !!ua.match( /version\/6\./i ) && !window.chrome;
+
+		if( isFirefoxDesktop || isSafari6 ){
 			if( this.$el.attr( "type" ) === "number" ) {
 				this.$el.attr( "type", "text" );
 			}
@@ -28,24 +34,31 @@
 		this.isNavDisabled =
 			(this.$el.attr("data-numeric-input-nav-disabled") !== null &&
 			 this.$el.attr("data-numeric-input-nav-disabled") !== undefined) ||
-			this.$el.is(".formcore-disable-spinner");
+			(this.$el.attr("class") || "").indexOf("formcore-disable-spinner") >= 0;
 
 		this.$el.on( "focus", function( e ) {
 			self.initMaxlength();
 		}).on( "keydown", function( e ) {
 			self.onKeydown.call( self, e );
+		}).on( "paste", function( e ){
+			self.onPaste( e );
 		});
 	};
 
 	NumericInput.allowedKeys = [
+		8, // Backspace
 		9, // Tab
 		13, // Enter
-		27, //Escape
-		8, // Backspace
-		39, // ArrowRight
+		27, // Escape
+		33, // Pgup
+		34, // Pgdown
+		35, // End
+		36, // Home
 		37, // ArrowLeft
 		38, // ArrowUp
-		40 // ArrowDown
+		39, // ArrowRight
+		40, // ArrowDown
+		46 // Delete
 	];
 
 	NumericInput.prototype.initMaxlength = function(){
@@ -59,6 +72,15 @@
 			Infinity;
 	};
 
+	NumericInput.prototype.isCodeNumeric = function( code ){
+		return code >= 48 && code <= 57 ||
+			code >= 96 && code <= 105;
+	};
+
+	NumericInput.prototype.isCodeDecimalPoint = function( code ){
+		return code === 110 || code === 190; // different keycodes for numpad
+	};
+
 	NumericInput.prototype.onKeydown = function( event ){
 		var prevented = false;
 		// The key pressed is allowed, no exceptions
@@ -69,17 +91,15 @@
 		}
 		if (event.keyCode !== undefined) {
 			var code = event.keyCode;
-			// allow '.', return
-			// disallow anything less than 48 or greater than 57
-			prevented = (code < 48 || code > 57) &&
-				!this.isInputTextSelected() &&
-				( !this.allowFloat || code !== 190);
 
-			if( this.allowFloat && code === 190 && this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) {
+			prevented = !this.isCodeNumeric( code ) &&
+				!this.isInputTextSelected() &&
+				( !this.allowFloat || !this.isCodeDecimalPoint( code ) );
+
+			if( this.allowFloat && this.isCodeDecimalPoint( code ) && this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) {
 				prevented = true;
 			}
 		}
-
 
 		// Suppress "double action" if event prevented
 		//
@@ -94,6 +114,30 @@
 		if((this.isMaxLengthExceeded() && !this.isInputTextSelected()) || prevented) {
 			event.preventDefault();
 		}
+	};
+
+	NumericInput.prototype.onPaste = function( e ){
+		var event = e.originalEvent || e;
+
+		// http://stackoverflow.com/questions/6035071/intercept-paste-event-in-javascript
+		var pastedText;
+
+		if (window.clipboardData && window.clipboardData.getData) { // IE
+			pastedText = window.clipboardData.getData('Text');
+		} else if (event.clipboardData && event.clipboardData.getData) {
+			pastedText = event.clipboardData.getData('text/plain');
+		}
+
+		// if we were unable to get the pasted text avoid doing anything
+		if( !pastedText ){
+			return;
+		}
+
+		// otherwise force the text to look right
+		this.el.value = pastedText.replace(/[^0-9\.,]*/g, "");
+
+		// prevent the original paste behavior
+		event.preventDefault();
 	};
 
 	NumericInput.prototype.isKeyAllowed = function( event ) {
