@@ -15,7 +15,7 @@
 
 		if ( $label.length ){
 			$( this ).unbind( ".charcount") .bind( "input.charcount keyup.charcount", function(){
-				newval = ( max || min ) - this.value.length;
+				newval = ( max || min ) - this.value.replace(/\r\n|\n/g, "__").length;
 				$label.html( "" + newval );
 				var add = [];
 				var remove = [ "min max limit" ];

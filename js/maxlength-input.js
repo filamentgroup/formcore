@@ -10,15 +10,6 @@
 		this.maxlength = this.$el.attr("maxlength");
 
 		this.$el
-			.bind("focus", function(){
-				// remove the maxlength constraint on focus, after other plugins
-				// have had a chance to select on/store the value but before
-				// the constraint can be enforced on paste or value entry
-				self.el.removeAttribute("maxlength");
-
-				// record the value for reference
-				self.el.setAttribute("data-formcore-maxlength", self.maxlength);
-			})
 			.bind("keydown", function(event){
 				// prevent extra text entry based on the maxlength
 				self.onKeydown(event);
@@ -30,22 +21,22 @@
 	}
 
 	MaxlengthInput.allowedKeys = [
-		9,  // Tab
-		13, // Enter
+		9,	// Tab
 		27, // Escape
-		8,  // Backspace
+		8,	// Backspace
 		39, // ArrowRight
 		37, // ArrowLeft
 		38, // ArrowUp
-		40  // ArrowDown
+		40	// ArrowDown
 	];
 
 	MaxlengthInput.prototype.isKeyAllowed = function( event ) {
 		var isAllowed = false, key = event.keyCode;
 
 		// indexOf not supported everywhere for arrays
-		$.each(NumericInput.allowedKeys, function(i, e){
+		$.each(MaxlengthInput.allowedKeys, function(i, e){
 			if( e === key ) {
+				console.log(e, key);
 				isAllowed = true;
 			}
 		});
@@ -55,37 +46,50 @@
 
 
 	MaxlengthInput.prototype.onKeydown = function( event ){
+		var self = this;
+
 		if( this.isKeyAllowed( event ) ){
 			return;
 		}
 
-		if(this.el.value.length >= this.maxlength){
+		// if any character would put us at the
+		if(this.valueLength() >= this.maxlength){
 			event.preventDefault();
-		}
-	};
-
-	MaxlengthInput.prototype.onPaste = function( e ){
-		var event = e.originalEvent || e;
-
-		// http://stackoverflow.com/questions/6035071/intercept-paste-event-in-javascript
-		var pastedText;
-
-		if (window.clipboardData && window.clipboardData.getData) { // IE
-			pastedText = window.clipboardData.getData('Text');
-		} else if (event.clipboardData && event.clipboardData.getData) {
-			pastedText = event.clipboardData.getData('text/plain');
-		}
-
-		// if we were unable to get the pasted text avoid doing anything
-		if( !pastedText ){
 			return;
 		}
 
-		// otherwise force the text to look right
-		this.el.value = pastedText.slice(0, this.maxlength);
+		// if the user hits return and that would put the length above
+		// the max, prevent the return character addition
+		if(event.keyCode == 13 && this.valueLength() + 2 > this.maxlength){
+			event.preventDefault();
+			return;
+		}
 
-		// prevent the original paste behavior
-		event.preventDefault();
+		setTimeout(function(){
+			self.alterValue();
+		});
+	};
+
+	MaxlengthInput.prototype.alterValue = function(){
+		var newValue = this.el
+				.value
+				.replace(/\r\n|\n/g, "\r\n")
+				.slice(0, this.maxlength);
+
+		this.el.value = newValue;
+	};
+
+	MaxlengthInput.prototype.onPaste = function( e ){
+		var self = this;
+
+		// force the text to look right after the paste has applied
+		setTimeout(function(){
+			self.alterValue();
+		});
+	};
+
+	MaxlengthInput.prototype.valueLength = function(check){
+		return (check || this.el.value).replace(/\r\n|\n/g, "__").length;
 	};
 
 	window.MaxlengthInput = MaxlengthInput;
