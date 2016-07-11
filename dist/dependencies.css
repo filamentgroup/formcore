@@ -1,7 +1,6 @@
-/*! X-rayHTML - v2.0.2 - 2016-01-22
+/*! X-rayHTML - v2.1.2 - 2016-05-18
 * https://github.com/filamentgroup/x-rayhtml
-* Copyright (c) 2016 ; Licensed MIT */
-
+* Copyright (c) 2016 Filament Group; Licensed MIT */
 .xrayhtml {
 	border: 1px solid rgba(0,0,0,.1);
 	border-radius: .3em;
@@ -130,6 +129,11 @@
 		#ffffff 40%,
 		transparent);
 }
+
+iframe.xray-iframe {
+	border: 0;
+	width: 100%
+}
 .politespace-proxy {
 	position: relative;
 	overflow: hidden; /* clearfix for floating siblings */
@@ -153,6 +157,7 @@
 	z-index: 1;
 }
 .politespace-proxy.active input {
+	-webkit-text-fill-color: transparent;
 	color: transparent;
 }
 .politespace-proxy.active input[type=number] {

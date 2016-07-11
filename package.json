@@ -22,16 +22,16 @@
     "node": ">= 0.8.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-concat": "^1.0.0",
-    "grunt-contrib-jshint": "~0.6.0",
-    "xrayhtml": "^2.0.2"
+    "grunt": "~1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "~1.0.0",
+    "xrayhtml": "^2.1.2"
   },
   "dependencies": {
     "creditable": "^1.0.7",
     "fg-select-css": "^1.0.3",
-    "grunt-grunticon": "^2.2.2",
-    "politespace": "^0.1.9",
+    "grunt-grunticon": "^2.2.3",
+    "politespace": "^0.1.14",
     "shoestring": "^1.0.3",
     "validator": "filamentgroup/validator.git#v2.0.6"
   }

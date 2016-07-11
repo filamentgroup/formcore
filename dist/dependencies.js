@@ -2353,13 +2353,13 @@
 
 
 })( this );
-/*! X-rayHTML - v2.0.2 - 2016-01-22
+/*! X-rayHTML - v2.1.2 - 2016-05-18
 * https://github.com/filamentgroup/x-rayhtml
-* Copyright (c) 2016 ; Licensed MIT */
-
+* Copyright (c) 2016 Filament Group; Licensed MIT */
 window.jQuery = window.jQuery || window.shoestring;
 
 (function( $ ) {
+  var xrayiframeid = 0;
   var pluginName = "xrayhtml",
 		o = {
 		text: {
@@ -2394,6 +2394,10 @@ window.jQuery = window.jQuery || window.shoestring;
 			});
 		},
 		_init: function() {
+			var $self =	 $(this);
+
+			$self.data( "id." + pluginName, xrayiframeid++);
+
 			var method = $( this ).attr( "data-" + pluginName ) || o.defaultReveal;
 
 			if( method === "flip" ) {
@@ -2402,7 +2406,57 @@ window.jQuery = window.jQuery || window.shoestring;
 
 			$( this )
 				.addClass( pluginName + " " + "method-" + method )
-				[ pluginName ]( "_createSource" );
+			[ pluginName ]( "_createSource" );
+
+			// use an iframe to host the source
+			if( $(this).is("[data-" + pluginName + "-iframe]") ){
+
+				// grab the snippet html to ship to the iframe
+				var snippetHTML = $(this).find(".snippet").html();
+
+				// grab the url of the iframe to load
+				var url = $(this).attr("data-" + pluginName + "-iframe");
+
+				// grab the selector for the element in the iframe to put the html in
+				var selector = $(this).attr("data-" + pluginName + "-iframe-target");
+
+				// create the iframe element, so we can bind to the load event
+				var $iframe = $("<iframe src='" + url + "'/>");
+
+				// get the scripts and styles to ship to the iframe
+				// TODO we should support styles/scripts elsewhere in the page
+				var headHTML = $( "head" ).html();
+
+				// wait until the iframe loads to send the data
+				$iframe.bind("load",function(){
+
+					// wait for the iframe page to transmit the height of the page
+					$(window).bind("message", function(event){
+						var data = JSON.parse(event.data || event.originalEvent.data);
+
+						if( data.iframeid !== $self.data("id." + pluginName) ){
+							return;
+						}
+
+						$iframe.attr("height", data.iframeheight);
+					});
+
+					// send a message to the iframe with the snippet to load and any
+					// assets that are required to make it look right
+					$iframe[0].contentWindow.postMessage({
+						html: snippetHTML,
+						head: headHTML,
+						id: $self.data("id." + pluginName),
+						selector: selector
+					}, "*");
+				});
+
+				// style the iframe properly
+				$iframe.addClass("xray-iframe");
+
+				// replace the snippet which is rendered in the page with the iframe
+				$(this).find(".snippet").html("").append($iframe);
+			}
 		},
 		_createButton: function() {
 			var btn = document.createElement( "a" ),
@@ -2513,6 +2567,7 @@ window.jQuery = window.jQuery || window.shoestring;
 	// init either on beforeenhance event or domready, whichever comes first.
 	$( document ).bind("beforeenhance", init );
 	$( init );
+
 
 }( jQuery ));
 
@@ -2705,8 +2760,16 @@ window.jQuery = window.jQuery || window.shoestring;
 	};
 
 	Politespace.prototype.useProxy = function() {
+		var pattern = this.$element.attr( "pattern" );
+		var type = this.$element.attr( "type" );
+
 		// this needs to be an attr check and not a prop for `type` toggling (like password)
-		return this.$element.attr( "type" ) === "number";
+		return type === "number" ||
+			// When Chrome validates form fields using native form validation, it uses `pattern`
+			// which causes validation errors when we inject delimiters. So use the proxy to avoid
+			// delimiters in the form field value.
+			// Chrome also has some sort of
+			( pattern ? !( new RegExp( "^" + pattern + "$" ) ).test( this.delimiter ) : false );
 	};
 
 	Politespace.prototype.updateProxy = function() {
@@ -2731,9 +2794,10 @@ window.jQuery = window.jQuery || window.shoestring;
 		}
 
 		var $el = $( "<div>" ).addClass( "politespace-proxy active" );
+		var $nextSibling = this.$proxyAnchor.next();
 		var $parent = this.$proxyAnchor.parent();
 
-		this.$proxy = $( "<div>" ).css({
+		this.$proxy = $( "<div>" ).addClass( "politespace-proxy-val" ).css({
 			font: this.$element.css( "font" ),
 			"padding-left": sumStyles( this.element, [ "padding-left", "border-left-width" ] ) + "px",
 			"padding-right": sumStyles( this.element, [ "padding-right", "border-right-width" ] ) + "px",
@@ -2741,7 +2805,12 @@ window.jQuery = window.jQuery || window.shoestring;
 		});
 		$el.append( this.$proxy );
 		$el.append( this.$proxyAnchor );
-		$parent.append( $el );
+
+		if( $nextSibling.length ) {
+			$el.insertBefore( $nextSibling );
+		} else {
+			$parent.append( $el );
+		}
 
 		this.updateProxy();
 	};
@@ -2807,18 +2876,14 @@ window.jQuery = window.jQuery || window.shoestring;
 				polite.createProxy();
 			}
 
-
-			$( this )
-				.bind( "politespace-hide-proxy", function() {
+			$t.bind( "politespace-hide-proxy", function() {
 					$( this ).closest( ".politespace-proxy" ).removeClass( "active" );
 				})
 				.bind( "politespace-show-proxy", function() {
 					$( this ).closest( ".politespace-proxy" ).addClass( "active" );
 
 					polite.update();
-					if( polite.useProxy() ) {
-						polite.updateProxy();
-					}
+					polite.updateProxy();
 				})
 				.bind( "input keydown", function() {
 					$( this ).trigger( "politespace-input" );
@@ -2840,6 +2905,7 @@ window.jQuery = window.jQuery || window.shoestring;
 				.trigger( "politespace-init" );
 
 			polite.update();
+			polite.updateProxy();
 		});
 	};
 
