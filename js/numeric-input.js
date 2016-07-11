@@ -17,7 +17,7 @@
 		// UA ref from MDN for Firefox:
 		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Gecko_user_agent_string_reference
 		// NOTE if they make one for windows mobile it may match "Windonws"
-		isFirefoxDesktop = /Windows|Macintosh|Linux/.test(ua) && /Firefox/.test(ua);
+		isFirefoxDesktop = /windows|macintosh|linux/.test(ua) && /firefox/.test(ua);
 
 		// Safari 6 removes leading zeros with type="number"
 		// This is a bad user agent sniff but is limited to an outdated version
@@ -82,22 +82,24 @@
 	};
 
 	NumericInput.prototype.onKeydown = function( event ){
-		var prevented = false;
+		var allowed = true;
 		// The key pressed is allowed, no exceptions
 		// modifier keys and keys listed in allowedKeys property
 
 		if( this.isKeyAllowed( event ) ){
 			return;
 		}
-		if (event.keyCode !== undefined) {
+
+		if( event.keyCode !== undefined ) {
 			var code = event.keyCode;
+			var isNumeric = this.isCodeNumeric( code );
 
-			prevented = !this.isCodeNumeric( code ) &&
-				!this.isInputTextSelected() &&
-				( !this.allowFloat || !this.isCodeDecimalPoint( code ) );
-
-			if( this.allowFloat && this.isCodeDecimalPoint( code ) && this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) {
-				prevented = true;
+			if( !isNumeric ||
+				// prevent typing when maxlength exceeded
+				this.isMaxLengthExceeded() && !this.isInputTextSelected() ||
+				// prevent two or more decimal points
+				this.allowFloat && ( !this.isCodeDecimalPoint( code ) || this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) ) {
+				allowed = false;
 			}
 		}
 
@@ -111,7 +113,7 @@
 		// our testing
 		// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
 		// (see `maxlength`)
-		if((this.isMaxLengthExceeded() && !this.isInputTextSelected()) || prevented) {
+		if( !allowed ) {
 			event.preventDefault();
 		}
 	};
@@ -165,13 +167,22 @@
 	NumericInput.prototype.isInputTextSelected = function() {
 		var selectionText;
 
-		// if most browsers
+		// if firefox
+		// use try-catch otherwise we get InvalidStateError when using selectionStart on type="number" in Chrome
+		try {
+			if( !isNaN( this.el.selectionStart ) || !isNaN( this.el.selectionEnd ) ) {
+				return Math.abs( this.el.selectionStart - this.el.selectionEnd ) > 0;
+			}
+		} catch(e) {}
+
+		// else if most browsers
 		// else if ie8 or lower
-		if (window.getSelection) {
+		if( window.getSelection ) {
 			selectionText = window.getSelection().toString();
-		} else if (document.selection && document.selection.type != "Control") {
+		} else if( document.selection && document.selection.type != "Control" ) {
 			selectionText = document.selection.createRange().text;
 		}
+
 		return selectionText ? this.$el.val().indexOf(selectionText) > -1 : false;
 	};
 
