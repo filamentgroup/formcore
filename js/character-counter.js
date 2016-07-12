@@ -15,7 +15,7 @@
 
 		if ( $label.length ){
 			$( this ).unbind( ".charcount") .bind( "input.charcount keyup.charcount", function(){
-				newval = ( max || min ) - this.value.length;
+				newval = ( max || min ) - this.value.replace(/\r\n|\n/g, "__").length;
 				$label.html( "" + newval );
 				var add = [];
 				var remove = [ "min max limit" ];
@@ -37,9 +37,14 @@
 		}
 	};
 
+	CharacterCounter.selectors = [
+		"textarea[maxlength]",
+		"textarea[minlength]"
+	]
+
 	$( w.document ).bind( "enhance", function( e ) {
 		//textarea max-length counter
-		$( e.target ).find( "textarea[maxlength],textarea[minlength]" ).each(function(){
+		$( e.target ).find( CharacterCounter.selectors.join(",") ).each(function(){
 			new CharacterCounter( this );
 		});
 	});
