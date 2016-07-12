@@ -36,7 +36,6 @@
 		// indexOf not supported everywhere for arrays
 		$.each(MaxlengthInput.allowedKeys, function(i, e){
 			if( e === key ) {
-				console.log(e, key);
 				isAllowed = true;
 			}
 		});
