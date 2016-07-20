@@ -21,16 +21,16 @@ A number of features around normalizing the behavior of `<input type="number">` 
 1. Works to enforce the `maxlength` attribute (also works with the number of digits on `max`)
 1. Works around bugs with `<input type="number">` in Safari 6 and Firefox desktop (large numbers may be rounded or leading zeros may be truncated). In these browsers, the type is toggled to `text`.
 
-### Getting Started
+### Getting Started with Numeric Input
 
-Include `src/numeric-input.js` and optionally `src/numeric-input-init.js`.
+Include the `js/numeric-input.js` and optionally `js/numeric-input-init.js` files in your build/page.
 
 #### Initialization
 
-* When using `numeric-input-init.js` simply add the `data-numeric-input` attribute to your `<input type="number">` element:  `<input type="number" data-numeric-input">`
-* Otherwise, manually initialize with `new NumericInput( element );`. You’re on the hook to prevent duplicate initialization when doing this manually.
+* Add the `data-numeric-input` attribute to your `<input type="number">` element:  `<input type="number" data-numeric-input">`
+* Alternatively, if you don’t want to use our auto-initialization code (`numeric-input-init.js`), you can manually initialize with `new NumericInput( element );` You’re on the hook to prevent duplicate initialization when doing this manually.
 
-### Options
+#### Options
 
 * `data-float`: Allow one decimal point
 * `data-numeric-input-nav-disabled`: Prevent the up and down arrow keys from incrementing and decrementing the number value.
