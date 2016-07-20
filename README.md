@@ -18,7 +18,7 @@ http://keith-wood.name/maxlength.html
 A number of features around normalizing the behavior of `<input type="number">` form fields. To start, add the `data-numeric-input` attribute to your `<input type="number">` element:
 
 ```html
-<input type="number" data-numeric-input">
+<input type="number" data-numeric-input>
 ```
 
 Next, include the `js/numeric-input.js` and `js/numeric-input-init.js` files.
