@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 					customselectors: {}
 				}
 			}
-		},
+		}
 	});
 
 	// These plugins provide necessary tasks.

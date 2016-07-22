@@ -5,7 +5,8 @@
 	var NumericInput = function( el ){
 		this.el = el;
 		this.$el = $( el );
-		this.allowFloat = this.$el.is( '[data-float]' );
+		this.allowFloat = this.$el.is( '[data-float]' ) || this.$el.is( '[data-numeric-input-float]' );
+		this.allowNegative = this.$el.is( '[data-numeric-input-negative]' );
 
 		var ua, isFirefoxDesktop, isSafari6, self = this;
 		ua = navigator.userAgent.toLowerCase();
@@ -72,35 +73,37 @@
 			Infinity;
 	};
 
-	NumericInput.prototype.isCodeNumeric = function( code ){
+	// Reference: https://github.com/wesbos/keycodes/blob/gh-pages/scripts.js
+	NumericInput.prototype.isNumeric = function( code ){
 		return code >= 48 && code <= 57 ||
 			code >= 96 && code <= 105;
 	};
-
 	NumericInput.prototype.isCodeDecimalPoint = function( code ){
-		return code === 110 || code === 190; // different keycodes for numpad
+		return code === 110 || code === 190;
+	};
+
+	NumericInput.prototype.isCodeNegativeSign = function( code ){
+		return code === 109 || code === 173 || code === 189;
 	};
 
 	NumericInput.prototype.onKeydown = function( event ){
-		var allowed = true;
-		// The key pressed is allowed, no exceptions
+		var allowed = false;
+		var code = event.keyCode;
+
 		// modifier keys and keys listed in allowedKeys property
-
-		if( this.isKeyAllowed( event ) ){
-			return;
-		}
-
-		if( event.keyCode !== undefined ) {
-			var code = event.keyCode;
-			var isNumeric = this.isCodeNumeric( code );
-
-			if( !isNumeric ||
-				// prevent typing when maxlength exceeded
-				this.isMaxLengthExceeded() && !this.isInputTextSelected() ||
-				// prevent two or more decimal points
-				this.allowFloat && ( !this.isCodeDecimalPoint( code ) || this.el.value.length && this.el.value.indexOf( '.' ) > -1 ) ) {
-				allowed = false;
-			}
+		if( !code || this.isMetaKeyAllowed( event ) ){
+			allowed = true;
+		} else if( this.isNumeric( code ) && !event.shiftKey ) {
+			allowed = true;
+		// typing when maxlength exceeded only if text selected
+		} else if( this.isMaxLengthExceeded() && this.isInputTextSelected() ) {
+			allowed = true;
+		// allow negative signs
+		} else if( this.allowNegative && this.isCodeNegativeSign( code ) && ( !this.el.value.length || this.el.value.indexOf( '-' ) === -1 ) ) {
+			allowed = true;
+		// allow decimal points
+		} else if( this.allowFloat && this.isCodeDecimalPoint( code ) && ( !this.el.value.length || this.el.value.indexOf( '.' ) === -1 ) ) {
+			allowed = true;
 		}
 
 		// Suppress "double action" if event prevented
@@ -142,7 +145,7 @@
 		event.preventDefault();
 	};
 
-	NumericInput.prototype.isKeyAllowed = function( event ) {
+	NumericInput.prototype.isMetaKeyAllowed = function( event ) {
 		var isAllowed = false, key = event.keyCode;
 
 		// indexOf not supported everywhere for arrays
@@ -153,7 +156,7 @@
 		});
 
 		// the up/down arrow key numeric navigation of values may be disabled
-		if( this.isNavDisabled && (key == 38 || key == 40) ){
+		if( this.isNavDisabled && ( key == 38 || key == 40 ) ){
 			isAllowed = false;
 		}
 

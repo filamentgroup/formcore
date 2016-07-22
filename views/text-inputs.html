@@ -202,13 +202,29 @@
 </label>
 </div><!-- /data-xrayhtml -->
 
-<p>In order to reliably allow cross-browser input of decimal places, we cannot use the numeric keyboards for fields that require a decimal place. Numeric keyboards on iOS and Android do not include a key for the decimal place. This requires use of <code>type="text"</code> and omitting <code>pattern="[0-9]*"</code>. Add <code>data-float</code> to tell the numeric keypress filter to allow decimal marks.</p>
+<p>In order to reliably allow cross-browser input of decimal places, we cannot use the numeric keyboards for fields that require a decimal place. Numeric keyboards on iOS and Android do not include a key for the decimal place. This requires use of <code>type="text"</code> and omitting <code>pattern="[0-9]*"</code>. Add <code>data-numeric-input-float</code> to tell the numeric keypress filter to allow decimal marks.</p>
 
 <div data-xrayhtml>
 <h3 class="xraytitle">Price (Dollars and Cents)</h3>
 <label class="form-group">
 	<span class="label-text">Price ($)</span>
-	<input type="text" inputmode="numeric" data-numeric-input data-float data-politespace data-grouplength="3" data-delimiter="," data-decimal-mark="." data-reverse step="any">
+	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-float data-politespace data-grouplength="3" data-delimiter="," data-decimal-mark="." data-reverse step="any">
+</label>
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Price (Negative)</h3>
+<label class="form-group">
+	<span class="label-text">Price ($)</span>
+	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-negative step="1">
+</label>
+</div><!-- /data-xrayhtml -->
+
+<div data-xrayhtml>
+<h3 class="xraytitle">Price (Dollars and Cents, Negative)</h3>
+<label class="form-group">
+	<span class="label-text">Price ($)</span>
+	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-float data-numeric-input-negative step="1">
 </label>
 </div><!-- /data-xrayhtml -->
 
