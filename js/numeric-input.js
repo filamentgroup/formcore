@@ -2,10 +2,19 @@
 (function($, window){
 	"use strict";
 
-	var NumericInput = function( el ){
+	function NumericInput( el ){
 		this.el = el;
 		this.$el = $( el );
-		this.allowFloat = this.$el.is( '[data-float]' ) || this.$el.is( '[data-numeric-input-float]' );
+
+		// prevent double init
+		if( this.$el.data( this.constructor.name ) ){
+			return;
+		}
+
+		this.$el.data( this.constructor.name, this);
+
+		this.allowFloat =
+			this.$el.is( '[data-float]' ) || this.$el.is( '[data-numeric-input-float]' );
 		this.allowNegative = this.$el.is( '[data-numeric-input-negative]' );
 
 		var ua, isFirefoxDesktop, isSafari6, self = this;

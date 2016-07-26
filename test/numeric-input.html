@@ -4,19 +4,25 @@
 	<meta charset="utf-8">
 	<title>numeric-input Test Suite</title>
 	<script src="../node_modules/shoestring/dist/shoestring-dev.js"></script>
-  <script>
-    window.jQuery = shoestring;
-  </script>
+	<script>
+		window.jQuery = shoestring;
+	</script>
 	<!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
 	<link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
 	<script src="../node_modules/qunitjs/qunit/qunit.js"></script>
 	<!-- Load local lib and tests. -->
 	<script src="../js/numeric-input.js"></script>
+	<script src="../js/numeric-input-init.js"></script>
 	<script src="numeric-input.js"></script>
-</head>
+	</head>
 <body>
 	<div id="qunit"></div>
 	<div id="qunit-fixture">
-  </div>
+		<input
+			 id="simple"
+			 type="number"
+			 inputmode="numeric"
+			 data-numeric-input>
+	</div>
 </body>
 </html>
