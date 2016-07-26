@@ -66,12 +66,17 @@ module.exports = function(grunt) {
 					customselectors: {}
 				}
 			}
+		},
+
+		qunit: {
+			all: ['test/**/*.html']
 		}
 	});
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-grunticon');
 
 	// By default, lint and run all tests.
