@@ -71,12 +71,12 @@
 		}));
 	});
 
-	test("onKeydown prevented", function(){
-		expect(4);
+	function preventDefault(){
+		ok(true, "preventDefault called");
+	}
 
-		function preventDefault(){
-			ok(true, "preventDefault called");
-		}
+	test("onKeydown prevented", function(){
+		expect(5);
 
 		simple.maxLength = 0;
 
@@ -98,10 +98,21 @@
 
 		// prevents extra minus
 		simple.$el.val( "-1" );
+		simple.allowNegative = true;
 		simple.onKeydown({
 			preventDefault: preventDefault,
 
-			// `.`
+			// `-`
+			keyCode: 189
+		});
+
+		// prevents extra minus
+		simple.el.value = "-1";
+		simple.allowNegative = true;
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `-`
 			keyCode: 189
 		});
 
@@ -111,6 +122,42 @@
 			// `1`
 			keyCode: 49,
 			shiftKey: true
+		});
+	});
+
+	test("onKeydown not prevented", function(){
+		expect(0);
+
+		simple.onKeydown({
+			preventDefault: preventDefault,
+			metaKey: true
+		});
+
+		// allows decimals
+		simple.allowFloat = true;
+		simple.$el.val( "1" );
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `.`
+			keyCode: 190
+		});
+
+		// prevents extra minus
+		simple.$el.val( "" );
+		simple.allowNegative = true;
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `-`
+			keyCode: 189
+		});
+
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `1`
+			keyCode: 49
 		});
 	});
 })(window, shoestring);
