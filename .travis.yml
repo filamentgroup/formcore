@@ -4,7 +4,7 @@ node_js:
 before_script:
   - npm install -g grunt-cli
   - npm install
-script: grunt test
+script: npm test
 branches:
   except:
     - gh-pages
