@@ -70,4 +70,47 @@
 			keyCode: 38
 		}));
 	});
+
+	test("onKeydown prevented", function(){
+		expect(4);
+
+		function preventDefault(){
+			ok(true, "preventDefault called");
+		}
+
+		simple.maxLength = 0;
+
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// space
+			keyCode: 32
+		});
+
+		// prevents extra decimal points
+		simple.$el.val( "1." );
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `.`
+			keyCode: 190
+		});
+
+		// prevents extra minus
+		simple.$el.val( "-1" );
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `.`
+			keyCode: 189
+		});
+
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `1`
+			keyCode: 49,
+			shiftKey: true
+		});
+	});
 })(window, shoestring);
