@@ -87,6 +87,7 @@
 		return code >= 48 && code <= 57 ||
 			code >= 96 && code <= 105;
 	};
+
 	NumericInput.prototype.isCodeDecimalPoint = function( code ){
 		return code === 110 || code === 190;
 	};
