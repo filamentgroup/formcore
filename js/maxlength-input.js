@@ -38,6 +38,7 @@
 		40	// ArrowDown
 	];
 
+	// TODO shared behavior with NumericInput
 	MaxlengthInput.prototype.isKeyAllowed = function( event ) {
 		var isAllowed = false, key = event.keyCode;
 

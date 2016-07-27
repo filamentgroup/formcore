@@ -11,7 +11,30 @@
 		setup: commonSetup
 	});
 
-	test("truth", function(){
-		ok(true);
+	test("isKeyAllowed", function(){
+		ok(simple.isKeyAllowed(event = {
+			keyCode: -1,
+			altKey: true
+		}));
+
+		ok(simple.isKeyAllowed(event = {
+			keyCode: -1,
+			ctrlKey: true
+		}));
+
+		ok(simple.isKeyAllowed(event = {
+			keyCode: -1,
+			metaKey: true
+		}));
+
+		$.each(window.MaxlengthInput.allowedKeys, function(i, k){
+			ok(simple.isKeyAllowed(event = {
+				keyCode: k
+			}));
+		});
+
+		ok(simple.isKeyAllowed(event = {
+			keyCode: 38
+		}));
 	});
 })(window, shoestring);
