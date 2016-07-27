@@ -1,6 +1,8 @@
 formcore
 ========
 
+[![Build Status](https://img.shields.io/travis/filamentgroup/formcore/master.svg)](https://travis-ci.org/filamentgroup/formcore)
+
 A set of forms.
 
 * [Demo](http://master.origin.formcore.fgview.com/)

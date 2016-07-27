@@ -2,10 +2,19 @@
 (function($, window){
 	"use strict";
 
-	var NumericInput = function( el ){
+	function NumericInput( el ){
 		this.el = el;
 		this.$el = $( el );
-		this.allowFloat = this.$el.is( '[data-float]' ) || this.$el.is( '[data-numeric-input-float]' );
+
+		// prevent double init
+		if( this.$el.data( "NumericInput" ) ){
+			return;
+		}
+
+		this.$el.data( "NumericInput", this);
+
+		this.allowFloat =
+			this.$el.is( '[data-float]' ) || this.$el.is( '[data-numeric-input-float]' );
 		this.allowNegative = this.$el.is( '[data-numeric-input-negative]' );
 
 		var ua, isFirefoxDesktop, isSafari6, self = this;
@@ -78,6 +87,7 @@
 		return code >= 48 && code <= 57 ||
 			code >= 96 && code <= 105;
 	};
+
 	NumericInput.prototype.isCodeDecimalPoint = function( code ){
 		return code === 110 || code === 190;
 	};
@@ -139,7 +149,15 @@
 		}
 
 		// otherwise force the text to look right
-		this.el.value = pastedText.replace(/[^0-9\.,]*/g, "");
+		this.el.value = pastedText
+			// remove signs that appear inside the string
+			.replace(/(.+)\-(.+)/g, "$1$2")
+
+			// remove all decimals beside the first
+			.replace(/(.+[\.,].+)\.(.+)/g, "$1$2")
+
+			// remove any non float/integer characters left
+			.replace(/[^0-9\.\-,]*/g, "");
 
 		// prevent the original paste behavior
 		event.preventDefault();

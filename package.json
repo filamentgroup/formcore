@@ -19,12 +19,17 @@
   "license": "MIT",
   "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 4.4.7"
+  },
+  "scripts" : {
+    "test" : "grunt qunit"
   },
   "devDependencies": {
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-qunit": "^1.0.1",
+    "qunitjs": "^1.22.0",
     "xrayhtml": "^2.1.2"
   },
   "dependencies": {
