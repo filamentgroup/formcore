@@ -180,7 +180,8 @@
 
 	test("onPaste", function(){
 		// one for prevent default, one for the check
-		expect(14);
+		// the final test doesn't prevent default
+		expect(15);
 		testOnPaste("123", "123");
 		testOnPaste("-1.23", "-1.23");
 		testOnPaste("12a3", "123");
@@ -188,5 +189,9 @@
 		testOnPaste("-1-23", "-123");
 		testOnPaste("-1.2.-3", "-1.23");
 		testOnPaste("-.2.-3", "-.23");
+
+		// empty paste values will be ignored
+		simple.el.value = "123";
+		testOnPaste("", "123");
 	});
 })(window, shoestring);
