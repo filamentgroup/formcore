@@ -7,11 +7,11 @@
 		this.$el = $( el );
 
 		// prevent double init
-		if( this.$el.data( this.constructor.name ) ){
+		if( this.$el.data( "NumericInput" ) ){
 			return;
 		}
 
-		this.$el.data( this.constructor.name, this);
+		this.$el.data( "NumericInput", this);
 
 		this.allowFloat =
 			this.$el.is( '[data-float]' ) || this.$el.is( '[data-numeric-input-float]' );
