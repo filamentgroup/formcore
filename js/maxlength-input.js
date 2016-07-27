@@ -7,6 +7,14 @@
 
 		this.el = el;
 		this.$el = $(el);
+
+		// prevent double init
+		if( this.$el.data( "MaxlengthInput" ) ){
+			return;
+		}
+
+		this.$el.data( "MaxlengthInput", this);
+
 		this.maxlength = this.$el.attr("maxlength");
 
 		this.$el
