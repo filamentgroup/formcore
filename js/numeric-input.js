@@ -149,7 +149,15 @@
 		}
 
 		// otherwise force the text to look right
-		this.el.value = pastedText.replace(/[^0-9\.,]*/g, "");
+		this.el.value = pastedText
+			// remove signs that appear inside the string
+			.replace(/(.+)\-(.+)/g, "$1$2")
+
+			// remove all decimals beside the first
+			.replace(/(.+[\.,].+)\.(.+)/g, "$1$2")
+
+			// remove any non float/integer characters left
+			.replace(/[^0-9\.\-,]*/g, "");
 
 		// prevent the original paste behavior
 		event.preventDefault();

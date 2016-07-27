@@ -125,11 +125,15 @@
 		});
 	});
 
+	function notPreventDefault(){
+		ok(false, "preventDefault called");
+	}
+
 	test("onKeydown not prevented", function(){
 		expect(0);
 
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: notPreventDefault,
 			metaKey: true
 		});
 
@@ -137,7 +141,7 @@
 		simple.allowFloat = true;
 		simple.$el.val( "1" );
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: notPreventDefault,
 
 			// `.`
 			keyCode: 190
@@ -147,17 +151,42 @@
 		simple.$el.val( "" );
 		simple.allowNegative = true;
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: notPreventDefault,
 
 			// `-`
 			keyCode: 189
 		});
 
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: notPreventDefault,
 
 			// `1`
 			keyCode: 49
 		});
+	});
+
+	function testOnPaste(pasted, value){
+		simple.onPaste({
+			preventDefault: preventDefault,
+			clipboardData: {
+				getData: function(){
+					return pasted;
+				}
+			}
+		});
+
+		equal(simple.el.value, value);
+	}
+
+	test("onPaste", function(){
+		// one for prevent default, one for the check
+		expect(14);
+		testOnPaste("123", "123");
+		testOnPaste("-1.23", "-1.23");
+		testOnPaste("12a3", "123");
+		testOnPaste("-123", "-123");
+		testOnPaste("-1-23", "-123");
+		testOnPaste("-1.2.-3", "-1.23");
+		testOnPaste("-.2.-3", "-.23");
 	});
 })(window, shoestring);
