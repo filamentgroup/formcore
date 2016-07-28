@@ -38,6 +38,8 @@
 		40	// ArrowDown
 	];
 
+	MaxlengthInput.returnRegex = /\r\n|\n/g;
+
 	// TODO shared behavior with NumericInput
 	MaxlengthInput.prototype.isKeyAllowed = function( event ) {
 		var isAllowed = false, key = event.keyCode;
@@ -80,11 +82,11 @@
 
 	MaxlengthInput.prototype.alterValue = function(){
 		var newValue = this.el
-				.value
-				.replace(/\r\n|\n/g, "\r\n")
-				.slice(0, this.maxlength);
+			.value
+			.replace(MaxlengthInput.returnRegex, "\r\n")
+			.slice(0, this.maxlength);
 
-		this.el.value = newValue;
+		return this.el.value = newValue;
 	};
 
 	MaxlengthInput.prototype.onPaste = function( e ){
@@ -97,7 +99,9 @@
 	};
 
 	MaxlengthInput.prototype.valueLength = function(check){
-		return (check || this.el.value).replace(/\r\n|\n/g, "__").length;
+		return (check || this.el.value)
+			.replace(MaxlengthInput.returnRegex, "__")
+			.length;
 	};
 
 	window.MaxlengthInput = MaxlengthInput;
