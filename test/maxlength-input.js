@@ -129,4 +129,31 @@
 			preventDefault: preventDefault
 		});
 	});
+
+	test("alterValue changes LF to CR + LF", function(){
+		simple.maxlength = 10;
+		simple.el.value = "\n";
+		// note that we can't test the value of the element directly
+		// because some browsers will remove the CR on assignment (e.g. Chrome)
+		equal(simple.alterValue(), "\r\n", "changes one return");
+
+		simple.el.value = "a\nb\nc";
+		equal(simple.alterValue(), "a\r\nb\r\nc", "changes all returns");
+	});
+
+	test("alterValue changes CR + LF to CR + LF", function(){
+		simple.maxlength = 10;
+		simple.el.value = "\r\n";
+		// note that we can't test the value of the element directly
+		// because some browsers will remove the CR on assignment (e.g. Chrome)
+		equal(simple.alterValue(), "\r\n", "changes CR + LF");
+	});
+
+	test("alterValue does not change other chars", function(){
+		simple.maxlength = 10;
+		simple.el.value = "x";
+		// note that we can't test the value of the element directly
+		// because some browsers will remove the CR on assignment (e.g. Chrome)
+		equal(simple.alterValue(), "x");
+	});
 })(window, shoestring);
