@@ -130,11 +130,11 @@
 		});
 	});
 
+	// note that we can't test the value of the element directly
+	// because some browsers will remove the CR on assignment (e.g. Chrome)
 	test("alterValue changes LF to CR + LF", function(){
 		simple.maxlength = 10;
 		simple.el.value = "\n";
-		// note that we can't test the value of the element directly
-		// because some browsers will remove the CR on assignment (e.g. Chrome)
 		equal(simple.alterValue(), "\r\n", "changes one return");
 
 		simple.el.value = "a\nb\nc";
@@ -144,16 +144,26 @@
 	test("alterValue changes CR + LF to CR + LF", function(){
 		simple.maxlength = 10;
 		simple.el.value = "\r\n";
-		// note that we can't test the value of the element directly
-		// because some browsers will remove the CR on assignment (e.g. Chrome)
 		equal(simple.alterValue(), "\r\n", "changes CR + LF");
 	});
 
 	test("alterValue does not change other chars", function(){
 		simple.maxlength = 10;
 		simple.el.value = "x";
-		// note that we can't test the value of the element directly
-		// because some browsers will remove the CR on assignment (e.g. Chrome)
 		equal(simple.alterValue(), "x");
+	});
+
+	// note that we can't test the value of the element directly
+	// because some browsers will remove the CR on assignment (e.g. Chrome)
+	test("valueLength accounts for CR and LF", function(){
+		simple.maxlength = 10;
+		simple.el.value = "a\nb\n";
+		equal(simple.valueLength(), 6);
+
+		simple.el.value = "a\r\nb\r\n";
+		equal(simple.valueLength(), 6);
+
+		simple.el.value = "x";
+		equal(simple.valueLength(), 1);
 	});
 })(window, shoestring);
