@@ -40,7 +40,7 @@
 	CharacterCounter.selectors = [
 		"textarea[maxlength]",
 		"textarea[minlength]"
-	]
+	];
 
 	$( w.document ).bind( "enhance", function( e ) {
 		//textarea max-length counter
