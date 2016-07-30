@@ -8,15 +8,19 @@
 		if( $el.data("CharacterCounter") ){
 			return;
 		}
-
 		$el.data( "CharacterCounter", this );
 
-		this.characterCounter.call( el );
+		this.$el = $el;
+		this.$label = $(
+			"[data-maxlength-count='" + this.$el.attr("id") + "']," +
+				"[data-minlength-count='" + this.$el.attr("id") + "']"
+		);
+
+		this.characterCounter.call( el, this.$label );
 	}
 
-	CharacterCounter.prototype.characterCounter = function() {
-		var $label = $( "[data-maxlength-count='" + this.id + "'],[data-minlength-count='" + this.id + "']" ),
-			$parent = $label.parent().addClass( "character-counter plural" ),
+	CharacterCounter.prototype.characterCounter = function( $label ) {
+		var $parent = $label.parent().addClass( "character-counter plural" ),
 			max = parseFloat( $( this ).attr( "maxlength" ) ),
 			min = parseFloat( $( this ).attr( "minlength" ) ),
 			newval;
