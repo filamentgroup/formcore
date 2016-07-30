@@ -22,7 +22,7 @@
 			newval;
 
 		if ( $label.length ){
-			$( this ).unbind( ".charcount") .bind( "input.charcount keyup.charcount", function(){
+			$( this ).unbind( ".charcount").bind( "input.charcount keyup.charcount", function(){
 				newval = ( max || min ) - this.value.replace(/\r\n|\n/g, "__").length;
 				$label.html( "" + newval );
 				var add = [];
