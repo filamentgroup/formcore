@@ -3,6 +3,14 @@
 	var $ = w.jQuery;
 
 	function CharacterCounter( el ) {
+		var $el = $(el);
+
+		if( $el.data("CharacterCounter") ){
+			return;
+		}
+
+		$el.data( "CharacterCounter", this );
+
 		this.characterCounter.call( el );
 	}
 
