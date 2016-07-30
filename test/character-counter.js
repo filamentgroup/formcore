@@ -11,9 +11,29 @@
 		setup: commonSetup
 	});
 
-	test( "label counting", function(){
+	test( "label max counting", function(){
 		var string = simple.$el[0].value = "123";
-		simple.$el.trigger( "keyup" );
-		equal(simple.$label.html(), (10 - string.length).toString());
+		simple.characterCount();
+		equal(simple.$label.html(), (simple.max - string.length).toString());
+	});
+
+	test( "past max counting", function(){
+		var string = simple.$el[0].value = "1234567890";
+		simple.characterCount();
+		equal(simple.$label.html(), 0);
+	});
+
+	test( "label min counting", function(){
+		var string = simple.$el[0].value = "1";
+		simple.max = undefined;
+		simple.characterCount();
+		equal(simple.$label.html(), (simple.min - string.length).toString());
+	});
+
+	test( "past min counting reports 0", function(){
+		var string = simple.$el[0].value = "123";
+		simple.max = undefined;
+		simple.characterCount();
+		equal(simple.$label.html(), 0);
 	});
 })(window, shoestring);
