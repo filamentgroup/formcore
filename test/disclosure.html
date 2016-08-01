@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>disclosure Test Suite</title>
+	<script src="../node_modules/shoestring/dist/shoestring-dev.js"></script>
+	<script>
+		window.jQuery = shoestring;
+	</script>
+	<!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
+	<link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
+	<script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+	<!-- Load local lib and tests. -->
+	<script src="../js/disclosure.js"></script>
+	<script src="disclosure.js"></script>
+	</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture">
+		<input id="simple" type="radio" name="options1" data-disclosure="radiochoice-1">
+		<p class="disclosure hidden" id="radiochoice-1"></p>
+	</div>
+</body>
+</html>
