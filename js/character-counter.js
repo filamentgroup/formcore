@@ -72,5 +72,4 @@
 			new CharacterCounter( this );
 		});
 	});
-
 }( typeof global !== "undefined" ? global : this ));
