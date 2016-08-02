@@ -3,44 +3,68 @@
 	var $ = w.jQuery;
 
 	function CharacterCounter( el ) {
-		this.characterCounter.call( el );
+		var $el = $(el);
+
+		if( $el.data("CharacterCounter") ){
+			return;
+		}
+		$el.data( "CharacterCounter", this );
+
+		var self = this;
+
+		this.$el = $el;
+		this.$label = $(
+			"[data-maxlength-count='" + this.$el.attr("id") + "']," +
+				"[data-minlength-count='" + this.$el.attr("id") + "']"
+		);
+
+		this.$parent = this.$label.parent().addClass( "character-counter plural" );
+		this.max = parseFloat( this.$el.attr( "maxlength" ), 10 );
+		this.min = parseFloat( this.$el.attr( "minlength" ), 10 );
+
+		if ( this.$label.length ){
+			this.$el
+				.unbind( ".charcount")
+				.bind( "input.charcount keyup.charcount", function(){
+					self.characterCount();
+				});
+		}
 	}
 
-	CharacterCounter.prototype.characterCounter = function() {
-		var $label = $( "[data-maxlength-count='" + this.id + "'],[data-minlength-count='" + this.id + "']" ),
-			$parent = $label.parent().addClass( "character-counter plural" ),
-			max = parseFloat( $( this ).attr( "maxlength" ) ),
-			min = parseFloat( $( this ).attr( "minlength" ) ),
-			newval;
+	// TODO duplication with maxlength input
+	CharacterCounter.prototype.valueLength = function(){
+		return this.$el[0].value.replace(/\r\n|\n/g, "__").length;
+	};
 
-		if ( $label.length ){
-			$( this ).unbind( ".charcount") .bind( "input.charcount keyup.charcount", function(){
-				newval = ( max || min ) - this.value.replace(/\r\n|\n/g, "__").length;
-				$label.html( "" + newval );
-				var add = [];
-				var remove = [ "min max limit" ];
-				if( newval !== 1 ) {
-					remove.push( "singular" );
-					add.push( "plural" );
-				} else {
-					add.push( "singular" );
-					remove.push( "plural" );
-				}
-				var hitMax = max && newval === 0;
-				var hitMin = min && newval <= 0;
-				if( hitMax || hitMin ){
-					add.push( "limit " + ( hitMax ? "max" : "min" ) );
-					$label.html( "0" );
-				}
-				$parent.removeClass( remove.join( " " ) ).addClass( add.join( " " ) );
-			});
+	CharacterCounter.prototype.characterCount = function( $label ) {
+		var newval = ( this.max || this.min ) - this.valueLength();
+
+		this.$label.html( "" + newval );
+		var add = [];
+		var remove = [ "min max limit" ];
+		if( newval !== 1 ) {
+			remove.push( "singular" );
+			add.push( "plural" );
+		} else {
+			add.push( "singular" );
+			remove.push( "plural" );
 		}
+
+		var hitMax = this.max && newval === 0;
+		var hitMin = this.min && newval <= 0;
+
+		if( hitMax || hitMin ){
+			add.push( "limit " + ( hitMax ? "max" : "min" ) );
+			this.$label.html( "0" );
+		}
+
+		this.$parent.removeClass( remove.join( " " ) ).addClass( add.join( " " ) );
 	};
 
 	CharacterCounter.selectors = [
 		"textarea[maxlength]",
 		"textarea[minlength]"
-	]
+	];
 
 	$( w.document ).bind( "enhance", function( e ) {
 		//textarea max-length counter
@@ -48,5 +72,4 @@
 			new CharacterCounter( this );
 		});
 	});
-
 }( typeof global !== "undefined" ? global : this ));

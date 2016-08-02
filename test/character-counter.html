@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>character-counter Test Suite</title>
+		<script src="../node_modules/shoestring/dist/shoestring-dev.js"></script>
+		<script>
+			window.jQuery = shoestring;
+		</script>
+		<!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
+		<link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
+		<script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+		<!-- Load local lib and tests. -->
+		<script src="../js/character-counter.js"></script>
+		<script src="character-counter.js"></script>
+	</head>
+	<body>
+		<div id="qunit"></div>
+		<div id="qunit-fixture">
+			<textarea
+				 id="simple"
+				 maxlength="10"
+				 minlength="2">
+			</textarea>
+			<span data-maxlength-count="simple">250</span>
+		</div>
+	</body>
+</html>
