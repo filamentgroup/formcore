@@ -1,7 +1,7 @@
 {
   "name": "formcore",
   "description": "A set of form pieces",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "homepage": "https://github.com/filamentgroup/formcore",
   "author": {
     "name": "Filament Group",
