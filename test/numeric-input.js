@@ -76,7 +76,7 @@
 	}
 
 	test("onKeydown prevented", function(){
-		expect(5);
+		expect(6);
 
 		simple.maxLength = 0;
 
@@ -123,7 +123,16 @@
 			keyCode: 49,
 			shiftKey: true
 		});
-	});
+
+		simple.maxLength = 0;
+		simple.el.value = "";
+		simple.onKeydown({
+			preventDefault: preventDefault,
+
+			// `1`
+			keyCode: 49
+		});
+});
 
 	function notPreventDefault(){
 		ok(false, "preventDefault called");
@@ -157,6 +166,15 @@
 			keyCode: 189
 		});
 
+		simple.onKeydown({
+			preventDefault: notPreventDefault,
+
+			// `1`
+			keyCode: 49
+		});
+
+		simple.maxLength = 1;
+		simple.el.value = "";
 		simple.onKeydown({
 			preventDefault: notPreventDefault,
 
