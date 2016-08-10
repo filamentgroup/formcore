@@ -103,7 +103,8 @@
 		// modifier keys and keys listed in allowedKeys property
 		if( !code || this.isMetaKeyAllowed( event ) ){
 			allowed = true;
-		} else if( this.isNumeric( code ) && !event.shiftKey ) {
+		// numeric codes are always allowed without a shift modifier and below the maxlength
+		} else if( this.isNumeric( code ) && !event.shiftKey && !this.isMaxLengthExceeded() ) {
 			allowed = true;
 		// typing when maxlength exceeded only if text selected
 		} else if( this.isMaxLengthExceeded() && this.isInputTextSelected() ) {
