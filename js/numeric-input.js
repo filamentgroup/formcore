@@ -183,7 +183,7 @@
 	};
 
 	NumericInput.prototype.isMaxLengthExceeded = function() {
-		return this.maxLength && this.$el.val().length >= this.maxLength;
+		return this.maxLength !== undefined && this.$el.val().length >= this.maxLength;
 	};
 
 	NumericInput.prototype.isInputTextSelected = function() {
