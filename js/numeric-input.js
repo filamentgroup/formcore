@@ -161,7 +161,7 @@
 			.replace(/[^0-9\.\-,]*/g, "")
 
 			// truncate the value to the maxlength
-			.slice(0, this.maxlength);
+			.slice(0, this.maxLength);
 
 		// prevent the original paste behavior
 		event.preventDefault();

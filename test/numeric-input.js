@@ -217,7 +217,7 @@
 		expect(2);
 		var value = "01234567890";
 
-		simple.maxlength = 10;
+		simple.maxLength = 10;
 		testOnPaste(value, "0123456789");
 	});
 
