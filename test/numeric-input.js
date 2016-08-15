@@ -212,4 +212,25 @@
 		simple.el.value = "123";
 		testOnPaste("", "123");
 	});
+
+	test("onPaste truncates values longer than maxlength", function(){
+		expect(2);
+		var value = "01234567890";
+
+		simple.maxlength = 10;
+		testOnPaste(value, "0123456789");
+	});
+
+	test("onPaste does not truncate value when maxlength is not defined on element", function(){
+		expect(2);
+		var value = "01234567890";
+
+		// remove the maxlength
+		simple.el.removeAttribute("maxlength");
+		// reset the maxlength
+		simple.initMaxlength();
+
+		// should preserve the value
+		testOnPaste(value, value);
+	});
 })(window, shoestring);
