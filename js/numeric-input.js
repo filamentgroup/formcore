@@ -158,7 +158,10 @@
 			.replace(/(.+[\.,].+)\.(.+)/g, "$1$2")
 
 			// remove any non float/integer characters left
-			.replace(/[^0-9\.\-,]*/g, "");
+			.replace(/[^0-9\.\-,]*/g, "")
+
+			// truncate the value to the maxlength
+			.slice(0, this.maxlength);
 
 		// prevent the original paste behavior
 		event.preventDefault();
