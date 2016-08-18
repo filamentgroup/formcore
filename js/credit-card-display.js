@@ -4,19 +4,19 @@
 	var $ = w.jQuery;
 	var $doc = $( w.document );
 
+	var classes = {
+		all: "creditcarddisplay-active",
+		AMEX: "creditcarddisplay-amex",
+		VISA: "creditcarddisplay-visa",
+		MASTERCARD: "creditcarddisplay-mastercard",
+		DISCOVER: "creditcarddisplay-discover"
+	};
+
 	function setCardClass( event, value ){
 		var $t = $( event.target );
 		if( !$t.is( "[data-credit-card-display]" ) ) {
 			return;
 		}
-
-		var classes = {
-			all: "creditcarddisplay-active",
-			amex: "creditcarddisplay-amex",
-			visa: "creditcarddisplay-visa",
-			mastercard: "creditcarddisplay-mastercard",
-			discover: "creditcarddisplay-discover"
-		};
 
 		value = value ? value : $t.val();
 
@@ -28,18 +28,10 @@
 		for( var j in classes ) {
 			remove.push( classes[ j ] );
 		}
+
 		$container.removeClass( remove.join( " " ) );
 
-		// add new
-		if( cardType === "AMEX" ) {
-			$container.addClass( classes.all + " " + classes.amex );
-		} else if( cardType === "VISA" ) {
-			$container.addClass( classes.all + " " + classes.visa );
-		} else if( cardType === "MASTERCARD" ) {
-			$container.addClass( classes.all + " " + classes.mastercard );
-		} else if( cardType === "DISCOVER" ) {
-			$container.addClass( classes.all + " " + classes.discover );
-		}
+		$container.addClass( classes.all + " " + (classes[cardType] || "") );
 	}
 
 	$doc.on( "politespace-input", setCardClass );
