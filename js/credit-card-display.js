@@ -2,10 +2,10 @@
 // Requires: politespace and creditable
 ;(function( w ){
 	var $ = w.jQuery;
-
+	var update;
 	var $doc = $( w.document );
 
-	$doc.on( "politespace-input", function( event ) {
+	$doc.on( "politespace-input", update = function( event, value ) {
 		var $t = $( event.target );
 		if( !$t.is( "[data-credit-card-display]" ) ) {
 			return;
@@ -19,7 +19,9 @@
 			discover: "creditcarddisplay-discover"
 		};
 
-		var cardType = w.CreditableCardType( $t.val() );
+		value = value ? value : $t.val();
+
+		var cardType = w.CreditableCardType( value );
 		var $container = $t.closest( ".group-form, .sect-group" );
 
 		// remove previous
@@ -39,5 +41,25 @@
 		} else if( cardType === "DISCOVER" ) {
 			$container.addClass( classes.all + " " + classes.discover );
 		}
+	});
+
+	$doc.on("paste", function(e){
+		var event = e.originalEvent || e;
+
+		// http://stackoverflow.com/questions/6035071/intercept-paste-event-in-javascript
+		var pastedText;
+
+		if (window.clipboardData && window.clipboardData.getData) { // IE
+			pastedText = window.clipboardData.getData('Text');
+		} else if (event.clipboardData && event.clipboardData.getData) {
+			pastedText = event.clipboardData.getData('text/plain');
+		}
+
+		// if we were unable to get the pasted text avoid doing anything
+		if( !pastedText ){
+			return;
+		}
+
+		update(event, pastedText);
 	});
 }( typeof global !== "undefined" ? global : this ));
