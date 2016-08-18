@@ -2,10 +2,9 @@
 // Requires: politespace and creditable
 ;(function( w ){
 	var $ = w.jQuery;
-	var update;
 	var $doc = $( w.document );
 
-	$doc.on( "politespace-input", update = function( event, value ) {
+	function setCardClass( event, value ){
 		var $t = $( event.target );
 		if( !$t.is( "[data-credit-card-display]" ) ) {
 			return;
@@ -41,7 +40,9 @@
 		} else if( cardType === "DISCOVER" ) {
 			$container.addClass( classes.all + " " + classes.discover );
 		}
-	});
+	}
+
+	$doc.on( "politespace-input", setCardClass );
 
 	$doc.on("paste", function(e){
 		var event = e.originalEvent || e;
@@ -60,6 +61,6 @@
 			return;
 		}
 
-		update(event, pastedText);
+		setCardClass(event, pastedText);
 	});
 }( typeof global !== "undefined" ? global : this ));
