@@ -30,10 +30,8 @@ Next, include the `js/numeric-input.js` and `js/numeric-input-init.js` files.
 1. Suppresses non-numeric input into the form field, similar to how Chrome desktop behaves with `<input type="number">`. This will also prevent scientific or E notation from being entered into the form field (since `E` and `e` are alphabetic).
 1. Works to enforce the `maxlength` attribute (also works with the number of digits on `max`)
 1. Works around bugs with `<input type="number">` in Safari 6 and Firefox desktop (large numbers may be rounded or leading zeros may be truncated). In these browsers, the type is toggled to `text`.
-1. `data-numeric-input-float` attribute option (`data-float` is still supported but deprecated): Allow a decimal point. Note that if the input has `pattern="[0-9]*"` the software keyboard will not include an option to type a decimal point on iOS.
-1. `data-numeric-input-negative` attribute option: Allow a negative sign. Note that if the input has `pattern="[0-9]*"` the software keyboard will not include an option to type a negative sign on iOS.
 1. `data-numeric-input-nav-disabled` attribute option: Prevent the up and down arrow keys from incrementing and decrementing the number value.
 
 #### Manual Initialization
 
-* Alternatively, if you don’t want to use our auto-initialization code (the `numeric-input-init.js` file), you can manually initialize with `new NumericInput( element );` You’re on the hook to prevent duplicate initialization when doing this manually.
+* Alternatively, if you don’t want to use our auto-initialization code (the `numeric-input-init.js` file, which relies on a global `enhance` event), you can manually initialize with `new NumericInput( element );` You’re on the hook to prevent duplicate initialization when doing this manually.
