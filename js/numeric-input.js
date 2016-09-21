@@ -136,6 +136,7 @@
 
 	// used to prevent mobile safari from allowing shifted numeric keycodes
 	// because it doesn't set the `shiftKey` properly
+	// Credit to: http://notes.ericjiang.com/posts/333
 	NumericInput.keypressBlacklist = [
 		33, // `!` aka Shift + 1
 		64, // `@` aka Shift + 2
