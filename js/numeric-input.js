@@ -49,7 +49,9 @@
 		this.$el.on( "focus", function( e ) {
 			self.initMaxlength();
 		}).on( "keydown", function( e ) {
-			self.onKeydown.call( self, e );
+			self.onKeydown( e );
+		}).on( "keypress", function( e ) {
+			self.onKeypress( e );
 		}).on( "paste", function( e ){
 			self.onPaste( e );
 		});
@@ -130,6 +132,39 @@
 		if( !allowed ) {
 			event.preventDefault();
 		}
+	};
+
+	// used to prevent mobile safari from allowing shifted numeric keycodes
+	// because it doesn't set the `shiftKey` properly
+	NumericInput.keypressBlacklist = [
+		33, // `!` aka Shift + 1
+		64, // `@` aka Shift + 2
+		35, // `#` aka Shift + 3
+		36, // `$` aka Shift + 4
+		37, // `%` aka Shift + 5
+		94, // `^` aka Shift + 6
+		38, // `&` aka Shift + 7
+		42, // `*` aka Shift + 8
+		40, // `(` aka Shift + 9
+		41, // `)` aka Shift + 0
+	];
+
+	NumericInput.prototype.onKeypress = function( event ){
+		var allowed = true;
+		var code = event.keyCode;
+
+		// indexOf not supported everywhere for arrays
+		$.each(NumericInput.keypressBlacklist, function(i, e){
+			if( e === code ) {
+				allowed = false;
+			}
+		});
+
+		if( allowed ){
+			return;
+		}
+
+		event.preventDefault();
 	};
 
 	NumericInput.prototype.onPaste = function( e ){
