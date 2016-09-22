@@ -45,6 +45,9 @@
 	margin-top: 1.818181818em; /* 20px /11 */
 	margin-bottom: .363636364em; /* 4px /11 */
 }
+.creditcarddisplay_type:first-child ~ .creditcarddisplay_type:nth-child(2n) {
+	margin-left: .272727273em; /* 3px /11 */
+}
 .creditcarddisplay-active .creditcarddisplay_type:first-child,
 .creditcarddisplay-active .creditcarddisplay_type:first-child ~ .creditcarddisplay_type {
 	margin-top: 1.25em; /* 15px */
