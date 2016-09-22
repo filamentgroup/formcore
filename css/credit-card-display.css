@@ -29,8 +29,32 @@
 	height: 16px;
 	background-size: contain;
 	display: inline-block;
+	float: left;
 	text-indent: -9999px;
 	line-height: 1;
+}
+.creditcarddisplay_type-text.creditcarddisplay_type-text {
+	width: auto;
+	height: auto;
+	margin-right: .25em;
+	text-indent: 0;
+}
+/* No `creditcarddisplay_desc` element */
+.creditcarddisplay_type:first-child,
+.creditcarddisplay_type:first-child + .creditcarddisplay_type {
+	margin-top: 1.818181818em; /* 20px /11 */
+	margin-bottom: .363636364em; /* 4px /11 */
+}
+.creditcarddisplay-active .creditcarddisplay_type:first-child,
+.creditcarddisplay-active .creditcarddisplay_type:first-child ~ .creditcarddisplay_type {
+	margin-top: 1.25em; /* 15px */
+	margin-bottom: .25em; /* 4px */
+}
+.creditcarddisplay-active .creditcarddisplay_type-text {
+	margin: 0;
+}
+.creditcarddisplay_type:first-child + .creditcarddisplay_type + .creditcarddisplay_type {
+	clear: left;
 }
 .creditcarddisplay-active .creditcarddisplay_type {
 	display: none;

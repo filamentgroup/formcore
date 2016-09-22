@@ -11,33 +11,37 @@
 			return;
 		}
 
-		var classes = {
-			all: "creditcarddisplay-active",
-			amex: "creditcarddisplay-amex",
-			visa: "creditcarddisplay-visa",
-			mastercard: "creditcarddisplay-mastercard",
-			discover: "creditcarddisplay-discover"
+		var prefixes = {
+			topLevelClass: "creditcarddisplay-",
+			labels: "creditcarddisplay_type-"
+		}
+
+		var keys = {
+			amex: "amex",
+			visa: "visa",
+			mastercard: "mastercard",
+			discover: "discover"
 		};
 
+		var activeClass = prefixes.topLevelClass + "active";
 		var cardType = w.CreditableCardType( $t.val() );
 		var $container = $t.closest( ".group-form, .sect-group" );
 
 		// remove previous
-		var remove = [];
-		for( var j in classes ) {
-			remove.push( classes[ j ] );
+		var remove = [ activeClass ];
+		for( var j in keys ) {
+			remove.push( prefixes.topLevelClass + keys[ j ] );
 		}
 		$container.removeClass( remove.join( " " ) );
 
 		// add new
-		if( cardType === "AMEX" ) {
-			$container.addClass( classes.all + " " + classes.amex );
-		} else if( cardType === "VISA" ) {
-			$container.addClass( classes.all + " " + classes.visa );
-		} else if( cardType === "MASTERCARD" ) {
-			$container.addClass( classes.all + " " + classes.mastercard );
-		} else if( cardType === "DISCOVER" ) {
-			$container.addClass( classes.all + " " + classes.discover );
+		if( cardType === "AMEX" ||
+			cardType === "VISA" ||
+			cardType === "MASTERCARD" ||
+			cardType === "DISCOVER" ) {
+			if( $container.find( "." + prefixes.labels + keys[ cardType.toLowerCase() ] ).length ) {
+				$container.addClass( activeClass + " " + prefixes.topLevelClass + keys[ cardType.toLowerCase() ] );
+			}
 		}
 	});
 }( typeof global !== "undefined" ? global : this ));
