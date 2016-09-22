@@ -41,7 +41,10 @@
 }
 /* No `creditcarddisplay_desc` element */
 .creditcarddisplay_type:first-child,
-.creditcarddisplay_type:first-child + .creditcarddisplay_type,
+.creditcarddisplay_type:first-child + .creditcarddisplay_type {
+	margin-top: 1.818181818em; /* 20px /11 */
+	margin-bottom: .363636364em; /* 4px /11 */
+}
 .creditcarddisplay-active .creditcarddisplay_type:first-child,
 .creditcarddisplay-active .creditcarddisplay_type:first-child ~ .creditcarddisplay_type {
 	margin-top: 1.25em; /* 15px */
