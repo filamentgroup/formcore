@@ -2659,7 +2659,7 @@ window.jQuery = window.jQuery || window.shoestring;
 			throw new Error( "Politespace requires an element argument." );
 		}
 
-		if( !element.getAttribute ) {
+		if( !element.getAttribute || window.operamini ) {
 			// Cut the mustard
 			return;
 		}
@@ -2774,8 +2774,17 @@ window.jQuery = window.jQuery || window.shoestring;
 
 	Politespace.prototype.updateProxy = function() {
 		if( this.useProxy() && this.$proxy.length ) {
-			this.$proxy.html( this.format( this.getValue() ) );
-			this.$proxy.css( "width", this.element.offsetWidth + "px" );
+			var html = this.format( this.getValue() );
+			var width = this.element.offsetWidth;
+
+			this.$proxy.html( html );
+
+			if( width ) {
+				this.$proxy.css( "width", width + "px" );
+			}
+
+			// Hide if empty, to show placeholder
+			this.$proxy.closest( ".politespace-proxy" )[ html ? 'addClass' : 'removeClass' ]( "notempty" );
 		}
 	};
 
@@ -2784,11 +2793,11 @@ window.jQuery = window.jQuery || window.shoestring;
 			return;
 		}
 
-		var self = this;
 		function sumStyles( el, props ) {
 			var total = 0;
+			var $el = $( el );
 			for( var j=0, k=props.length; j<k; j++ ) {
-				total += parseFloat( self.$element.css( props[ j ] ) );
+				total += parseFloat( $el.css( props[ j ] ) );
 			}
 			return total;
 		}
