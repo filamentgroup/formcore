@@ -132,6 +132,9 @@
 		if( !allowed ) {
 			event.preventDefault();
 		}
+
+		// record the keydown code for subsequent keypress checks/hairsplitting
+		this.keydownCode = code;
 	};
 
 	// used to prevent mobile safari from allowing shifted numeric keycodes
@@ -142,7 +145,6 @@
 		64, // `@` aka Shift + 2
 		35, // `#` aka Shift + 3
 		36, // `$` aka Shift + 4
-		37, // `%` aka Shift + 5
 		94, // `^` aka Shift + 6
 		38, // `&` aka Shift + 7
 		42, // `*` aka Shift + 8
@@ -154,12 +156,19 @@
 		var allowed = true;
 		var code = event.keyCode;
 
+
 		// indexOf not supported everywhere for arrays
 		$.each(NumericInput.keypressBlacklist, function(i, e){
 			if( e === code ) {
 				allowed = false;
 			}
 		});
+
+		// mobile safari registers % as 37 but firefox also does for the arrow
+		// key, thankfully firefox registers the keydown event code as 37 also
+		if(this.keydownCode == 53 && code == 37){
+			allowed = false;
+		}
 
 		if( allowed ){
 			return;
