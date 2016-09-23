@@ -157,7 +157,6 @@
 		var allowed = true;
 		var code = event.keyCode;
 
-
 		// indexOf not supported everywhere for arrays
 		$.each(NumericInput.keypressBlacklist, function(i, e){
 			if( e === code ) {
