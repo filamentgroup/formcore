@@ -103,7 +103,7 @@
 		var code = event.keyCode;
 
 		// modifier keys and keys listed in allowedKeys property
-		if( !code || this.isMetaKeyAllowed( event ) ){
+		if( code === undefined || this.isMetaKeyAllowed( event ) ){
 			allowed = true;
 		// numeric codes are always allowed without a shift modifier and below the maxlength
 		} else if( this.isNumeric( code ) && !event.shiftKey && !this.isMaxLengthExceeded() ) {
@@ -145,11 +145,12 @@
 		64, // `@` aka Shift + 2
 		35, // `#` aka Shift + 3
 		36, // `$` aka Shift + 4
+		// NOTE `%` aka Shift + 5 is handled in the body of `onKeypress`
 		94, // `^` aka Shift + 6
 		38, // `&` aka Shift + 7
 		42, // `*` aka Shift + 8
 		40, // `(` aka Shift + 9
-		41, // `)` aka Shift + 0
+		41  // `)` aka Shift + 0
 	];
 
 	NumericInput.prototype.onKeypress = function( event ){
