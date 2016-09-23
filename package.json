@@ -35,7 +35,7 @@
     "creditable": "^1.0.7",
     "fg-select-css": "^1.0.3",
     "grunt-grunticon": "^2.2.3",
-    "politespace": "^0.1.18",
+    "politespace": "^0.1.19",
     "shoestring": "^1.0.3",
     "validator": "filamentgroup/validator.git#v2.0.6"
   }

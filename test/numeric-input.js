@@ -11,17 +11,17 @@
 		setup: commonSetup
 	});
 
-	test("initMaxlength", function(){
-		simple.initMaxlength();
+	test("updateMaxlength", function(){
+		simple.updateMaxlength();
 		equal(simple.maxLength, Infinity);
 
 		simple.$el.attr("maxlength", 10);
-		simple.initMaxlength();
+		simple.updateMaxlength();
 		equal(simple.maxLength, 10);
 
 		simple.$el.removeAttr("maxlength");
 		simple.$el.attr("max", 200);
-		simple.initMaxlength();
+		simple.updateMaxlength();
 		equal(simple.maxLength, 3);
 	});
 
@@ -228,7 +228,7 @@
 		// remove the maxlength
 		simple.el.removeAttribute("maxlength");
 		// reset the maxlength
-		simple.initMaxlength();
+		simple.updateMaxlength();
 
 		// should preserve the value
 		testOnPaste(value, value);

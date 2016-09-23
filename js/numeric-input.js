@@ -47,8 +47,9 @@
 			(this.$el.attr("class") || "").indexOf("formcore-disable-spinner") >= 0;
 
 		this.$el.on( "focus", function( e ) {
-			self.initMaxlength();
+			self.updateMaxlength();
 		}).on( "keydown", function( e ) {
+			self.updateMaxlength();
 			self.onKeydown( e );
 		}).on( "keypress", function( e ) {
 			self.onKeypress( e );
@@ -73,7 +74,7 @@
 		46 // Delete
 	];
 
-	NumericInput.prototype.initMaxlength = function(){
+	NumericInput.prototype.updateMaxlength = function(){
 		// if maxLength isn't defined on `$el` then `parseInt` will return
 		// `NaN` which is falsey meaning there is no max length. The max length
 		// is then `Infinity`.

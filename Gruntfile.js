@@ -32,6 +32,7 @@ module.exports = function(grunt) {
 					// politespace should come before validator
 					'node_modules/politespace/src/politespace.js',
 					'node_modules/politespace/src/politespace-creditcard.js',
+					'node_modules/politespace/src/politespace-us-telephone.js',
 					'node_modules/politespace/src/politespace-init.js',
 					'node_modules/validator/dist/validator.js',
 					'node_modules/validator/dist/validator.config.js',

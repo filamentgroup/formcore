@@ -2670,6 +2670,7 @@ window.jQuery = window.jQuery || window.shoestring;
 		// https://en.wikipedia.org/wiki/Decimal_mark
 		this.decimalMark = this.$element.attr( "data-decimal-mark" ) || "";
 		this.reverse = this.$element.is( "[data-reverse]" );
+		this.strip = this.$element.attr( "data-politespace-strip" );
 		this.groupLength = this.$element.attr( "data-grouplength" ) || 3;
 
 		var proxyAnchorSelector = this.$element.attr( "data-proxy-anchor" );
@@ -2721,6 +2722,9 @@ window.jQuery = window.jQuery || window.shoestring;
 	Politespace.prototype.format = function( value ) {
 		var split;
 		var val = this.unformat( value );
+		if( this.strip ) {
+			val = val.replace( new RegExp(  this.strip, 'g' ), "" );
+		}
 		var suffix = '';
 
 		if( this.decimalMark ) {
@@ -2859,6 +2863,45 @@ window.jQuery = window.jQuery || window.shoestring;
 			if( adjustMaxlength ) {
 				$t.attr( "maxlength", 16 );
 			}
+		}
+	});
+
+}( typeof global !== "undefined" ? global : this, jQuery ));
+
+// jQuery Plugin
+(function( w, $ ) {
+	"use strict";
+
+	function cleanup( el ) {
+		var $t = $( el );
+		$t.val( $t.val().replace( /^1/, "" ) );
+	}
+
+	$( document ).bind( "politespace-init politespace-input", function( event ) {
+		var $t = $( event.target );
+		if( !$t.is( "[data-politespace-us-telephone]" ) ) {
+			return;
+		}
+		var val = $t.val();
+
+		// Adjust maxlength
+		var maxlength= $t.attr( "maxlength" );
+		var maxlengthCacheKey = "politespace-us-telephone-maxlength";
+		var maxlengthCache = $t.data( maxlengthCacheKey );
+
+		if( maxlength && !maxlengthCache ) {
+			maxlengthCache = maxlength;
+			$t.data( maxlengthCacheKey, maxlength );
+
+			cleanup( $t[ 0 ] );
+			$t.one( "blur", function() {
+				$( this ).attr( "maxlength", maxlength );
+				cleanup( this );
+			});
+		}
+
+		if( val.indexOf( '1' ) === 0 ) {
+			$t.attr( "maxlength", parseInt( maxlengthCache, 10 ) + 1 );
 		}
 	});
 
