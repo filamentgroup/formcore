@@ -109,7 +109,7 @@
 		} else if( this.isNumeric( code ) && !event.shiftKey && !this.isMaxLengthExceeded() ) {
 			allowed = true;
 		// typing when maxlength exceeded only if text selected
-		} else if( this.isMaxLengthExceeded() && this.isInputTextSelected() ) {
+		} else if( this.isNumeric( code ) && this.isMaxLengthExceeded() && this.isInputTextSelected() ) {
 			allowed = true;
 		// allow negative signs
 		} else if( this.allowNegative && this.isCodeNegativeSign( code ) && ( !this.el.value.length || this.el.value.indexOf( '-' ) === -1 ) ) {
