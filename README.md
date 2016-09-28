@@ -1,7 +1,10 @@
 formcore
 ========
 
+[![npm version](https://badge.fury.io/js/formcore.svg)](https://badge.fury.io/js/formcore)
 [![Build Status](https://img.shields.io/travis/filamentgroup/formcore/master.svg)](https://travis-ci.org/filamentgroup/formcore)
+[![Dependency Status](https://david-dm.org/filamentgroup/formcore.svg?theme=shields.io)](https://david-dm.org/filamentgroup/formcore)
+
 
 A set of forms.
 
