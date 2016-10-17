@@ -29,6 +29,9 @@
 }
 /* Focus style */
 .custom-select select:focus {
+	box-shadow: 0 0 1px 3px rgba(180,222,250, 1);
+	box-shadow: 0 0 1px 3px -moz-mac-focusring;
+	box-shadow: 0 0 1px 3px -webkit-focus-ring-color;
 	color: #222; /* Match-02 */
 }
 
