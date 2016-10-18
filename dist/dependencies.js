@@ -1,10 +1,25 @@
 /*! grunt-grunticon Stylesheet Loader - v2.1.6 | https://github.com/filamentgroup/grunticon | (c) 2015 Scott Jehl, Filament Group, Inc. | MIT license. */
 
-!function(){function e(e,n,t){"use strict";var o=window.document.createElement("link"),r=n||window.document.getElementsByTagName("script")[0],a=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",r.parentNode.insertBefore(o,r),o.onloadcssdefined=function(e){for(var n,t=0;t<a.length;t++)a[t].href&&a[t].href===o.href&&(n=!0);n?e():setTimeout(function(){o.onloadcssdefined(e)})},o.onloadcssdefined(function(){o.media=t||"all"}),o}function n(e,n){e.onload=function(){e.onload=null,n&&n.call(e)},"isApplicationInstalled"in navigator&&"onloadcssdefined"in e&&e.onloadcssdefined(n)}!function(t){var o=function(r,a){"use strict";if(r&&3===r.length){var i=t.navigator,c=t.document,s=t.Image,d=!(!c.createElementNS||!c.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!c.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||t.opera&&-1===i.userAgent.indexOf("Chrome")||-1!==i.userAgent.indexOf("Series40")),l=new s;l.onerror=function(){o.method="png",o.href=r[2],e(r[2])},l.onload=function(){var t=1===l.width&&1===l.height,i=r[t&&d?0:t?1:2];t&&d?o.method="svg":t?o.method="datapng":o.method="png",o.href=i,n(e(i),a)},l.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",c.documentElement.className+=" grunticon"}};o.loadCSS=e,o.onloadCSS=n,t.grunticon=o}(this),function(e,n){"use strict";var t=n.document,o="grunticon:",r=function(e){if(t.attachEvent?"complete"===t.readyState:"loading"!==t.readyState)e();else{var n=!1;t.addEventListener("readystatechange",function(){n||(n=!0,e())},!1)}},a=function(e){return n.document.querySelector('link[href$="'+e+'"]')},i=function(e){var n,t,r,a,i,c,s={};if(n=e.sheet,!n)return s;t=n.cssRules?n.cssRules:n.rules;for(var d=0;d<t.length;d++)r=t[d].cssText,a=o+t[d].selectorText,i=r.split(");")[0].match(/US\-ASCII\,([^"']+)/),i&&i[1]&&(c=decodeURIComponent(i[1]),s[a]=c);return s},c=function(e){var n,r,a,i;a="data-grunticon-embed";for(var c in e){i=c.slice(o.length);try{n=t.querySelectorAll(i)}catch(s){continue}r=[];for(var d=0;d<n.length;d++)null!==n[d].getAttribute(a)&&r.push(n[d]);if(r.length)for(d=0;d<r.length;d++)r[d].innerHTML=e[c],r[d].style.backgroundImage="none",r[d].removeAttribute(a)}return r},s=function(n){"svg"===e.method&&r(function(){c(i(a(e.href))),"function"==typeof n&&n()})};e.embedIcons=c,e.getCSS=a,e.getIcons=i,e.ready=r,e.svgLoadedCallback=s,e.embedSVG=s}(grunticon,this)}();
-/*! Shoestring - v1.0.3 - 2015-09-10
+!function(){function e(e,n,t){"use strict";var o=window.document.createElement("link"),r=n||window.document.getElementsByTagName("script")[0],a=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",r.parentNode.insertBefore(o,r),o.onloadcssdefined=function(e){for(var n,t=0;t<a.length;t++)a[t].href&&a[t].href===o.href&&(n=!0);n?e():setTimeout(function(){o.onloadcssdefined(e)})},o.onloadcssdefined(function(){o.media=t||"all"}),o}function n(e,n){e.onload=function(){e.onload=null,n&&n.call(e)},"isApplicationInstalled"in navigator&&"onloadcssdefined"in e&&e.onloadcssdefined(n)}!function(t){var o=function(r,a){"use strict";if(r&&3===r.length){var i=t.navigator,c=t.document,s=t.Image,d=!(!c.createElementNS||!c.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!c.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||t.opera&&i.userAgent.indexOf("Chrome")===-1||i.userAgent.indexOf("Series40")!==-1),l=new s;l.onerror=function(){o.method="png",o.href=r[2],e(r[2])},l.onload=function(){var t=1===l.width&&1===l.height,i=r[t&&d?0:t?1:2];t&&d?o.method="svg":t?o.method="datapng":o.method="png",o.href=i,n(e(i),a)},l.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",c.documentElement.className+=" grunticon"}};o.loadCSS=e,o.onloadCSS=n,t.grunticon=o}(this),function(e,n){"use strict";var t,o=n.document,r="grunticon:",a=function(e){if(o.attachEvent?"complete"===o.readyState:"loading"!==o.readyState)e();else{var n=!1;o.addEventListener("readystatechange",function(){n||(n=!0,e())},!1)}},i=function(e){return n.document.querySelector('link[href$="'+e+'"]')},c=function(e,n){if(t&&!n)return t;t={};var o,a,i,c,s,d;if(o=e.sheet,!o)return t;a=o.cssRules?o.cssRules:o.rules;for(var l=0;l<a.length;l++)i=a[l].cssText,c=r+a[l].selectorText,s=i.split(");")[0].match(/US\-ASCII\,([^"']+)/),s&&s[1]&&(d=decodeURIComponent(s[1]),t[c]=d);return t},s=function(e,n){var t,a,i,c,s;n?t=e:(n=e,t=o),c="data-grunticon-embed";for(var d in n){s=d.slice(r.length);try{a=t.querySelectorAll(s)}catch(e){continue}i=[];for(var l=0;l<a.length;l++)null!==a[l].getAttribute(c)&&i.push(a[l]);if(i.length)for(l=0;l<i.length;l++)i[l].innerHTML=n[d],i[l].style.backgroundImage="none",i[l].removeAttribute(c)}return i},d=function(n,t){"svg"===e.method&&a(function(){var o=c(i(e.href));"function"==typeof t?(s(n,o),t()):"function"==typeof n&&(s(o),n())})};e.embedIcons=s,e.getCSS=i,e.getIcons=c,e.ready=a,e.svgLoadedCallback=d,e.embedSVG=d}(grunticon,this)}();
+/*! Shoestring - v1.0.5 - 2016-09-20
 * http://github.com/filamentgroup/shoestring/
-* Copyright (c) 2015 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
-(function( w, undefined ){
+* Copyright (c) 2016 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
+(function( factory ) {
+	if( typeof define === 'function' && define.amd ) {
+			// AMD. Register as an anonymous module.
+			define( [ 'shoestring' ], factory );
+	} else if (typeof module === 'object' && module.exports) {
+		// Node/CommonJS
+		module.exports = factory();
+	} else {
+		// Browser globals
+		factory();
+	}
+}(function () {
+	var win = typeof window !== "undefined" ? window : this;
+	var doc = win.document;
+
+
 	/**
 	 * The shoestring object constructor.
 	 *
@@ -35,7 +50,7 @@
 
 		// if string starting with <, make html
 		if( pType === "string" && prim.indexOf( "<" ) === 0 ){
-			var dfrag = document.createElement( "div" );
+			var dfrag = doc.createElement( "div" );
 
 			dfrag.innerHTML = prim;
 
@@ -51,14 +66,14 @@
 				return shoestring( sec ).find( prim );
 			}
 
-				sel = document.querySelectorAll( prim );
+				sel = doc.querySelectorAll( prim );
 
 			return new Shoestring( sel, prim );
 		}
 
 		// array like objects or node lists
 		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-				(window.NodeList && prim instanceof window.NodeList) ){
+				(win.NodeList && prim instanceof win.NodeList) ){
 
 			return new Shoestring( prim, prim );
 		}
@@ -84,7 +99,6 @@
 	// For adding element set methods
 	shoestring.fn = Shoestring.prototype;
 
-	// expose for testing purposes only
 	shoestring.Shoestring = Shoestring;
 
 	// For extending objects
@@ -117,7 +131,7 @@
 	};
 
 	// expose
-	window.shoestring = shoestring;
+	win.shoestring = shoestring;
 
 
 
@@ -354,7 +368,7 @@
 	 */
 	shoestring.ready = function( fn ){
 		if( ready && fn ){
-			fn.call( document );
+			fn.call( doc );
 		}
 		else if( fn ){
 			readyQueue.push( fn );
@@ -363,7 +377,7 @@
 			runReady();
 		}
 
-		return [document];
+		return [doc];
 	};
 
 	// TODO necessary?
@@ -378,32 +392,32 @@
 		runReady = function(){
 			if( !ready ){
 				while( readyQueue.length ){
-					readyQueue.shift().call( document );
+					readyQueue.shift().call( doc );
 				}
 				ready = true;
 			}
 		};
 
 	// Quick IE8 shiv
-	if( !window.addEventListener ){
-		window.addEventListener = function( evt, cb ){
-			return window.attachEvent( "on" + evt, cb );
+	if( !win.addEventListener ){
+		win.addEventListener = function( evt, cb ){
+			return win.attachEvent( "on" + evt, cb );
 		};
 	}
 
 	// If DOM is already ready at exec time, depends on the browser.
 	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
-	if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+	if (doc.attachEvent ? doc.readyState === "complete" : doc.readyState !== "loading") {
 		runReady();
 	}	else {
-		if( !document.addEventListener ){
-			document.attachEvent( "DOMContentLoaded", runReady );
-			document.attachEvent( "onreadystatechange", runReady );
+		if( !doc.addEventListener ){
+			doc.attachEvent( "DOMContentLoaded", runReady );
+			doc.attachEvent( "onreadystatechange", runReady );
 		} else {
-			document.addEventListener( "DOMContentLoaded", runReady, false );
-			document.addEventListener( "readystatechange", runReady, false );
+			doc.addEventListener( "DOMContentLoaded", runReady, false );
+			doc.addEventListener( "readystatechange", runReady, false );
 		}
-		window.addEventListener( "load", runReady, false );
+		win.addEventListener( "load", runReady, false );
 	}
 
 
@@ -433,7 +447,7 @@
 		parents = this.parent();
 
 		if( !parents.length ){
-			parents = shoestring( document );
+			parents = shoestring( doc );
 		}
 
 		parents.each(function( i, e ) {
@@ -523,7 +537,7 @@
 	/**
 	 * An alias for the `shoestring` constructor.
 	 */
-	window.$ = shoestring;
+	win.$ = shoestring;
 
 
 
@@ -690,7 +704,7 @@
 	 * @this shoestring
 	 */
 	shoestring.fn.children = function(){
-		var ret = [],
+				var ret = [],
 			childs,
 			j;
 		this.each(function(){
@@ -885,15 +899,15 @@
 			}
 		};
 
-		if( !window.getComputedStyle ) {
-			// <window>.getComputedStyle
-			// NOTE Window is not defined in all browsers
-			window.getComputedStyle = function (element) {
+		if( !win.getComputedStyle ) {
+			// <win>.getComputedStyle
+			// NOTE win is not defined in all browsers
+			win.getComputedStyle = function (element) {
 				return new CSSStyleDeclaration(element);
 			};
 
-			if ( window.Window ) {
-				window.Window.prototype.getComputedStyle = window.getComputedStyle;
+			if ( win.Window ) {
+				win.Window.prototype.getComputedStyle = win.getComputedStyle;
 			}
 		}
 	})();
@@ -912,7 +926,7 @@
 
 		function _getStyle( element, property ) {
 			// polyfilled in getComputedStyle module
-			return window.getComputedStyle( element, null ).getPropertyValue( property );
+			return win.getComputedStyle( element, null ).getPropertyValue( property );
 		}
 
 		var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
@@ -1078,7 +1092,7 @@
 				}
 			} else {
 				if( !this.parentNode ){
-					var context = shoestring( document.createDocumentFragment() );
+					var context = shoestring( doc.createDocumentFragment() );
 
 					context[ 0 ].appendChild( this );
 					wsel = shoestring( selector, context );
@@ -1135,11 +1149,23 @@
 	 * Returns the raw DOM node at the passed index.
 	 *
 	 * @param {integer} index The index of the element to wrap and return.
-	 * @return HTMLElement
+	 * @return {HTMLElement|undefined|array}
 	 * @this shoestring
 	 */
 	shoestring.fn.get = function( index ){
-		return this[ index ];
+
+		// return an array of elements if index is undefined
+		if( index === undefined ){
+			var elements = [];
+
+			for( var i = 0; i < this.length; i++ ){
+				elements.push( this[ i ] );
+			}
+
+			return elements;
+		} else {
+			return this[ index ];
+		}
 	};
 
 
@@ -1190,9 +1216,9 @@
 
 
 	var set = function( html ){
-		if( typeof html === "string" ){
+		if( typeof html === "string" || typeof html === "number" ){
 			return this.each(function(){
-				this.innerHTML = html;
+				this.innerHTML = "" + html;
 			});
 		} else {
 			var h = "";
@@ -1267,7 +1293,7 @@
 
 			// no arg? check the children, otherwise check each element that matches
 			if( selector === undefined ){
-				children = ( ( this[ 0 ] && this[0].parentNode ) || document.documentElement).childNodes;
+				children = ( ( this[ 0 ] && this[0].parentNode ) || doc.documentElement).childNodes;
 
 				// check if the element matches the first of the set
 				return _getIndex(children, function( element ) {
@@ -1418,7 +1444,7 @@
 		this.each(function(){
 			// no parent node, assume top level
 			// jQuery parent: return the document object for <html> or the parent node if it exists
-			parent = (this === document.documentElement ? document : this.parentNode);
+			parent = (this === doc.documentElement ? doc : this.parentNode);
 
 			// if there is a parent and it's not a document fragment
 			if( parent && parent.nodeType !== 11 ){
@@ -1994,7 +2020,7 @@
 		}
 
 		var evts = evt.split( " " ),
-			docEl = document.documentElement;
+			docEl = doc.documentElement;
 
 		// NOTE the `triggeredElement` is purely for custom events from IE
 		function encasedCallback( e, namespace, triggeredElement ){
@@ -2049,13 +2075,13 @@
 
 		// This is exclusively for custom events on browsers without addEventListener (IE8)
 		function propChange( originalEvent, boundElement, namespace ) {
-			var lastEventInfo = document.documentElement[ originalEvent.propertyName ],
+			var lastEventInfo = doc.documentElement[ originalEvent.propertyName ],
 				triggeredElement = lastEventInfo.el;
 
 			var boundCheckElement = boundElement;
 
-			if( boundElement === document && triggeredElement !== document ) {
-				boundCheckElement = document.documentElement;
+			if( boundElement === doc && triggeredElement !== doc ) {
+				boundCheckElement = doc.documentElement;
 			}
 
 			if( triggeredElement !== undefined &&
@@ -2200,7 +2226,7 @@
 		for( j = 0, jl = bound.length; j < jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
 				if( callback === undefined || callback === bound[ j ].originalCallback ) {
-					if( "removeEventListener" in window ){
+					if( "removeEventListener" in win ){
 						this.removeEventListener( evt, bound[ j ].callback, false );
 					} else if( this.detachEvent ){
 						// dom event
@@ -2208,7 +2234,7 @@
 
 						// only unbind custom events if its the last one on the element
 						if( bound.length === 1 && this.shoestringData.loop && this.shoestringData.loop[ evt ] ) {
-							document.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
+							doc.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
 						}
 					}
 					matched.push( j );
@@ -2279,11 +2305,11 @@
 
 		// TODO needs IE8 support
 		// See this.fireEvent( 'on' + evts[ i ], document.createEventObject() ); instead of click() etc in trigger.
-		if( document.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
+		if( doc.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
 			var bindings = el.shoestringData.events[ e ];
 			for (var i in bindings ){
 				if( bindings.hasOwnProperty( i ) ){
-					event = document.createEvent( "Event" );
+					event = doc.createEvent( "Event" );
 					event.initEvent( e, true, true );
 					event._args = args;
 					args.unshift( event );
@@ -2323,14 +2349,14 @@
 					}
 				}
 
-				if( document.createEvent ){
-					var event = document.createEvent( "Event" );
+				if( doc.createEvent ){
+					var event = doc.createEvent( "Event" );
 					event.initEvent( evt, true, true );
 					event._args = args;
 					event._namespace = namespace;
 
 					this.dispatchEvent( event );
-				} else if ( document.createEventObject ) {
+				} else if ( doc.createEventObject ) {
 					if( ( "" + this[ evt ] ).indexOf( "function" ) > -1 ) {
 						this.ssEventTrigger = {
 							_namespace: namespace,
@@ -2339,7 +2365,7 @@
 
 						this[ evt ]();
 					} else {
-						document.documentElement[ evt ] = {
+						doc.documentElement[ evt ] = {
 							"el": this,
 							_namespace: namespace,
 							_args: args
@@ -2352,7 +2378,9 @@
 
 
 
-})( this );
+	return shoestring;
+}));
+
 /*! X-rayHTML - v2.1.2 - 2016-05-18
 * https://github.com/filamentgroup/x-rayhtml
 * Copyright (c) 2016 Filament Group; Licensed MIT */
@@ -2575,12 +2603,25 @@ window.jQuery = window.jQuery || window.shoestring;
 (function( w ) {
 	"use strict";
 
-	var types = {
-		MASTERCARD: /^(2[2-7]|5[1-5])/, // 22-27 and 51-55
-		VISA: /^4/,
-		DISCOVER: /^6(011|5)/, // 6011 or 65
-		AMEX: /^3[47]/ // 34 or 37
+	var keys = {
+		MASTERCARD: "MASTERCARD",
+		VISA: "VISA",
+		DISCOVER: "DISCOVER",
+		AMEX: "AMEX"
 	};
+
+	var types = {};
+
+	// 2221-2720 and 51-55
+	types[ keys.MASTERCARD ] = /^(222[1-9]|22[3-9]|2[3-6]|27[01]|2720|5[1-5])/;
+
+	types[ keys.VISA ] = /^4/;
+
+	// 6011 or 65
+	types[ keys.DISCOVER ] = /^6(011|22(12[6-9]|1[3-9]|[2-8]|9[0-1]|92[0-5])|4[4-9]|5)/;
+
+	// 34 or 37
+	types[ keys.AMEX ] = /^3[47]/;
 
 	function CreditableCardType( val ) {
 		for( var j in types ) {
@@ -2592,6 +2633,7 @@ window.jQuery = window.jQuery || window.shoestring;
 		return -1;
 	}
 
+	CreditableCardType.KEYS = keys;
 	CreditableCardType.TYPES = types;
 	w.CreditableCardType = CreditableCardType;
 
