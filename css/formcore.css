@@ -134,9 +134,7 @@ input[type="datetime"],
 input[type="month"],
 input[type="time"],
 input[type="week"] {
-	box-shadow: inset 0 1px 1px 2px rgba(0,0,0,.05);
 	background: none;
-	outline: none;
 
 	/* prefixed box-sizing rules necessary for older browsers */
 	-webkit-box-sizing: border-box;
@@ -259,24 +257,13 @@ input[type="number"]:focus,
 input[type="tel"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus {
-	outline: none;
 	border-color: #1176bb;
-	box-shadow: inset 0 0 0 2px rgba(163,215,243,.40);
-}
-.btn:focus,
-.button:focus,
-select:focus {
-	outline: none;
-	box-shadow: 0 0 0 3px rgba(180,222,250, .75);
 }
 input[type="checkbox"] {
 	border-radius: 10%;
 }
 input[type="checkbox"]:focus {
 	border-radius: 10%;
-	outline-color: #1176bb;
-	outline-width: 2px;
-	box-shadow: inset 0 0 0 2px rgba(163,215,243,.40);
 }
 input[type="radio"] {
 	border-radius: 100%;

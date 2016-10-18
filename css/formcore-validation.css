@@ -6,6 +6,9 @@
 .invalid textarea {
 	border-color: #DC0014;
 }
+.invalid .custom-select select {
+	border-color: transparent;
+}
 .invalid .checkbox input,
 .invalid .radiobutton input {
 	position: relative;
