@@ -268,7 +268,7 @@ input[type="number"]:-moz-focusring,
 input[type="tel"]:-moz-focusring,
 input[type="email"]:-moz-focusring,
 input[type="url"]:-moz-focusring {
-	outline: 2px solid rgb( 180, 222, 250 );
+	outline: 2px solid rgba(59, 153, 252, .7); /* Match select box-shadow color in formcore-select.css */
 	outline: 2px solid -moz-mac-focusring;
 	-moz-outline-radius: 6px;
 	outline-radius: 6px;
