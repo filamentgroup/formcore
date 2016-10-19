@@ -262,7 +262,6 @@ input[type="url"]:focus {
 /* See https://github.com/filamentgroup/formcore/issues/87 */
 textarea:-moz-focusring,
 input[type="text"]:-moz-focusring,
-input[type="radio"]:-moz-focusring,
 input[type="search"]:-moz-focusring,
 input[type="password"]:-moz-focusring,
 input[type="number"]:-moz-focusring,
