@@ -259,6 +259,19 @@ input[type="email"]:focus,
 input[type="url"]:focus {
 	border-color: #1176bb;
 }
+/* See https://github.com/filamentgroup/formcore/issues/87 */
+textarea:-moz-focusring,
+input[type="text"]:-moz-focusring,
+input[type="radio"]:-moz-focusring,
+input[type="search"]:-moz-focusring,
+input[type="password"]:-moz-focusring,
+input[type="number"]:-moz-focusring,
+input[type="tel"]:-moz-focusring,
+input[type="email"]:-moz-focusring,
+input[type="url"]:-moz-focusring {
+	outline: 2px solid -moz-mac-focusring;
+	-moz-outline-radius: 7px;
+}
 input[type="checkbox"] {
 	border-radius: 10%;
 }
