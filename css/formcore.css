@@ -269,8 +269,10 @@ input[type="number"]:-moz-focusring,
 input[type="tel"]:-moz-focusring,
 input[type="email"]:-moz-focusring,
 input[type="url"]:-moz-focusring {
+	outline: 2px solid rgb( 180, 222, 250 );
 	outline: 2px solid -moz-mac-focusring;
-	-moz-outline-radius: 7px;
+	-moz-outline-radius: 6px;
+	outline-radius: 6px;
 }
 input[type="checkbox"] {
 	border-radius: 10%;
