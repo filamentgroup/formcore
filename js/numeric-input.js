@@ -62,21 +62,21 @@
 			this.maxLength = parseInt( this.$el.attr( "maxlength" ), 10 ) ||
 				( "" + ( Math.abs( parseInt( this.$el.attr( "max" ), 10 ) ) || "" ) ).length ||
 				Infinity;
-		};
+		}
 
 		// Reference: https://github.com/wesbos/keycodes/blob/gh-pages/scripts.js
 		isNumeric( code ){
 			return code >= 48 && code <= 57 ||
 				code >= 96 && code <= 105;
-		};
+		}
 
 		isCodeDecimalPoint( code ){
 			return code === 110 || code === 190;
-		};
+		}
 
 		isCodeNegativeSign( code ){
 			return code === 109 || code === 173 || code === 189;
-		};
+		}
 
 		onKeydown( event ){
 			var allowed = false;
@@ -112,7 +112,7 @@
 			if( !allowed ) {
 				event.preventDefault();
 			}
-		};
+		}
 
 		onPaste( e ){
 			var event = e.originalEvent || e;
@@ -133,21 +133,21 @@
 
 			// otherwise force the text to look right
 			this.el.value = pastedText
-			// remove signs that appear inside the string
+				// remove signs that appear inside the string
 				.replace(/(.+)\-(.+)/g, "$1$2")
 
-			// remove all decimals beside the first
+				// remove all decimals beside the first
 				.replace(/(.+[\.,].+)\.(.+)/g, "$1$2")
 
-			// remove any non float/integer characters left
+				// remove any non float/integer characters left
 				.replace(/[^0-9\.\-,]*/g, "")
 
-			// truncate the value to the maxlength
+				// truncate the value to the maxlength
 				.slice(0, this.maxLength);
 
 			// prevent the original paste behavior
 			event.preventDefault();
-		};
+		}
 
 		isMetaKeyAllowed( event ) {
 			var isAllowed = false, key = event.keyCode;
@@ -165,11 +165,11 @@
 			}
 
 			return event.altKey || event.ctrlKey || event.metaKey || isAllowed;
-		};
+		}
 
 		isMaxLengthExceeded() {
 			return this.maxLength !== undefined && this.$el.val().length >= this.maxLength;
-		};
+		}
 
 		isInputTextSelected() {
 			var selectionText;
