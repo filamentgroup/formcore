@@ -1,4 +1,4 @@
-/* global jQuery:true */
+/* global window:true */
 /* jshint esversion: 6*/
 (function($, window){
 
@@ -154,11 +154,11 @@
 			var isAllowed = false, key = event.keyCode;
 
 			// indexOf not supported everywhere for arrays
-			$.each(NumericInput.allowedKeys((e, i) => {
-				if( e === key ) {
+			$.each(NumericInput.allowedKeys, (i, e) => {
+				if( e == key ) {
 					isAllowed = true;
 				}
-			}));
+			});
 
 			// the up/down arrow key numeric navigation of values may be disabled
 			if( this.isNavDisabled && ( key === 38 || key === 40 ) ){
@@ -212,4 +212,4 @@
 	];
 
 	window.NumericInput = NumericInput;
-}(jQuery, this));
+}(window.jQuery, window));

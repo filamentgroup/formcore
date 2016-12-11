@@ -92,7 +92,7 @@ module.exports = function(grunt) {
   var flags = {
     languageIn: 'ECMASCRIPT6_STRICT',
     languageOut: 'ECMASCRIPT3',
-    compilationLevel: 'ADVANCED',
+    createSourceMap: true,
     warningLevel: 'VERBOSE',
     jsCode: [{path: 'js/numeric-input.js'}]
       .map(file => {
@@ -107,6 +107,24 @@ module.exports = function(grunt) {
 
   grunt.task.registerTask('closure', 'run the closure compiler', function(){
     const out = compile(flags);
-    fs.writeFileSync('dist/numeric-input.es3.js', out.compiledCode);
+
+    // TODO make error handling suck less
+    if( out.warnings.length ){
+      console.warn(out.warnings[0].description);
+    }
+
+    if( out.errors.length ){
+      throw new Error(out.errors[0].description);
+    }
+
+    const map = "numeric-input.es3.js.map";
+    fs.writeFileSync('dist/numeric-input.es3.js', "//# sourceMappingURL=" + map + "\n");
+    fs.appendFileSync('dist/numeric-input.es3.js', out.compiledCode);
+
+    var srcMap = JSON.parse(out.sourceMap);
+    srcMap.sourceRoot = "/";
+    fs.writeFileSync('dist/' + map, JSON.stringify(srcMap));
   });
+
+  grunt.registerTask('test', ['closure', 'qunit']);
 };
