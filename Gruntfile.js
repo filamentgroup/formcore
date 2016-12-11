@@ -83,4 +83,28 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['jshint', 'concat', 'grunticon']);
 	grunt.registerTask('stage', ['default']);
 
+  var compile = require('google-closure-compiler-js').compile;
+  var path = require('path');
+  var fs = require('fs');
+
+  var flags = {
+    languageIn: 'ECMASCRIPT6_STRICT',
+    languageOut: 'ECMASCRIPT3',
+    compilationLevel: 'ADVANCED',
+    warningLevel: 'VERBOSE',
+    jsCode: [{path: 'js/numeric-input.js'}]
+      .map(file => {
+        return {
+          path: path.relative(process.cwd(), file.path),
+          src: fs.readFileSync(path.relative(process.cwd(), file.path)).toString(),
+          // TODO
+          sourceMap: file.sourceMap ? JSON.stringify(file.sourceMap) : undefined
+        };
+      })
+  };
+
+  grunt.task.registerTask('closure', 'run the closure compiler', function(){
+    const out = compile(flags);
+    fs.writeFileSync('dist/numeric-input.es3.js', out.compiledCode);
+  });
 };
