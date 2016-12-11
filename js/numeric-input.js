@@ -17,7 +17,7 @@
 				this.$el.is( '[data-float]' ) || this.$el.is( '[data-numeric-input-float]' );
 			this.allowNegative = this.$el.is( '[data-numeric-input-negative]' );
 
-			var ua, isFirefoxDesktop, isSafari6, self = this;
+			var ua, isFirefoxDesktop, isSafari6;
 			ua = navigator.userAgent.toLowerCase();
 
 			// Issue #267 and #521
@@ -46,13 +46,10 @@
 				 this.$el.attr("data-numeric-input-nav-disabled") !== undefined) ||
 				(this.$el.attr("class") || "").indexOf("formcore-disable-spinner") >= 0;
 
-			this.$el.on( "focus", function( e ) {
-				self.initMaxlength();
-			}).on( "keydown", function( e ) {
-				self.onKeydown.call( self, e );
-			}).on( "paste", function( e ){
-				self.onPaste( e );
-			});
+			this.$el
+				.on( "focus", e => this.initMaxlength() )
+				.on( "keydown", e => this.onKeydown(e) )
+				.on( "paste", e => this.onPaste(e) );
 		}
 
 
