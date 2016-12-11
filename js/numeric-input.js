@@ -153,7 +153,7 @@
 			var isAllowed = false, key = event.keyCode;
 
 			// indexOf not supported everywhere for arrays
-			$.each(NumericInput.allowedKeys, function(i, e){
+			NumericInput.allowedKeys.forEach(function(e){
 				if( e === key ) {
 					isAllowed = true;
 				}
