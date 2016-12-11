@@ -1,4 +1,5 @@
-/*global jQuery:true*/
+/* global jQuery:true */
+/* jshint esversion: 6*/
 (function($, window){
 
 	class NumericInput {
@@ -18,7 +19,7 @@
 			this.allowNegative = this.$el.is( '[data-numeric-input-negative]' );
 
 			var ua, isFirefoxDesktop, isSafari6;
-			ua = navigator.userAgent.toLowerCase();
+			ua = window.navigator.userAgent.toLowerCase();
 
 			// Issue #267 and #521
 			// https://github.com/filamentgroup/lm-esales/issues/267
@@ -153,14 +154,14 @@
 			var isAllowed = false, key = event.keyCode;
 
 			// indexOf not supported everywhere for arrays
-			NumericInput.allowedKeys.forEach(function(e){
+			$.each(NumericInput.allowedKeys((e, i) => {
 				if( e === key ) {
 					isAllowed = true;
 				}
-			});
+			}));
 
 			// the up/down arrow key numeric navigation of values may be disabled
-			if( this.isNavDisabled && ( key == 38 || key == 40 ) ){
+			if( this.isNavDisabled && ( key === 38 || key === 40 ) ){
 				isAllowed = false;
 			}
 
@@ -186,8 +187,8 @@
 			// else if ie8 or lower
 			if( window.getSelection ) {
 				selectionText = window.getSelection().toString();
-			} else if( document.selection && document.selection.type != "Control" ) {
-				selectionText = document.selection.createRange().text;
+			} else if( window.document.selection && window.document.selection.type !== "Control" ) {
+				selectionText = window.document.selection.createRange().text;
 			}
 
 			return selectionText ? this.$el.val().indexOf(selectionText) > -1 : false;

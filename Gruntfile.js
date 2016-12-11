@@ -7,6 +7,7 @@
  */
 
 'use strict';
+/* jshint esversion: 6*/
 
 module.exports = function(grunt) {
 
@@ -14,7 +15,8 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		jshint: {
 			all: [
-				'Gruntfile.js'
+				'Gruntfile.js',
+				'js/numeric-input.js'
 			],
 			options: {
 				jshintrc: '.jshintrc'
