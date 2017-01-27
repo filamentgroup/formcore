@@ -19,6 +19,9 @@
 		);
 
 		this.$parent = this.$label.parent().addClass( "character-counter plural" );
+		this.$singular = this.$parent.find( ".singular" );
+		this.$plural = this.$parent.find( ".plural" );
+
 		this.max = parseFloat( this.$el.attr( "maxlength" ), 10 );
 		this.min = parseFloat( this.$el.attr( "minlength" ), 10 );
 
@@ -43,9 +46,15 @@
 		var add = [];
 		var remove = [ "min max limit" ];
 		if( newval !== 1 ) {
+			this.$singular.attr( "aria-hidden", "true" );
+			this.$plural.removeAttr( "aria-hidden" );
+
 			remove.push( "singular" );
 			add.push( "plural" );
 		} else {
+			this.$plural.attr( "aria-hidden", "true" );
+			this.$singular.removeAttr( "aria-hidden" );
+
 			add.push( "singular" );
 			remove.push( "plural" );
 		}
