@@ -216,12 +216,12 @@
 
 <label class="form-group">
 	<b class="label-text">Number</b>
-	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric">
+	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric" data-formcore-type="numeric">
 </label>
 
 <label class="form-group">
 	<b class="label-text">Number without Spinner Buttons</b>
-	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-numeric-input-nav-disabled data-validate="numeric" class="formcore-disable-spinner">
+	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-numeric-input-nav-disabled data-validate="numeric" class="formcore-disable-spinner" data-formcore-type="numeric">
 </label>
 
 </div><!-- /data-xrayhtml -->
@@ -233,7 +233,7 @@
 <h3 class="xraytitle">Price (Full Dollar Amounts) - with spinner</h3>
 <label class="form-group">
 	<span class="label-text">Price ($)</span>
-	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric" data-politespace data-grouplength="3" data-delimiter="," data-reverse step="1">
+	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric" data-politespace data-grouplength="3" data-delimiter="," data-reverse step="1" data-formcore-type="price-positive">
 </label>
 </div><!-- /data-xrayhtml -->
 
@@ -241,7 +241,7 @@
 <h3 class="xraytitle">Price (Full Dollar Amounts) without Spinner Buttons</h3>
 <label class="form-group">
 	<span class="label-text">Price ($)</span>
-	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric" data-politespace data-grouplength="3" data-delimiter="," data-reverse data-numeric-input-nav-disabled class="formcore-disable-spinner">
+	<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric" data-politespace data-grouplength="3" data-delimiter="," data-reverse data-numeric-input-nav-disabled class="formcore-disable-spinner" data-formcore-type="price-positive">
 </label>
 </div><!-- /data-xrayhtml -->
 
@@ -251,23 +251,23 @@
 <h3 class="xraytitle">Price (Dollars and Cents)</h3>
 <label class="form-group">
 	<span class="label-text">Price ($)</span>
-	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-float data-politespace data-grouplength="3" data-delimiter="," data-decimal-mark="." data-reverse step="any">
+	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-float data-politespace data-grouplength="3" data-delimiter="," data-decimal-mark="." data-reverse  data-formcore-type="price-float-positive">
 </label>
 </div><!-- /data-xrayhtml -->
 
 <div data-xrayhtml>
-<h3 class="xraytitle">Price (Negative)</h3>
+<h3 class="xraytitle">Price (Full Dollar Amounts, allows Negative)</h3>
 <label class="form-group">
 	<span class="label-text">Price ($)</span>
-	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-negative step="1">
+	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-negative data-politespace data-grouplength="3" data-delimiter="," data-reverse  data-formcore-type="price">
 </label>
 </div><!-- /data-xrayhtml -->
 
 <div data-xrayhtml>
-<h3 class="xraytitle">Price (Dollars and Cents, Negative)</h3>
+<h3 class="xraytitle">Price (Dollars and Cents, allows Negative)</h3>
 <label class="form-group">
 	<span class="label-text">Price ($)</span>
-	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-float data-numeric-input-negative step="1">
+	<input type="text" inputmode="numeric" data-numeric-input data-numeric-input-float data-numeric-input-negative data-politespace data-grouplength="3" data-delimiter="," data-decimal-mark="." data-reverse data-formcore-type="price-float">
 </label>
 </div><!-- /data-xrayhtml -->
 

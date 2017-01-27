@@ -63,12 +63,12 @@
 			<div class="sect-inner-b">
 				<label class="form-group">
 					<b class="label-text">Day</b>
-					<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-numeric-input-nav-disabled data-validate="numeric" min="1" max="31" class="formcore-disable-spinner">
+					<input type="number" inputmode="numeric" pattern="[0-9]*" data-numeric-input data-validate="numeric" min="1" max="31" data-formcore-type="date-day">
 				</label>
 			</div>
 		</div><!-- /.sect-group-a -->
 
-		<label class="form-group">
+		<label class="form-group required">
 			<b class="label-text">Email</b>
 			<input type="email" data-validate="email" required autocorrect="off" autocapitalize="none" spellcheck="false">
 		</label>
@@ -93,12 +93,12 @@
 <form novalidate data-validatorform>
 	<label class="form-group required">
 		<span class="label-text">Email</span>
-		<input type="email" data-validate="email" required>
+		<input type="email" data-validate="email" autocorrect="off" autocapitalize="none" spellcheck="false" required>
 	</label>
 
 	<label class="form-group required" data-mask-pw>
 		<b class="label-text">Password</b>
-		<input type="password" minlength="6" data-validate="password" required>
+		<input type="password" minlength="6" data-validate="password" required autocorrect="off" autocapitalize="none" spellcheck="false">
 	</label>
 	
 	<label class="form-group checkbox">
@@ -274,6 +274,7 @@
 	<label class="form-group required">
 		<span class="label-text">Security Code</span>
 		<input type="number"
+			inputmode="numeric"
 			required maxlength="4"
 			pattern="[0-9]*"
 			data-numeric-input
@@ -290,7 +291,7 @@
 
 	<label class="form-group required">
 		<span class="label-text">ZIP Code</span>
-		<input type="text" data-validate="zip" inputmode="numeric" data-numeric-input data-numeric-input-nav-disabled pattern="[0-9]*" maxlength="9" placeholder="00000" required data-politespace data-grouplength="5," data-delimiter="-">
+		<input type="number" data-validate="zip" inputmode="numeric" data-numeric-input data-numeric-input-nav-disabled pattern="[0-9]*" maxlength="9" placeholder="00000" required data-politespace data-grouplength="5," data-delimiter="-" class="formcore-disable-spinner">
 	</label>
 </form>
 </div><!-- /data-xrayhtml -->
@@ -301,12 +302,12 @@
 	<div class="sect-group">
 		<label class="form-group required">
 			<span class="label-text">Gift Card Number</span>
-			<input type="number" inputmode="numeric" data-numeric-input data-numeric-input-nav-disabled pattern="[0-9]*" minlength="8" maxlength="8" placeholder="8 digits" data-validate="minlength" data-message="Please enter an 8-digit card number." required class="formcore-disable-spinner">
+			<input type="number" inputmode="numeric" data-numeric-input data-numeric-input-nav-disabled pattern="[0-9]*" minlength="8" maxlength="8" placeholder="8 digits" data-validate="minlength" data-message="Please enter an 8-digit card number." required class="formcore-disable-spinner" data-formcore-type="numeric">
 		</label>
 		<div class="sect-inner-a">
 			<label class="form-group required">
 				<span class="label-text">PIN</span>
-				<input type="number" inputmode="numeric"  data-numeric-input data-numeric-input-nav-disabled pattern="[0-9]*" minlength="4" maxlength="4" placeholder="4 Digits" data-validate="minlength" data-message="Please enter a 4-digit PIN." required class="formcore-disable-spinner">
+				<input type="number" inputmode="numeric"  data-numeric-input data-numeric-input-nav-disabled pattern="[0-9]*" minlength="4" maxlength="4" placeholder="4 Digits" data-validate="minlength" data-message="Please enter a 4-digit PIN." required class="formcore-disable-spinner" data-formcore-type="numeric">
 			</label>
 		</div>
 		<div class="sect-inner-b">
