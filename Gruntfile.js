@@ -87,7 +87,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-grunticon');
 
 	// By default, lint and run all tests.
-	grunt.registerTask('default', ['jshint', 'concat', 'grunticon']);
+	grunt.registerTask('default', ['jshint', 'concat', 'grunticon', 'qunit']);
 	grunt.registerTask('stage', ['default']);
 
 };
