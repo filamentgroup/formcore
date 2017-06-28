@@ -1,9 +1,9 @@
 /*! grunt-grunticon Stylesheet Loader - v2.1.6 | https://github.com/filamentgroup/grunticon | (c) 2015 Scott Jehl, Filament Group, Inc. | MIT license. */
 
-!function(){function e(e,n,t){"use strict";var o=window.document.createElement("link"),r=n||window.document.getElementsByTagName("script")[0],a=window.document.styleSheets;return o.rel="stylesheet",o.href=e,o.media="only x",r.parentNode.insertBefore(o,r),o.onloadcssdefined=function(e){for(var n,t=0;t<a.length;t++)a[t].href&&a[t].href===o.href&&(n=!0);n?e():setTimeout(function(){o.onloadcssdefined(e)})},o.onloadcssdefined(function(){o.media=t||"all"}),o}function n(e,n){e.onload=function(){e.onload=null,n&&n.call(e)},"isApplicationInstalled"in navigator&&"onloadcssdefined"in e&&e.onloadcssdefined(n)}!function(t){var o=function(r,a){"use strict";if(r&&3===r.length){var i=t.navigator,c=t.document,s=t.Image,d=!(!c.createElementNS||!c.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!c.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||t.opera&&i.userAgent.indexOf("Chrome")===-1||i.userAgent.indexOf("Series40")!==-1),l=new s;l.onerror=function(){o.method="png",o.href=r[2],e(r[2])},l.onload=function(){var t=1===l.width&&1===l.height,i=r[t&&d?0:t?1:2];t&&d?o.method="svg":t?o.method="datapng":o.method="png",o.href=i,n(e(i),a)},l.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",c.documentElement.className+=" grunticon"}};o.loadCSS=e,o.onloadCSS=n,t.grunticon=o}(this),function(e,n){"use strict";var t,o=n.document,r="grunticon:",a=function(e){if(o.attachEvent?"complete"===o.readyState:"loading"!==o.readyState)e();else{var n=!1;o.addEventListener("readystatechange",function(){n||(n=!0,e())},!1)}},i=function(e){return n.document.querySelector('link[href$="'+e+'"]')},c=function(e,n){if(t&&!n)return t;t={};var o,a,i,c,s,d;if(o=e.sheet,!o)return t;a=o.cssRules?o.cssRules:o.rules;for(var l=0;l<a.length;l++)i=a[l].cssText,c=r+a[l].selectorText,s=i.split(");")[0].match(/US\-ASCII\,([^"']+)/),s&&s[1]&&(d=decodeURIComponent(s[1]),t[c]=d);return t},s=function(e,n){var t,a,i,c,s;n?t=e:(n=e,t=o),c="data-grunticon-embed";for(var d in n){s=d.slice(r.length);try{a=t.querySelectorAll(s)}catch(e){continue}i=[];for(var l=0;l<a.length;l++)null!==a[l].getAttribute(c)&&i.push(a[l]);if(i.length)for(l=0;l<i.length;l++)i[l].innerHTML=n[d],i[l].style.backgroundImage="none",i[l].removeAttribute(c)}return i},d=function(n,t){"svg"===e.method&&a(function(){var o=c(i(e.href));"function"==typeof t?(s(n,o),t()):"function"==typeof n&&(s(o),n())})};e.embedIcons=s,e.getCSS=i,e.getIcons=c,e.ready=a,e.svgLoadedCallback=d,e.embedSVG=d}(grunticon,this)}();
-/*! Shoestring - v1.0.5 - 2016-09-20
+!function(){function e(e,t){function n(){!o&&t&&(o=!0,t.call(e))}var o;e.addEventListener&&e.addEventListener("load",n),e.attachEvent&&e.attachEvent("onload",n),"isApplicationInstalled"in navigator&&"onloadcssdefined"in e&&e.onloadcssdefined(n)}!function(e){"use strict";var t=function(t,n,o){function r(e){if(c.body)return e();setTimeout(function(){r(e)})}function a(){d.addEventListener&&d.removeEventListener("load",a),d.media=o||"all"}var i,c=e.document,d=c.createElement("link");if(n)i=n;else{var l=(c.body||c.getElementsByTagName("head")[0]).childNodes;i=l[l.length-1]}var s=c.styleSheets;d.rel="stylesheet",d.href=t,d.media="only x",r(function(){i.parentNode.insertBefore(d,n?i:i.nextSibling)});var u=function(e){for(var t=d.href,n=s.length;n--;)if(s[n].href===t)return e();setTimeout(function(){u(e)})};return d.addEventListener&&d.addEventListener("load",a),d.onloadcssdefined=u,u(a),d};"undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this),function(t){var n=function(o,r){"use strict";if(o&&3===o.length){var a=t.navigator,i=t.document,c=t.Image,d=!(!i.createElementNS||!i.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!i.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||t.opera&&-1===a.userAgent.indexOf("Chrome")||-1!==a.userAgent.indexOf("Series40")),l=new c;l.onerror=function(){n.method="png",n.href=o[2],loadCSS(o[2])},l.onload=function(){var t=1===l.width&&1===l.height,a=o[t&&d?0:t?1:2];n.method=t&&d?"svg":t?"datapng":"png",n.href=a,e(loadCSS(a),r)},l.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",i.documentElement.className+=" grunticon"}};n.loadCSS=loadCSS,n.onloadCSS=e,t.grunticon=n}(this),function(e,t){"use strict";var n,o=t.document,r=function(e){if(o.attachEvent?"complete"===o.readyState:"loading"!==o.readyState)e();else{var t=!1;o.addEventListener("readystatechange",function(){t||(t=!0,e())},!1)}},a=function(e){return t.document.querySelector('link[href$="'+e+'"]')},i=function(e,t){if(n&&!t)return n;n={};var o,r,a,i,c,d;if(!(o=e.sheet))return n;r=o.cssRules?o.cssRules:o.rules;for(var l=0;l<r.length;l++)a=r[l].cssText,i="grunticon:"+r[l].selectorText,(c=a.split(");")[0].match(/US\-ASCII\,([^"']+)/))&&c[1]&&(d=decodeURIComponent(c[1]),n[i]=d);return n},c=function(e,t){var n,r,a,i,c;t?n=e:(t=e,n=o),i="data-grunticon-embed";for(var d in t){c=d.slice("grunticon:".length);try{r=n.querySelectorAll(c)}catch(e){continue}a=[];for(var l=0;l<r.length;l++)null!==r[l].getAttribute(i)&&a.push(r[l]);if(a.length)for(l=0;l<a.length;l++)a[l].innerHTML=t[d],a[l].style.backgroundImage="none",a[l].removeAttribute(i)}return a},d=function(t,n){"svg"===e.method&&r(function(){var o=i(a(e.href));"function"==typeof n?(c(t,o),n()):c(o),"function"==typeof t&&t()})};e.embedIcons=c,e.getCSS=a,e.getIcons=i,e.ready=r,e.svgLoadedCallback=d,e.embedSVG=d}(grunticon,this)}();
+/*! Shoestring - v2.0.1 - 2017-05-24
 * http://github.com/filamentgroup/shoestring/
-* Copyright (c) 2016 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
+* Copyright (c) 2017 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( factory ) {
 	if( typeof define === 'function' && define.amd ) {
 			// AMD. Register as an anonymous module.
@@ -135,15 +135,6 @@
 
 
 
-	var xmlHttp = function() {
-		try {
-			return new XMLHttpRequest();
-		}
-		catch( e ){
-			return new ActiveXObject( "Microsoft.XMLHTTP" );
-		}
-	};
-
 	/**
 	 * Make an HTTP request to a url.
 	 *
@@ -164,7 +155,7 @@
 	 */
 
 	shoestring.ajax = function( url, options ) {
-		var params = "", req = xmlHttp(), settings, key;
+		var params = "", req = new XMLHttpRequest(), settings, key;
 
 		settings = shoestring.extend( {}, shoestring.ajax.settings );
 
@@ -398,25 +389,13 @@
 			}
 		};
 
-	// Quick IE8 shiv
-	if( !win.addEventListener ){
-		win.addEventListener = function( evt, cb ){
-			return win.attachEvent( "on" + evt, cb );
-		};
-	}
-
 	// If DOM is already ready at exec time, depends on the browser.
 	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
 	if (doc.attachEvent ? doc.readyState === "complete" : doc.readyState !== "loading") {
 		runReady();
-	}	else {
-		if( !doc.addEventListener ){
-			doc.attachEvent( "DOMContentLoaded", runReady );
-			doc.attachEvent( "onreadystatechange", runReady );
-		} else {
-			doc.addEventListener( "DOMContentLoaded", runReady, false );
-			doc.addEventListener( "readystatechange", runReady, false );
-		}
+	} else {
+		doc.addEventListener( "DOMContentLoaded", runReady, false );
+		doc.addEventListener( "readystatechange", runReady, false );
 		win.addEventListener( "load", runReady, false );
 	}
 
@@ -778,146 +757,15 @@
 
 
   shoestring.cssExceptions = {
-		'float': [ 'cssFloat', 'styleFloat' ] // styleFloat is IE8
+		'float': [ 'cssFloat' ]
 	};
-
-
-
-	/**
-	 * A polyfill to support computed styles in IE < 9
-	 *
-	 * NOTE this is taken directly from https://github.com/jonathantneal/polyfill
-	 */
-	(function () {
-		function getComputedStylePixel(element, property, fontSize) {
-			element.document; // Internet Explorer sometimes struggles to read currentStyle until the element's document is accessed.
-
-			var
-			value = element.currentStyle[property].match(/([\d\.]+)(%|cm|em|in|mm|pc|pt|)/) || [0, 0, ''],
-			size = value[1],
-			suffix = value[2],
-			rootSize;
-
-			fontSize = !fontSize ? fontSize : /%|em/.test(suffix) && element.parentElement ? getComputedStylePixel(element.parentElement, 'fontSize', null) : 16;
-			rootSize = property === 'fontSize' ? fontSize : /width/i.test(property) ? element.clientWidth : element.clientHeight;
-
-			return suffix === '%' ? size / 100 * rootSize :
-				suffix === 'cm' ? size * 0.3937 * 96 :
-				suffix === 'em' ? size * fontSize :
-				suffix === 'in' ? size * 96 :
-				suffix === 'mm' ? size * 0.3937 * 96 / 10 :
-				suffix === 'pc' ? size * 12 * 96 / 72 :
-				suffix === 'pt' ? size * 96 / 72 :
-				size;
-		}
-
-		function setShortStyleProperty(style, property) {
-			var
-			borderSuffix = property === 'border' ? 'Width' : '',
-			t = property + 'Top' + borderSuffix,
-			r = property + 'Right' + borderSuffix,
-			b = property + 'Bottom' + borderSuffix,
-			l = property + 'Left' + borderSuffix;
-
-			style[property] = (style[t] === style[r] && style[t] === style[b] && style[t] === style[l] ? [ style[t] ] :
-												 style[t] === style[b] && style[l] === style[r] ? [ style[t], style[r] ] :
-												 style[l] === style[r] ? [ style[t], style[r], style[b] ] :
-												 [ style[t], style[r], style[b], style[l] ]).join(' ');
-		}
-
-		// <CSSStyleDeclaration>
-		function CSSStyleDeclaration(element) {
-			var
-			style = this,
-			currentStyle = element.currentStyle,
-			fontSize = getComputedStylePixel(element, 'fontSize'),
-			unCamelCase = function (match) {
-				return '-' + match.toLowerCase();
-			},
-			property;
-
-			for (property in currentStyle) {
-				Array.prototype.push.call(style, property === 'styleFloat' ? 'float' : property.replace(/[A-Z]/, unCamelCase));
-
-				if (property === 'width') {
-					style[property] = element.offsetWidth + 'px';
-				} else if (property === 'height') {
-					style[property] = element.offsetHeight + 'px';
-				} else if (property === 'styleFloat') {
-					style.float = currentStyle[property];
-				} else if (/margin.|padding.|border.+W/.test(property) && style[property] !== 'auto') {
-					style[property] = Math.round(getComputedStylePixel(element, property, fontSize)) + 'px';
-				} else if (/^outline/.test(property)) {
-					// errors on checking outline
-					try {
-						style[property] = currentStyle[property];
-					} catch (error) {
-						style.outlineColor = currentStyle.color;
-						style.outlineStyle = style.outlineStyle || 'none';
-						style.outlineWidth = style.outlineWidth || '0px';
-						style.outline = [style.outlineColor, style.outlineWidth, style.outlineStyle].join(' ');
-					}
-				} else {
-					style[property] = currentStyle[property];
-				}
-			}
-
-			setShortStyleProperty(style, 'margin');
-			setShortStyleProperty(style, 'padding');
-			setShortStyleProperty(style, 'border');
-
-			style.fontSize = Math.round(fontSize) + 'px';
-		}
-
-		CSSStyleDeclaration.prototype = {
-			constructor: CSSStyleDeclaration,
-			// <CSSStyleDeclaration>.getPropertyPriority
-			getPropertyPriority: function () {
-				throw new Error('NotSupportedError: DOM Exception 9');
-			},
-			// <CSSStyleDeclaration>.getPropertyValue
-			getPropertyValue: function (property) {
-				return this[property.replace(/-\w/g, function (match) {
-					return match[1].toUpperCase();
-				})];
-			},
-			// <CSSStyleDeclaration>.item
-			item: function (index) {
-				return this[index];
-			},
-			// <CSSStyleDeclaration>.removeProperty
-			removeProperty: function () {
-				throw new Error('NoModificationAllowedError: DOM Exception 7');
-			},
-			// <CSSStyleDeclaration>.setProperty
-			setProperty: function () {
-				throw new Error('NoModificationAllowedError: DOM Exception 7');
-			},
-			// <CSSStyleDeclaration>.getPropertyCSSValue
-			getPropertyCSSValue: function () {
-				throw new Error('NotSupportedError: DOM Exception 9');
-			}
-		};
-
-		if( !win.getComputedStyle ) {
-			// <win>.getComputedStyle
-			// NOTE win is not defined in all browsers
-			win.getComputedStyle = function (element) {
-				return new CSSStyleDeclaration(element);
-			};
-
-			if ( win.Window ) {
-				win.Window.prototype.getComputedStyle = win.getComputedStyle;
-			}
-		}
-	})();
 
 
 
 	(function() {
 		var cssExceptions = shoestring.cssExceptions;
 
-		// IE8 uses marginRight instead of margin-right
+		// marginRight instead of margin-right
 		function convertPropertyName( str ) {
 			return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
 				return character.toUpperCase();
@@ -925,7 +773,6 @@
 		}
 
 		function _getStyle( element, property ) {
-			// polyfilled in getComputedStyle module
 			return win.getComputedStyle( element, null ).getPropertyValue( property );
 		}
 
@@ -982,7 +829,7 @@
 	(function() {
 		var cssExceptions = shoestring.cssExceptions;
 
-		// IE8 uses marginRight instead of margin-right
+		// marginRight instead of margin-right
 		function convertPropertyName( str ) {
 			return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
 				return character.toUpperCase();
@@ -1088,6 +935,11 @@
 
 			if( typeof selector === 'function' ) {
 				if( selector.call( this, index ) !== false ) {
+					ret.push( this );
+				}
+			// document node
+			} else if( this.nodeType === 9 ){
+				if( this === selector ) {
 					ret.push( this );
 				}
 			} else {
@@ -1985,24 +1837,6 @@
 		}
 	}
 
-	// In IE8 the events trigger in a reverse order (LIFO). This code
-	// unbinds and rebinds all callbacks on an element in the a FIFO order.
-	function reorderEvents( node, eventName ) {
-		if( node.addEventListener || !node.shoestringData || !node.shoestringData.events ) {
-			// add event listner obviates the need for all the callback order juggling
-			return;
-		}
-
-		var otherEvents = node.shoestringData.events[ eventName ] || [];
-		for( var j = otherEvents.length - 1; j >= 0; j-- ) {
-			// DOM Events only, Custom events maintain their own order internally.
-			if( !otherEvents[ j ].isCustomEvent ) {
-				node.detachEvent( "on" + eventName, otherEvents[ j ].callback );
-				node.attachEvent( "on" + eventName, otherEvents[ j ].callback );
-			}
-		}
-	}
-
 	/**
 	 * Bind a callback to an event for the currrent set of elements.
 	 *
@@ -2019,8 +1853,7 @@
 			data = null;
 		}
 
-		var evts = evt.split( " " ),
-			docEl = doc.documentElement;
+		var evts = evt.split( " " );
 
 		// NOTE the `triggeredElement` is purely for custom events from IE
 		function encasedCallback( e, namespace, triggeredElement ){
@@ -2073,26 +1906,6 @@
 			return result;
 		}
 
-		// This is exclusively for custom events on browsers without addEventListener (IE8)
-		function propChange( originalEvent, boundElement, namespace ) {
-			var lastEventInfo = doc.documentElement[ originalEvent.propertyName ],
-				triggeredElement = lastEventInfo.el;
-
-			var boundCheckElement = boundElement;
-
-			if( boundElement === doc && triggeredElement !== doc ) {
-				boundCheckElement = doc.documentElement;
-			}
-
-			if( triggeredElement !== undefined &&
-				shoestring( triggeredElement ).closest( boundCheckElement ).length ) {
-
-				originalEvent._namespace = lastEventInfo._namespace;
-				originalEvent._args = lastEventInfo._args;
-				encasedCallback.call( boundElement, originalEvent, namespace, triggeredElement );
-			}
-		}
-
 		return this.each(function(){
 			var domEventCallback,
 				customEventCallback,
@@ -2118,45 +1931,7 @@
 
 				initEventCache( this, evt );
 
-				if( "addEventListener" in this ){
-					this.addEventListener( evt, domEventCallback, false );
-				} else if( this.attachEvent ){
-					if( this[ "on" + evt ] !== undefined ) {
-						this.attachEvent( "on" + evt, domEventCallback );
-					} else {
-						customEventCallback = (function() {
-							var eventName = evt;
-							return function( e ) {
-								if( e.propertyName === eventName ) {
-									propChange( e, oEl, namespace );
-								}
-							};
-						})();
-
-						// only assign one onpropertychange per element
-						if( this.shoestringData.events[ evt ].length === 0 ) {
-							customEventLoop = (function() {
-								var eventName = evt;
-								return function( e ) {
-									if( !oEl.shoestringData || !oEl.shoestringData.events ) {
-										return;
-									}
-									var events = oEl.shoestringData.events[ eventName ];
-									if( !events ) {
-										return;
-									}
-
-									// TODO stopImmediatePropagation
-									for( var j = 0, k = events.length; j < k; j++ ) {
-										events[ j ].callback( e );
-									}
-								};
-							})();
-
-							docEl.attachEvent( "onpropertychange", customEventLoop );
-						}
-					}
-				}
+				this.addEventListener( evt, domEventCallback, false );
 
 				addToEventCache( this, evt, {
 					callfunc: customEventCallback || domEventCallback,
@@ -2165,11 +1940,6 @@
 					originalCallback: originalCallback,
 					namespace: namespace
 				});
-
-				// Don’t reorder custom events, only DOM Events.
-				if( !customEventCallback ) {
-					reorderEvents( oEl, evt );
-				}
 			}
 		});
 	};
@@ -2226,17 +1996,7 @@
 		for( j = 0, jl = bound.length; j < jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
 				if( callback === undefined || callback === bound[ j ].originalCallback ) {
-					if( "removeEventListener" in win ){
-						this.removeEventListener( evt, bound[ j ].callback, false );
-					} else if( this.detachEvent ){
-						// dom event
-						this.detachEvent( "on" + evt, bound[ j ].callback );
-
-						// only unbind custom events if its the last one on the element
-						if( bound.length === 1 && this.shoestringData.loop && this.shoestringData.loop[ evt ] ) {
-							doc.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
-						}
-					}
+					this.removeEventListener( evt, bound[ j ].callback, false );
 					matched.push( j );
 				}
 			}
@@ -2303,7 +2063,6 @@
 			el = this[ 0 ],
 			ret;
 
-		// TODO needs IE8 support
 		// See this.fireEvent( 'on' + evts[ i ], document.createEventObject() ); instead of click() etc in trigger.
 		if( doc.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
 			var bindings = el.shoestringData.events[ e ];
@@ -2356,21 +2115,6 @@
 					event._namespace = namespace;
 
 					this.dispatchEvent( event );
-				} else if ( doc.createEventObject ) {
-					if( ( "" + this[ evt ] ).indexOf( "function" ) > -1 ) {
-						this.ssEventTrigger = {
-							_namespace: namespace,
-							_args: args
-						};
-
-						this[ evt ]();
-					} else {
-						doc.documentElement[ evt ] = {
-							"el": this,
-							_namespace: namespace,
-							_args: args
-						};
-					}
 				}
 			}
 		});
@@ -2381,9 +2125,14 @@
 	return shoestring;
 }));
 
-/*! X-rayHTML - v2.1.2 - 2016-05-18
+// lib connector file for shoestring
+if( !window.jQuery ){
+	window.jQuery = window.shoestring;
+}
+
+/*! X-rayHTML - v2.1.3 - 2017-06-05
 * https://github.com/filamentgroup/x-rayhtml
-* Copyright (c) 2016 Filament Group; Licensed MIT */
+* Copyright (c) 2017 Filament Group; Licensed MIT */
 window.jQuery = window.jQuery || window.shoestring;
 
 (function( $ ) {
@@ -2693,29 +2442,55 @@ window.jQuery = window.jQuery || window.shoestring;
 
 }( typeof global !== "undefined" ? global : this, jQuery ));
 
-(function( w, $ ){
+// UMD module definition
+// From: https://github.com/umdjs/umd/blob/master/templates/jqueryPlugin.js
+
+(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+			// AMD. Register as an anonymous module.
+			define(['jquery'], factory);
+	} else if (typeof module === 'object' && module.exports) {
+		// Node/CommonJS
+		module.exports = function( root, jQuery ) {
+			if ( jQuery === undefined ) {
+				if ( typeof window !== 'undefined' ) {
+					jQuery = require('jquery');
+				} else {
+					jQuery = require('jquery')(root);
+				}
+			}
+			factory(jQuery);
+			return jQuery;
+		};
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+}(function ($) {
 	"use strict";
+
+	var w = typeof window !== "undefined" ? window : this;
 
 	var Politespace = function( element ) {
 		if( !element ) {
 			throw new Error( "Politespace requires an element argument." );
 		}
 
-		if( !element.getAttribute || window.operamini ) {
+		if( !element.getAttribute || w.operamini ) {
 			// Cut the mustard
 			return;
 		}
 
 		this.element = element;
 		this.$element = $( element );
-		this.delimiter = this.$element.attr( "data-delimiter" ) || " ";
+		this.delimiter = this.$element.attr( "data-politespace-delimiter" ) || " ";
 		// https://en.wikipedia.org/wiki/Decimal_mark
-		this.decimalMark = this.$element.attr( "data-decimal-mark" ) || "";
-		this.reverse = this.$element.is( "[data-reverse]" );
+		this.decimalMark = this.$element.attr( "data-politespace-decimal-mark" ) || "";
+		this.reverse = this.$element.is( "[data-politespace-reverse]" );
 		this.strip = this.$element.attr( "data-politespace-strip" );
-		this.groupLength = this.$element.attr( "data-grouplength" ) || 3;
+		this.groupLength = this.$element.attr( "data-politespace-grouplength" ) || 3;
 
-		var proxyAnchorSelector = this.$element.attr( "data-proxy-anchor" );
+		var proxyAnchorSelector = this.$element.attr( "data-politespace-proxy-anchor" );
 		this.$proxyAnchor = this.$element;
 		this.$proxy = null;
 
@@ -2872,16 +2647,57 @@ window.jQuery = window.jQuery || window.shoestring;
 
 	Politespace.prototype.setGroupLength = function( length ) {
 		this.groupLength = length;
-		this.$element.attr( "data-grouplength", length );
+		this.$element.attr( "data-politespace-grouplength", length );
 	};
 
-	w.Politespace = Politespace;
+	var componentName = "politespace";
 
-}( this, jQuery ));
+	$.fn[ componentName ] = function(){
+		return this.each( function(){
+			var $t = $( this );
+			if( $t.data( componentName ) ) {
+				return;
+			}
 
-// jQuery Plugin
-(function( w, $ ) {
-	"use strict";
+			var polite = new Politespace( this );
+			if( polite.useProxy() ) {
+				polite.createProxy();
+			}
+
+			$t.bind( "politespace-hide-proxy", function() {
+					$( this ).closest( ".politespace-proxy" ).removeClass( "active" );
+				})
+				.bind( "politespace-show-proxy", function() {
+					$( this ).closest( ".politespace-proxy" ).addClass( "active" );
+
+					polite.update();
+					polite.updateProxy();
+				})
+				.bind( "input keydown", function() {
+					$( this ).trigger( "politespace-input" );
+
+					polite.updateProxy();
+				})
+				.bind( "blur", function() {
+					$( this ).trigger( "politespace-beforeblur" );
+
+					polite.update();
+
+					if( polite.useProxy() ){
+						$( this ).trigger( "politespace-show-proxy" );
+					}
+				})
+				.bind( "focus", function() {
+					$( this ).trigger( "politespace-hide-proxy" );
+					polite.reset();
+				})
+				.data( componentName, polite )
+				.trigger( "politespace-init" );
+
+			polite.update();
+			polite.updateProxy();
+		});
+	};
 
 	$( document ).bind( "politespace-init politespace-input", function( event ) {
 		var $t = $( event.target );
@@ -2907,8 +2723,6 @@ window.jQuery = window.jQuery || window.shoestring;
 			}
 		}
 	});
-
-}( typeof global !== "undefined" ? global : this, jQuery ));
 
 // jQuery Plugin
 (function( w, $ ) {
@@ -2959,69 +2773,29 @@ window.jQuery = window.jQuery || window.shoestring;
 
 }( typeof global !== "undefined" ? global : this, jQuery ));
 
+	w.Politespace = Politespace;
+}));
+
 /* global Politespace:true */
-(function( $ ) {
+(function( win ) {
 	"use strict";
 
-	// jQuery Plugin
-
-	var componentName = "politespace",
-		initSelector = "[data-" + componentName + "]";
-
-	$.fn[ componentName ] = function(){
-		return this.each( function(){
-			var $t = $( this );
-			if( $t.data( componentName ) ) {
-				return;
-			}
-
-			var polite = new Politespace( this );
-			if( polite.useProxy() ) {
-				polite.createProxy();
-			}
-
-			$t.bind( "politespace-hide-proxy", function() {
-					$( this ).closest( ".politespace-proxy" ).removeClass( "active" );
-				})
-				.bind( "politespace-show-proxy", function() {
-					$( this ).closest( ".politespace-proxy" ).addClass( "active" );
-
-					polite.update();
-					polite.updateProxy();
-				})
-				.bind( "input keydown", function() {
-					$( this ).trigger( "politespace-input" );
-
-					polite.updateProxy();
-				})
-				.bind( "blur", function() {
-					$( this ).trigger( "politespace-beforeblur" );
-
-					polite.update();
-
-					if( polite.useProxy() ){
-						$( this ).trigger( "politespace-show-proxy" );
-					}
-				})
-				.bind( "focus", function() {
-					$( this ).trigger( "politespace-hide-proxy" );
-					polite.reset();
-				})
-				.data( componentName, polite )
-				.trigger( "politespace-init" );
-
-			polite.update();
-			polite.updateProxy();
-		});
-	};
+	var $;
+	if( 'shoestring' in win ) {
+		$ = win.shoestring;
+	} else if( 'jQuery' in win ) {
+		$ = win.jQuery;
+	} else {
+		throw new Error( "politespace: DOM library not found." );
+	}
 
 	// auto-init on enhance (which is called on domready)
 	$( document ).bind( "enhance", function( e ) {
-		var $sel = $( e.target ).is( initSelector ) ? $( e.target ) : $( initSelector, e.target );
-		$sel[ componentName ]();
+		var $sel = $( e.target ).is( "[data-politespace]" ) ? $( e.target ) : $( "[data-politespace]", e.target );
+		$sel.politespace();
 	});
 
-}( jQuery ));
+})( typeof window !== "undefined" ? window : this );
 
 /*! validator - v2.0.6 - 2016-04-25
 * https://github.com/filamentgroup/validator

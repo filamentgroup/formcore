@@ -1,6 +1,6 @@
-/*! X-rayHTML - v2.1.2 - 2016-05-18
+/*! X-rayHTML - v2.1.3 - 2017-06-05
 * https://github.com/filamentgroup/x-rayhtml
-* Copyright (c) 2016 Filament Group; Licensed MIT */
+* Copyright (c) 2017 Filament Group; Licensed MIT */
 .xrayhtml {
 	border: 1px solid rgba(0,0,0,.1);
 	border-radius: .3em;
@@ -32,6 +32,8 @@
 }
 .xrayhtml .source-panel pre {
 	margin: 0;
+	padding: 16px;
+	border-radius: 0 0 .3em .3em;
 }
 .xrayhtml .source-panel code {
 	white-space: pre-wrap;
@@ -41,17 +43,13 @@
 	border-radius: 0.3em;
 }
 .xrayhtml.method-inline .source-panel {
-	margin: 2em -1em -2em -1em !important; /* Prism style override. */
+	margin: 2em -1em -2em -1em !important; /* Prism override. */
 	border-top: 1px solid rgba(0,0,0,.1);
 	border-radius: 0 0 .3em .3em;
 }
-.xrayhtml pre {
-	padding: 16px;
-	margin: 0 !important; /* Prism style override. */
-	border-radius: 0 0 .3em .3em;
-}
-.xrayhtml code {
-	white-space: pre-wrap !important; /* Prism style override. */
+/* Prism override. */
+.xrayhtml .source-panel code.language-markup {
+	white-space: pre-wrap !important;
 }
 
 .xrayhtml.antipattern {
@@ -63,20 +61,13 @@
 }
 
 /* Flip Animation */
-
+.xrayhtml.method-flip {
+	padding: 0;
+}
 .method-flip {
 	-webkit-perspective: 2500px;
 	-moz-perspective: 2500px;
 	perspective: 2500px;
-}
-.method-flip .snippet {
-	padding: 0;
-	margin: 0;
-	position: relative;
-	top: 0;
-	left: 0;
-	z-index: 2;
-	min-height: 100%;
 }
 .method-flip .source-panel {
 	position: absolute;
@@ -84,10 +75,18 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
-
 .method-flip .snippet {
+	margin: 0;
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	min-height: 100%;
+	background-color: #fff;
+	padding: 1em;
+
 	-webkit-transform: rotateY(0deg);
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
@@ -231,12 +230,11 @@ iframe.xray-iframe {
 	display: none;
 }
 
-@supports ( -webkit-appearance: none ) or ( appearance: none )
-	/* Firefox <= 34 has a false positive on @supports( -moz-appearance: none )
-	 * @supports ( mask-type: alpha ) is Firefox 35+
-	 */
-	or ( ( -moz-appearance: none ) and ( mask-type: alpha ) ) {
-	
+/* Firefox <= 34 has a false positive on @supports( -moz-appearance: none )
+ * @supports ( mask-type: alpha ) is Firefox 35+
+ */
+@supports (-webkit-appearance: none) or (appearance: none) or ((-moz-appearance: none) and (mask-type: alpha)) {
+
 	/* Show custom arrow */
 	.custom-select::after {
 		display: block;
@@ -258,6 +256,7 @@ iframe.xray-iframe {
 		border-color: #aaa; /* Match-03 */
 	}
 }
+
 /* Adds Firefox < 35 support */
 /* FIREFOX won't let us hide the native select arrow, so we have to make it wider than needed and clip it via overflow on the parent container. The percentage width is a fallback since FF 4+ supports calc() so we can just add a fixed amount of extra width to push the native arrow out of view. We're applying this hack across all FF versions because all the previous hacks were too fragile and complex. You might want to consider not using this hack and using the native select arrow in FF. Note this makes the menus wider than the select button because they display at the specified width and aren't clipped. Targeting hack via http://browserhacks.com/#hack-758bff81c5c32351b02e10480b5ed48e */
 /* Show only the native arrow */
@@ -326,4 +325,50 @@ iframe.xray-iframe {
 	.custom-select::after {
 		display: block;
 	}
+}
+/* These are the "theme" styles for our button applied via separate button class, style as you like */
+/* Set the background fallback to solid #fff so Firefox renders the <option> list readably. */
+.custom-select {
+	border: 1px solid #bbb;
+	border-radius: .3em;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+}
+
+.custom-select select {
+	/* General select styles: change as needed */
+	font-family: sans-serif;
+	font-weight: 700;
+	color: #444;
+	line-height: 1.3;
+	border-radius: .2em;
+}
+/* Hover style */
+.custom-select:hover {
+	border-color: #888;
+}
+/* Focus style */
+.custom-select select:focus {
+	/* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
+	box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+	box-shadow: 0 0 0 3px -moz-mac-focusring;
+	color: #222; /* Match-02 */
+}
+@supports ( box-shadow: none ) {
+	.custom-select select:focus {
+		outline: none;
+	}
+}
+
+/* Set options to normal weight */
+.custom-select option {
+	font-weight:normal;
+}
+
+.custom-select::after {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 7px solid #666;
+	margin-top: -3px;
 }
