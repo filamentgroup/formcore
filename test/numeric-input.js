@@ -7,81 +7,79 @@
 		simple = $( "#simple" ).data( "NumericInput" );
 	}
 
-	module( "Methods", {
-		setup: commonSetup
+	QUnit.module( "Methods", {
+		beforeEach: commonSetup
 	});
 
-	test("updateMaxlength", function(){
+	QUnit.test("updateMaxlength", function(assert){
 		simple.updateMaxlength();
-		equal(simple.maxLength, Infinity);
+		assert.equal(simple.maxLength, Infinity);
 
 		simple.$el.attr("maxlength", 10);
 		simple.updateMaxlength();
-		equal(simple.maxLength, 10);
+		assert.equal(simple.maxLength, 10);
 
 		simple.$el.removeAttr("maxlength");
 		simple.$el.attr("max", 200);
 		simple.updateMaxlength();
-		equal(simple.maxLength, 3);
+		assert.equal(simple.maxLength, 3);
 	});
 
-	test("isNumeric key range", function(){
+	QUnit.test("isNumeric key range", function(assert){
 		// first range from 48 to 57
-		ok(!simple.isNumeric(47));
-		ok(simple.isNumeric(48));
-		ok(simple.isNumeric(57));
-		ok(!simple.isNumeric(58));
+		assert.ok(!simple.isNumeric(47));
+		assert.ok(simple.isNumeric(48));
+		assert.ok(simple.isNumeric(57));
+		assert.ok(!simple.isNumeric(58));
 
 		// second range from 96 to 105
-		ok(!simple.isNumeric(95));
-		ok(simple.isNumeric(96));
-		ok(simple.isNumeric(105));
-		ok(!simple.isNumeric(106));
+		assert.ok(!simple.isNumeric(95));
+		assert.ok(simple.isNumeric(96));
+		assert.ok(simple.isNumeric(105));
+		assert.ok(!simple.isNumeric(106));
 	});
 
-	test("isMetaKeyAllowed", function(){
-		ok(simple.isMetaKeyAllowed(event = {
+	QUnit.test("isMetaKeyAllowed", function(assert){
+		assert.ok(simple.isMetaKeyAllowed(event = {
 			keyCode: -1,
 			altKey: true
 		}));
 
-		ok(simple.isMetaKeyAllowed(event = {
+		assert.ok(simple.isMetaKeyAllowed(event = {
 			keyCode: -1,
 			ctrlKey: true
 		}));
 
-		ok(simple.isMetaKeyAllowed(event = {
+		assert.ok(simple.isMetaKeyAllowed(event = {
 			keyCode: -1,
 			metaKey: true
 		}));
 
 		$.each(window.NumericInput.allowedKeys, function(i, k){
-			ok(simple.isMetaKeyAllowed(event = {
+			assert.ok(simple.isMetaKeyAllowed(event = {
 				keyCode: k
 			}));
 		});
 
-		ok(simple.isMetaKeyAllowed(event = {
+		assert.ok(simple.isMetaKeyAllowed(event = {
 			keyCode: 38
 		}));
 
 		simple.isNavDisabled = true;
-		ok(!simple.isMetaKeyAllowed(event = {
+		assert.ok(!simple.isMetaKeyAllowed(event = {
 			keyCode: 38
 		}));
 	});
 
-	function preventDefault(){
-		ok(true, "preventDefault called");
-	}
-
-	test("onKeydown prevented", function(){
-		expect(6);
+	QUnit.test("onKeydown prevented", function(assert){
+		assert.expect(6);
 
 		simple.maxLength = 0;
 
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: function(){
+				assert.ok(true, "preventDefault called");
+			},
 
 			// space
 			keyCode: 32
@@ -90,7 +88,9 @@
 		// prevents extra decimal points
 		simple.$el.val( "1." );
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: function(){
+				assert.ok(true, "preventDefault called");
+			},
 
 			// `.`
 			keyCode: 190
@@ -100,7 +100,9 @@
 		simple.$el.val( "-1" );
 		simple.allowNegative = true;
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: function(){
+				assert.ok(true, "preventDefault called");
+			},
 
 			// `-`
 			keyCode: 189
@@ -110,14 +112,18 @@
 		simple.el.value = "-1";
 		simple.allowNegative = true;
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: function(){
+				assert.ok(true, "preventDefault called");
+			},
 
 			// `-`
 			keyCode: 189
 		});
 
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: function(){
+				assert.ok(true, "preventDefault called");
+			},
 
 			// `1`
 			keyCode: 49,
@@ -127,22 +133,22 @@
 		simple.maxLength = 0;
 		simple.el.value = "";
 		simple.onKeydown({
-			preventDefault: preventDefault,
+			preventDefault: function(){
+				assert.ok(true, "preventDefault called");
+			},
 
 			// `1`
 			keyCode: 49
 		});
 });
 
-	function notPreventDefault(){
-		ok(false, "preventDefault called");
-	}
-
-	test("onKeydown not prevented", function(){
-		expect(0);
+	QUnit.test("onKeydown not prevented", function(assert){
+		assert.expect(0);
 
 		simple.onKeydown({
-			preventDefault: notPreventDefault,
+			preventDefault: function(){
+				assert.ok(false, "preventDefault called");
+			},
 			metaKey: true
 		});
 
@@ -150,7 +156,9 @@
 		simple.allowFloat = true;
 		simple.$el.val( "1" );
 		simple.onKeydown({
-			preventDefault: notPreventDefault,
+			preventDefault: function(){
+				assert.ok(false, "preventDefault called");
+			},
 
 			// `.`
 			keyCode: 190
@@ -160,14 +168,18 @@
 		simple.$el.val( "" );
 		simple.allowNegative = true;
 		simple.onKeydown({
-			preventDefault: notPreventDefault,
+			preventDefault: function(){
+				assert.ok(false, "preventDefault called");
+			},
 
 			// `-`
 			keyCode: 189
 		});
 
 		simple.onKeydown({
-			preventDefault: notPreventDefault,
+			preventDefault: function(){
+				assert.ok(false, "preventDefault called");
+			},
 
 			// `1`
 			keyCode: 49
@@ -176,16 +188,20 @@
 		simple.maxLength = 1;
 		simple.el.value = "";
 		simple.onKeydown({
-			preventDefault: notPreventDefault,
+			preventDefault: function(){
+				assert.ok(false, "preventDefault called");
+			},
 
 			// `1`
 			keyCode: 49
 		});
 	});
 
-	function testOnPaste(pasted, value){
+	function testOnPaste(pasted, value, assert){
 		simple.onPaste({
-			preventDefault: preventDefault,
+			preventDefault: function(){
+				assert.ok(true, "preventDefault called");
+			},
 			clipboardData: {
 				getData: function(){
 					return pasted;
@@ -193,36 +209,36 @@
 			}
 		});
 
-		equal(simple.el.value, value);
+		assert.equal(simple.el.value, value);
 	}
 
-	test("onPaste", function(){
+	QUnit.test("onPaste", function(assert){
 		// one for prevent default, one for the check
 		// the final test doesn't prevent default
-		expect(15);
-		testOnPaste("123", "123");
-		testOnPaste("-1.23", "-1.23");
-		testOnPaste("12a3", "123");
-		testOnPaste("-123", "-123");
-		testOnPaste("-1-23", "-123");
-		testOnPaste("-1.2.-3", "-1.23");
-		testOnPaste("-.2.-3", "-.23");
+		assert.expect(15);
+		testOnPaste("123", "123", assert);
+		testOnPaste("-1.23", "-1.23", assert);
+		testOnPaste("12a3", "123", assert);
+		testOnPaste("-123", "-123", assert);
+		testOnPaste("-1-23", "-123", assert);
+		testOnPaste("-1.2.-3", "-1.23", assert);
+		testOnPaste("-.2.-3", "-.23", assert);
 
 		// empty paste values will be ignored
 		simple.el.value = "123";
-		testOnPaste("", "123");
+		testOnPaste("", "123", assert);
 	});
 
-	test("onPaste truncates values longer than maxlength", function(){
-		expect(2);
+	QUnit.test("onPaste truncates values longer than maxlength", function(assert){
+		assert.expect(2);
 		var value = "01234567890";
 
 		simple.maxLength = 10;
-		testOnPaste(value, "0123456789");
+		testOnPaste(value, "0123456789", assert);
 	});
 
-	test("onPaste does not truncate value when maxlength is not defined on element", function(){
-		expect(2);
+	QUnit.test("onPaste does not truncate value when maxlength is not defined on element", function(assert){
+		assert.expect(2);
 		var value = "01234567890";
 
 		// remove the maxlength
@@ -231,6 +247,6 @@
 		simple.updateMaxlength();
 
 		// should preserve the value
-		testOnPaste(value, value);
+		testOnPaste(value, value, assert);
 	});
 })(window, shoestring);

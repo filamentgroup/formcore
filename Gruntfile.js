@@ -26,13 +26,17 @@ module.exports = function(grunt) {
 				src: [
 					'node_modules/grunt-grunticon/example/output/grunticon.loader.js',
 					'node_modules/shoestring/dist/shoestring.js',
+					'js/shoestring.connector.js',
 					'node_modules/xrayhtml/dist/xrayhtml.js',
 					'node_modules/creditable/creditablecardtype.js',
 					'node_modules/creditable/creditablesecuritycode.js',
 					// politespace should come before validator
+					'node_modules/politespace/src/politespace-intro.js',
 					'node_modules/politespace/src/politespace.js',
+					'node_modules/politespace/src/politespace-jquery.js',
 					'node_modules/politespace/src/politespace-creditcard.js',
 					'node_modules/politespace/src/politespace-us-telephone.js',
+					'node_modules/politespace/src/politespace-outro.js',
 					'node_modules/politespace/src/politespace-init.js',
 					'node_modules/validator/dist/validator.js',
 					'node_modules/validator/dist/validator.config.js',
@@ -49,6 +53,8 @@ module.exports = function(grunt) {
 					'node_modules/validator/dist/validator.css',
 					'node_modules/fg-select-css/src/select-css.css',
 					'node_modules/fg-select-css/src/select-css-compat.css',
+					'node_modules/fg-select-css/src/select-css-theme.css',
+					'node_modules/fg-select-css/src/select-css-arrow.css',
 				],
 				dest: 'dist/dependencies.css'
 			}

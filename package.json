@@ -26,17 +26,17 @@
   "devDependencies": {
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-jshint": "~1.0.0",
-    "grunt-contrib-qunit": "^1.0.1",
-    "qunitjs": "^1.22.0",
+    "grunt-contrib-jshint": "~1.1.0",
+    "grunt-contrib-qunit": "^2.0.0",
+    "qunitjs": "^2.3.3",
     "xrayhtml": "^2.1.2"
   },
   "dependencies": {
     "creditable": "^1.0.7",
-    "fg-select-css": "^1.0.3",
+    "fg-select-css": "^2.0.3",
     "grunt-grunticon": "^2.2.3",
-    "politespace": "^0.1.20",
-    "shoestring": "^1.0.3",
+    "politespace": "^1.0.0",
+    "shoestring": "^2.0.1",
     "validator": "filamentgroup/validator.git#v2.0.6"
   }
 }

@@ -7,44 +7,44 @@
 		simple = $( "#simple" ).data( "MaxlengthInput" );
 	}
 
-	module( "Methods", {
-		setup: commonSetup
+	QUnit.module( "Methods", {
+		beforeEach: commonSetup
 	});
 
-	test("isKeyAllowed", function(){
-		ok(simple.isKeyAllowed(event = {
+	QUnit.test("isKeyAllowed", function(assert){
+		assert.ok(simple.isKeyAllowed(event = {
 			keyCode: -1,
 			altKey: true
 		}));
 
-		ok(simple.isKeyAllowed(event = {
+		assert.ok(simple.isKeyAllowed(event = {
 			keyCode: -1,
 			ctrlKey: true
 		}));
 
-		ok(simple.isKeyAllowed(event = {
+		assert.ok(simple.isKeyAllowed(event = {
 			keyCode: -1,
 			metaKey: true
 		}));
 
 		$.each(window.MaxlengthInput.allowedKeys, function(i, k){
-			ok(simple.isKeyAllowed(event = {
+			assert.ok(simple.isKeyAllowed(event = {
 				keyCode: k
 			}));
 		});
 
-		ok(simple.isKeyAllowed(event = {
+		assert.ok(simple.isKeyAllowed(event = {
 			keyCode: 38
 		}));
 	});
 
-	test("onKeydown always allowed keycode", function(){
-		expect(0);
+	QUnit.test("onKeydown always allowed keycode", function(assert){
+		assert.expect(0);
 
 		// mock alter value to signal that the method has completed, for these tests
 		// it should never complete
 		simple.alterValue = function(){
-			ok(false, "alterValue called");
+			assert.ok(false, "alterValue called");
 		};
 
 		simple.onKeydown({
@@ -52,17 +52,17 @@
 		});
 	});
 
-	test("onKeydown should prevent default for single non return char", function(){
-		expect(1);
+	QUnit.test("onKeydown should prevent default for single non return char", function(assert){
+		assert.expect(1);
 
 		function preventDefault(){
-			ok(true, "default prevented");
+			assert.ok(true, "default prevented");
 		}
 
 		// mock alter value to signal that the method has completed, for these tests
 		// it should never complete
 		simple.alterValue = function(){
-			ok(false, "alterValue called");
+			assert.ok(false, "alterValue called");
 		};
 
 		// max length for this text area is one, set a value that matches
@@ -77,17 +77,17 @@
 		});
 	});
 
-	test("onKeydown should prevent default for return char", function(){
-		expect(1);
+	QUnit.test("onKeydown should prevent default for return char", function(assert){
+		assert.expect(1);
 
 		function preventDefault(){
-			ok(true, "default prevented");
+			assert.ok(true, "default prevented");
 		}
 
 		// mock alter value to signal that the method has completed, for these tests
 		// it should never complete
 		simple.alterValue = function(){
-			ok(false, "alterValue called");
+			assert.ok(false, "alterValue called");
 		};
 
 		// max length for this text area is one, make sure it's empty
@@ -105,18 +105,20 @@
 		});
 	});
 
-	asyncTest("onKeydown should call alter value", function(){
-		expect(1);
+	QUnit.test("onKeydown should call alter value", function(assert){
+		assert.expect(1);
+
+		var done = assert.async();
 
 		function preventDefault(){
-			ok(false, "default prevented");
+			assert.ok(false, "default prevented");
 		}
 
 		// mock alter value to signal that the method has completed, for these tests
 		// it should never complete
 		simple.alterValue = function(){
-			ok(true, "alterValue called");
-			start();
+			assert.ok(true, "alterValue called");
+			done();
 		};
 
 		// max length for this text area is one empty it to accept the char
@@ -132,38 +134,38 @@
 
 	// note that we can't test the value of the element directly
 	// because some browsers will remove the CR on assignment (e.g. Chrome)
-	test("alterValue changes LF to CR + LF", function(){
+	QUnit.test("alterValue changes LF to CR + LF", function(assert){
 		simple.maxlength = 10;
 		simple.el.value = "\n";
-		equal(simple.alterValue(), "\r\n", "changes one return");
+		assert.equal(simple.alterValue(), "\r\n", "changes one return");
 
 		simple.el.value = "a\nb\nc";
-		equal(simple.alterValue(), "a\r\nb\r\nc", "changes all returns");
+		assert.equal(simple.alterValue(), "a\r\nb\r\nc", "changes all returns");
 	});
 
-	test("alterValue changes CR + LF to CR + LF", function(){
+	QUnit.test("alterValue changes CR + LF to CR + LF", function(assert){
 		simple.maxlength = 10;
 		simple.el.value = "\r\n";
-		equal(simple.alterValue(), "\r\n", "changes CR + LF");
+		assert.equal(simple.alterValue(), "\r\n", "changes CR + LF");
 	});
 
-	test("alterValue does not change other chars", function(){
+	QUnit.test("alterValue does not change other chars", function(assert){
 		simple.maxlength = 10;
 		simple.el.value = "x";
-		equal(simple.alterValue(), "x");
+		assert.equal(simple.alterValue(), "x");
 	});
 
 	// note that we can't test the value of the element directly
 	// because some browsers will remove the CR on assignment (e.g. Chrome)
-	test("valueLength accounts for CR and LF", function(){
+	QUnit.test("valueLength accounts for CR and LF", function(assert){
 		simple.maxlength = 10;
 		simple.el.value = "a\nb\n";
-		equal(simple.valueLength(), 6);
+		assert.equal(simple.valueLength(), 6);
 
 		simple.el.value = "a\r\nb\r\n";
-		equal(simple.valueLength(), 6);
+		assert.equal(simple.valueLength(), 6);
 
 		simple.el.value = "x";
-		equal(simple.valueLength(), 1);
+		assert.equal(simple.valueLength(), 1);
 	});
 })(window, shoestring);
