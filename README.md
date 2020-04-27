@@ -8,7 +8,7 @@ formcore
 
 A set of forms.
 
-* [Demo](https://master-origin-formcore.fgview.com/)
+* [Demo](http://filamentgroup.github.io/formcore/)
 
 ## Maxlength
 
