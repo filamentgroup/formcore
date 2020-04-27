@@ -4,13 +4,70 @@
 <title>formcore</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--#include virtual="/ssi/styles-scripts.html" -->
+<link rel="stylesheet" href="https://filamentgroup.github.io/demo-head/demohead.css">
+<link rel="stylesheet" href="/dist/dependencies.css">
+<link rel="stylesheet" href="/css/demo.css">
+<link rel="stylesheet" href="/css/formcore.css">
+<link rel="stylesheet" href="/css/formcore-validation.css">
+<link rel="stylesheet" href="/css/formcore-button.css">
+<link rel="stylesheet" href="/css/grids.css">
+<link rel="stylesheet" href="/css/character-counter.css">
+<link rel="stylesheet" href="/css/credit-card-display.css">
+<link rel="stylesheet" href="/css/disclosure.css">
+
+<script src="/dist/dependencies.js"></script>
+<script src="/js/numeric-input.js"></script>
+<script src="/js/numeric-input-init.js"></script>
+<script src="/js/maxlength-input.js"></script>
+<script src="/js/maxlength-input-init.js"></script>
+<script src="/js/password-init.js"></script>
+<script src="/js/textarea-grow.js"></script>
+<script src="/js/character-counter.js"></script>
+<script src="/js/credit-card-display.js"></script>
+<script src="/js/disclosure.js"></script>
+<script src="https://filamentgroup.github.io/demo-head/loadfont.js"></script>
+<script>
+	grunticon([ "/dist/grunticon/icons.data.svg.css", "/dist/grunticon/icons.data.png.css", "/dist/grunticon/icons.fallback.css" ]);
+
+	$(function(){
+		$( document ).trigger( "enhance" );
+		$( "html" ).addClass( "enhanced" );
+	});
+</script>
+
+
 </head>
 
 
 <body>
 
-<!--#include virtual="/ssi/masthead.html" -->
+<div class="demo-header">
+	<div class="company">
+		<img src="http://filamentgroup.com/images/fg-logo-positive-sm-crop.png">
+	</div>
+	<div class="details">
+		<h1 class="description-container">Demo of <span class="repo-name">Formcore</span>
+			<span class="description">Light-weight, validated forms</span>
+		</h1>
+		<ul class="outbound-links">
+			<li><a href="https://github.com/filamentgroup/formcore">Code</a></li>
+			<li><a href="https://github.com/filamentgroup/formcore/issues">Issues</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="nav-container">
+	<div class="docs-globalnav">
+		<nav class="docs-nav">
+		<a href="/">Patterns</a>
+		<a href="/views/text-inputs.html">Text Inputs</a>
+		<a href="/views/checks-radios.html">Checkboxes &amp; Radio Buttons</a>
+		<a href="/views/selects.html">Selects</a>
+		<a href="/views/disclosure.html">Disclosure</a>
+		</nav>
+	</div>
+</div>
+
 
 <div class="docs-main">
 <h2>Text Inputs</h2>
